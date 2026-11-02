@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Well of Frogs Campaign</title>
+<style>
+  :root {
+    --paper: #f4ecda;
+    --paper-2: #fbf7ec;
+    --ink: #241d14;
+    --ink-soft: #5f5342;
+    --rule: #d9c9a9;
+    --accent: #6b3a26;
+    --accent-2: #3f5b43;
+    --gold: #9a7228;
+    --shadow: 0 1px 2px rgba(60, 40, 20, 0.06), 0 24px 48px -36px rgba(60, 40, 20, 0.5);
+    --sans: ui-sans-serif, system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, "Times New Roman", serif;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background:
+      radial-gradient(1200px 600px at 12% -10%, rgba(255, 252, 240, 0.85), transparent 60%),
+      radial-gradient(900px 500px at 100% 0%, rgba(154, 114, 40, 0.07), transparent 55%),
+      var(--paper);
+    color: var(--ink);
+    font-family: var(--serif);
+    font-size: 17px;
+    line-height: 1.62;
+    text-rendering: optimizeLegibility;
+  }
+
+  .page {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 56px 28px 72px;
+  }
+
+  .eyebrow {
+    margin: 0 0 10px;
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  h1 {
+    margin: 0;
+    font-size: clamp(2.2rem, 5vw, 3.4rem);
+    line-height: 1.05;
+    font-weight: 600;
+    letter-spacing: -0.015em;
+  }
+
+  .lede {
+    margin: 18px 0 0;
+    max-width: 62ch;
+    font-size: 1.05rem;
+    color: var(--ink-soft);
+  }
+
+  .meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 14px;
+    margin: 18px 0 0;
+    font-family: var(--sans);
+    font-size: 12.5px;
+    color: var(--ink-soft);
+  }
+
+  .meta .sep {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--rule);
+  }
+
+  .notice {
+    margin: 30px 0 0;
+    padding: 14px 18px;
+    border-left: 3px solid var(--gold);
+    border-radius: 0 6px 6px 0;
+    background: var(--paper-2);
+    box-shadow: var(--shadow);
+    font-family: var(--sans);
+    font-size: 13px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+    max-width: 78ch;
+  }
+
+  /* Layout */
+
+  .split {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 270px;
+    gap: 36px;
+    align-items: start;
+    margin: 44px 0 0;
+  }
+
+  /* Cards */
+
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 22px;
+    margin: 0;
+  }
+
+  a.card {
+    display: flex;
+    flex-direction: column;
+    padding: 26px 26px 22px;
+    border: 1px solid var(--rule);
+    border-radius: 10px;
+    background: var(--paper-2);
+    box-shadow: var(--shadow);
+    color: inherit;
+    text-decoration: none;
+    transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+  }
+
+  a.card:hover {
+    transform: translateY(-3px);
+    border-color: var(--gold);
+  }
+
+  a.card:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+
+  .card .num {
+    font-family: var(--serif);
+    font-size: 2.4rem;
+    line-height: 1;
+    color: var(--gold);
+    letter-spacing: -0.02em;
+  }
+
+  .card h2 {
+    margin: 14px 0 8px;
+    padding: 0;
+    border: 0;
+    font-size: 1.3rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+
+  .card .desc {
+    margin: 0 0 18px;
+    font-size: 0.97rem;
+    color: var(--ink-soft);
+    max-width: 34ch;
+  }
+
+  .card .card-meta {
+    margin-top: auto;
+    padding-top: 14px;
+    border-top: 1px solid var(--rule);
+    font-family: var(--sans);
+    font-size: 11.5px;
+    letter-spacing: 0.02em;
+    color: var(--ink-soft);
+  }
+
+  .card .open {
+    margin-top: 14px;
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  a.card:hover .open { color: var(--gold); }
+
+  /* About sidebar */
+
+  .rail {
+    position: sticky;
+    top: 28px;
+    display: grid;
+    gap: 22px;
+    align-content: start;
+  }
+
+  .about {
+    padding: 22px;
+    border: 1px solid var(--rule);
+    border-radius: 10px;
+    background: var(--paper-2);
+    box-shadow: var(--shadow);
+  }
+
+  .about h2 {
+    margin: 0 0 8px;
+    padding: 0;
+    border: 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+
+  .about p {
+    margin: 0;
+    font-size: 0.92rem;
+    color: var(--ink-soft);
+  }
+
+  .about-links {
+    list-style: none;
+    margin: 16px 0 0;
+    padding: 14px 0 0;
+    border-top: 1px solid var(--rule);
+  }
+
+  .about-links li { margin: 0 0 10px; }
+  .about-links li:last-child { margin-bottom: 0; }
+
+  .about-links a {
+    color: var(--accent);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    font-weight: 600;
+  }
+
+  .about-links a:hover { color: var(--gold); }
+
+  .about-links span {
+    display: block;
+    margin-top: 2px;
+    font-size: 12px;
+    color: var(--ink-soft);
+  }
+
+  /* Footer */
+
+  footer {
+    margin-top: 56px;
+    padding-top: 18px;
+    border-top: 1px solid var(--rule);
+    font-family: var(--sans);
+    font-size: 12px;
+    color: var(--ink-soft);
+  }
+
+  footer p { margin: 0 0 8px; max-width: 70ch; }
+
+  footer a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+  footer a:hover { color: var(--gold); }
+
+  @media (max-width: 920px) {
+    .split { grid-template-columns: minmax(0, 1fr); gap: 24px; }
+    .rail { position: static; }
+  }
+
+  @media (max-width: 720px) {
+    .page { padding: 36px 20px 56px; }
+    .cards { grid-template-columns: minmax(0, 1fr); gap: 16px; }
+  }
+
+  @media print {
+    body { background: #fff; color: #000; }
+    .page { max-width: none; padding: 0; }
+    .notice { display: none; }
+    a.card { box-shadow: none; break-inside: avoid; }
+    .about { box-shadow: none; }
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #14110c;
+      --paper-2: #1c1811;
+      --ink: #e9e0ca;
+      --ink-soft: #b6a88d;
+      --rule: #3b3224;
+      --accent: #d9a05b;
+      --accent-2: #9dbfa1;
+      --gold: #d9b26a;
+      --shadow: none;
+    }
+    body {
+      background:
+        radial-gradient(1100px 500px at 10% -10%, rgba(120, 90, 45, 0.12), transparent 60%),
+        var(--paper);
+    }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header>
+    <p class="eyebrow">The Well of Frogs · Old-School Essentials</p>
+    <h1>Well of Frogs Campaign</h1>
+    <p class="lede">The factual outlines for all three sessions.</p>
+    <p class="meta">
+      <span>3 outlines</span>
+      <span class="sep"></span>
+      <span>34 scenes</span>
+      <span class="sep"></span>
+      <span>24 tables</span>
+    </p>
+  </header>
+
+  <div class="split">
+
+    <div class="cards">
+
+    <a class="card" href="session-001-facts.html">
+      <span class="num">01</span>
+      <h2>Session 1: Factual Outline</h2>
+      <p class="desc">The caravan road into Arakay, the crossroads ambush, Kollaro's fee, and the well that croaks.</p>
+      <p class="card-meta">active · updated 2026-11-02 · 10 scenes · 8 tables</p>
+      <span class="open">Open the outline →</span>
+    </a>
+
+    <a class="card" href="session-002-facts.html">
+      <span class="num">02</span>
+      <h2>Session 2: Factual Outline</h2>
+      <p class="desc">Lady Danarose's job, the tunnels under the shanty, the lantern moths, and the altar.</p>
+      <p class="card-meta">reviewed · updated 2026-10-27 · 13 scenes · 8 tables</p>
+      <span class="open">Open the outline →</span>
+    </a>
+
+    <a class="card" href="session-003-facts.html">
+      <span class="num">03</span>
+      <h2>Session 3: Factual Outline</h2>
+      <p class="desc">The pillar room moths, the Archivist and his books, the Amnesiac, and the way down toward the well.</p>
+      <p class="card-meta">draft · updated 2026-11-01 · 11 scenes · 8 tables</p>
+      <span class="open">Open the outline →</span>
+    </a>
+
+    </div>
+
+    <div class="rail">
+
+      <aside class="about" id="about-arakay">
+        <h2>About Arakay</h2>
+        <p>The city between the Black Desert and the Jashra Mountains, and what lies beneath it.</p>
+        <ul class="about-links">
+          <li><a href="../lore/lore.html">Lore</a><span>The peoples, gods, and history around Arakay.</span></li>
+          <li><a href="../factions/factions.html">Factions</a><span>The guilds, the army, and the cult of the pillar.</span></li>
+          <li><a href="../places/places.html">Places</a><span>The city, its streets, and what lies beneath.</span></li>
+          <li><a href="../bestiary/bestiary.html">Bestiary</a><span>Creatures met or heard of, from Batros to the paperkin.</span></li>
+        </ul>
+      </aside>
+
+      <aside class="about" id="campaign">
+        <h2>Campaign</h2>
+        <p>The table's working pages, beside the record.</p>
+        <ul class="about-links">
+          <li><a href="../rules/house-rules.html">House Rules</a><span>Combat, classes, and the table's deviations.</span></li>
+          <li><a href="../state/party-funds.html">Party Funds</a><span>What the party holds, and what is owed.</span></li>
+          <li><a href="../people/characters.html">Our Heroes</a><span>The five, and the boy who carries their torch.</span></li>
+          <li><a href="../people/npcs.html">NPCs</a><span>The people they have met, and where each stands.</span></li>
+          <li><a href="../state/experience.html">Experience</a><span>Awards, totals, and how they were reached.</span></li>
+          <li><a href="../assets/maps/maps.html">Maps</a><span>Region, city, plaza, and the undercroft.</span></li>
+        </ul>
+      </aside>
+
+    </div>
+
+  </div>
+
+</div>
+</body>
+</html>

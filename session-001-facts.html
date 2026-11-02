@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Session 1: Factual Outline · The Well of Frogs</title>
+<style>
+  :root {
+    --paper: #f4ecda;
+    --paper-2: #fbf7ec;
+    --ink: #241d14;
+    --ink-soft: #5f5342;
+    --rule: #d9c9a9;
+    --accent: #6b3a26;
+    --accent-2: #3f5b43;
+    --gold: #9a7228;
+    --wash: rgba(107, 58, 38, 0.035);
+    --shadow: 0 1px 2px rgba(60, 40, 20, 0.06), 0 24px 48px -36px rgba(60, 40, 20, 0.5);
+    --sans: ui-sans-serif, system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, "Times New Roman", serif;
+  }
+
+  * { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background:
+      radial-gradient(1200px 600px at 12% -10%, rgba(255, 252, 240, 0.85), transparent 60%),
+      radial-gradient(900px 500px at 100% 0%, rgba(154, 114, 40, 0.07), transparent 55%),
+      var(--paper);
+    color: var(--ink);
+    font-family: var(--serif);
+    font-size: 17px;
+    line-height: 1.62;
+    text-rendering: optimizeLegibility;
+  }
+
+  .page {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 44px 28px 72px;
+  }
+
+  /* Masthead */
+
+  .masthead {
+    max-width: 780px;
+    padding-bottom: 26px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .eyebrow {
+    margin: 0 0 10px;
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  h1 {
+    margin: 0;
+    font-size: clamp(2.1rem, 5vw, 3.25rem);
+    line-height: 1.05;
+    font-weight: 600;
+    letter-spacing: -0.015em;
+  }
+
+  .lede {
+    margin: 18px 0 0;
+    max-width: 66ch;
+    font-size: 1.04rem;
+    color: var(--ink-soft);
+  }
+
+  .meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 14px;
+    margin: 18px 0 0;
+    font-family: var(--sans);
+    font-size: 12.5px;
+    color: var(--ink-soft);
+  }
+
+  .meta .sep {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--rule);
+  }
+
+  .pill {
+    padding: 2px 9px;
+    border: 1px solid var(--rule);
+    border-radius: 999px;
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--accent-2);
+    background: rgba(63, 91, 67, 0.06);
+  }
+
+  .notice {
+    margin: 26px 0 0;
+    padding: 14px 18px;
+    border-left: 3px solid var(--gold);
+    border-radius: 0 6px 6px 0;
+    background: var(--paper-2);
+    box-shadow: var(--shadow);
+    font-family: var(--sans);
+    font-size: 13px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+  }
+
+  /* Layout */
+
+  .layout {
+    display: grid;
+    grid-template-columns: minmax(0, 780px) 240px;
+    gap: 64px;
+    justify-content: space-between;
+    padding-top: 40px;
+  }
+
+  main { min-width: 0; }
+
+  /* Contents */
+
+  .toc {
+    align-self: start;
+    position: sticky;
+    top: 28px;
+    font-family: var(--sans);
+  }
+
+  .toc h2 {
+    margin: 0 0 12px;
+    padding: 0 0 8px;
+    border: 0;
+    border-bottom: 1px solid var(--rule);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  .toc ol {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    counter-reset: toc;
+    font-size: 13px;
+    line-height: 1.4;
+  }
+
+  .toc li {
+    counter-increment: toc;
+    margin: 0;
+    padding: 6px 0 6px 26px;
+    position: relative;
+    border-bottom: 1px solid rgba(217, 201, 169, 0.45);
+  }
+
+  .toc li::before {
+    content: counter(toc, decimal-leading-zero);
+    position: absolute;
+    left: 0;
+    top: 7px;
+    font-size: 10.5px;
+    color: var(--gold);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .toc a { color: var(--ink-soft); text-decoration: none; }
+  .toc a:hover { color: var(--accent); }
+
+  .toc .top {
+    display: inline-block;
+    margin-top: 14px;
+    font-size: 11.5px;
+    letter-spacing: 0.04em;
+    color: var(--gold);
+    text-decoration: none;
+    border-bottom: 1px dotted currentColor;
+  }
+
+  /* Sections */
+
+  section { scroll-margin-top: 24px; }
+
+  h2 {
+    margin: 56px 0 0;
+    padding: 0 0 8px 14px;
+    border-left: 3px solid var(--accent);
+    border-bottom: 1px solid var(--rule);
+    font-size: 1.52rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+
+  h2:first-child { margin-top: 0; }
+
+  h3 {
+    margin: 34px 0 8px;
+    font-size: 1.02rem;
+    font-weight: 600;
+    color: var(--accent);
+    letter-spacing: 0.005em;
+  }
+
+  p { margin: 14px 0; max-width: 68ch; }
+
+  a {
+    color: var(--accent);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+  }
+
+  a:hover { color: var(--gold); }
+
+  ul, ol { margin: 14px 0; padding-left: 1.15rem; }
+  li { margin: 6px 0; max-width: 66ch; }
+  li::marker { color: var(--gold); }
+
+  ul ul, ul ol { margin: 8px 0 2px; }
+
+  /* Scene chips */
+
+  .scene-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    margin: 18px 0 6px;
+    font-family: var(--sans);
+    font-size: 11.5px;
+  }
+
+  .scene-nav a {
+    padding: 3px 10px;
+    border: 1px solid var(--rule);
+    border-radius: 999px;
+    background: var(--paper-2);
+    color: var(--ink-soft);
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .scene-nav a:hover { color: var(--accent); border-color: var(--gold); }
+
+  /* Tables */
+
+  .table-wrap {
+    margin: 18px 0 26px;
+    overflow-x: auto;
+    border: 1px solid var(--rule);
+    border-radius: 7px;
+    background: var(--paper-2);
+    box-shadow: var(--shadow);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: var(--sans);
+    font-size: 13.5px;
+    line-height: 1.5;
+  }
+
+  th, td {
+    padding: 9px 13px;
+    text-align: left;
+    vertical-align: top;
+    border-bottom: 1px solid rgba(217, 201, 169, 0.55);
+  }
+
+  thead th {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    border-bottom: 2px solid var(--rule);
+    white-space: nowrap;
+  }
+
+  tbody tr:nth-child(even) { background: var(--wash); }
+  tbody tr:last-child td { border-bottom: 0; }
+
+  td:first-child { font-weight: 600; color: var(--ink); }
+
+  .num {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+
+  tr.total td {
+    font-weight: 700;
+    border-top: 2px solid var(--rule);
+    background: rgba(154, 114, 40, 0.06);
+  }
+
+  /* Footer */
+
+  footer {
+    margin-top: 64px;
+    padding-top: 18px;
+    border-top: 1px solid var(--rule);
+    font-family: var(--sans);
+    font-size: 12px;
+    color: var(--ink-soft);
+  }
+
+  footer p { margin: 0; max-width: 70ch; }
+
+  /* Responsive */
+
+  @media (max-width: 980px) {
+    .page { padding: 32px 20px 56px; }
+    .layout { grid-template-columns: minmax(0, 1fr); gap: 0; padding-top: 28px; }
+    .toc { position: static; order: -1; padding: 0 0 28px; }
+    .toc ol { columns: 2; column-gap: 28px; }
+    .masthead { max-width: none; }
+  }
+
+  @media (max-width: 560px) {
+    .toc ol { columns: 1; }
+    h2 { margin-top: 42px; }
+  }
+
+  /* Print */
+
+  @media print {
+    body { background: #fff; color: #000; font-size: 11pt; }
+    .page { max-width: none; padding: 0; }
+    .toc, .notice { display: none; }
+    .table-wrap { box-shadow: none; }
+    th, td, tr { break-inside: avoid; }
+    a { color: inherit; text-decoration: none; }
+    h2 { break-after: avoid; }
+  }
+
+  /* Dark */
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #14110c;
+      --paper-2: #1c1811;
+      --ink: #e9e0ca;
+      --ink-soft: #b6a88d;
+      --rule: #3b3224;
+      --accent: #d9a05b;
+      --accent-2: #9dbfa1;
+      --gold: #d9b26a;
+      --wash: rgba(255, 246, 220, 0.03);
+      --shadow: none;
+    }
+    body {
+      background:
+        radial-gradient(1100px 500px at 10% -10%, rgba(120, 90, 45, 0.12), transparent 60%),
+        var(--paper);
+    }
+    .notice { background: var(--paper-2); }
+  }
+</style>
+</head>
+<body>
+<div class="page" id="top">
+
+  <header class="masthead">
+    <p class="eyebrow">The Well of Frogs · Old-School Essentials</p>
+    <h1>Session 1: Factual Outline</h1>
+    <p class="lede">A plain record of what happened, who was there, and what was learned. Corrected 2026-10-22 and 2026-11-02.</p>
+    <p class="meta">
+      <span class="pill">active</span>
+      <span>updated 2026-11-02</span>
+      <span class="sep"></span>
+      <span>10 scenes</span>
+      <span class="sep"></span>
+      <span>11 sections</span>
+      <span class="sep"></span>
+      <span>8 tables</span>
+    </p>
+  </header>
+
+  <div class="layout">
+
+    <main>
+
+      <section id="player-characters">
+        <h2>Player characters</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th scope="col">PC</th><th scope="col">Player</th><th scope="col">Ancestry</th><th scope="col">Class and level</th><th scope="col">Notes from play</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Elowyn</td><td>Ian</td><td>Essanin elf, male</td><td>Thief 1</td><td>Does the talking; fast; kills the first crossbowman with a stroke from shoulder to hip; flat-blades the fleeing leader; buys the sesame cakes; argues for an advance</td></tr>
+              <tr><td>Anglad the Faceless</td><td>Sebastian</td><td>Sabbatean</td><td>Fighter 1</td><td>Wears mail; kills the second crossbowman; keeps the rear on the road in</td></tr>
+              <tr><td>Bozz the Well Endowed</td><td>Max</td><td>Sabbatean</td><td>Fighter 1</td><td>Note-taker; tackles the literator and holds him at sword point</td></tr>
+              <tr><td>Dagen</td><td>Jordan</td><td>Human</td><td>Ranger 1</td><td>Hears the ambush coming before anyone sees it; gets the palm reading</td></tr>
+              <tr><td>Illiterate Ed</td><td>Alex</td><td>Half-elf</td><td>Magic User 1</td><td>Cannot read; searches the prisoner; lowers the lantern into the well; buys the Fire Rock</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="events">
+        <h2>Events in order</h2>
+
+        <nav class="scene-nav" aria-label="Scenes">
+          <a href="#scene-1">1 Caravan road</a>
+          <a href="#scene-2">2 Broken Wheel</a>
+          <a href="#scene-3">3 The ambush</a>
+          <a href="#scene-4">4 Kollaro's fee</a>
+          <a href="#scene-5">5 Barking Dogs</a>
+          <a href="#scene-6">6 The well</a>
+          <a href="#scene-7">7 The palm reading</a>
+          <a href="#scene-8">8 Night at the Wheel</a>
+          <a href="#scene-9">9 The pillar</a>
+          <a href="#scene-10">10 The urchin ruin</a>
+        </nav>
+
+        <h3 id="scene-1">1. The caravan road and the city gate</h3>
+        <ul>
+          <li>The caravan was destroyed by Zuiagirites in the dunes west of Arakay. The merchants were killed, the wagons burned, the animals stripped.</li>
+          <li>Five survivors walked in: Elowyn, Anglad, Bozz, Dagen, Ed. They carried what they could.</li>
+          <li>Arakay's gate stood open and had not been shut in years.</li>
+          <li>The River Asser is dry. Its bed lies under a bridge that crosses nothing.</li>
+          <li>Water and bread cost double.</li>
+          <li>In the Piazza dei Rospi, the Well of Frogs is ringed by four statues of horned bull frogs the size of dogs. People cross the square without going near the well, and without admitting the detour.</li>
+          <li>Local saying: the well is older than the city, and cursed.</li>
+        </ul>
+
+        <h3 id="scene-2">2. The Broken Wheel, then the Barking Dogs</h3>
+        <ul>
+          <li>The party lodged at the Broken Wheel, north-east corner of the old quarter.</li>
+          <li>Nook the Older: small, wiry, middle-aged; wants payment up front.</li>
+          <li>Wafik: porter.</li>
+          <li>Rewen: laundress under Nook's roof.</li>
+          <li>The next night they went looking for work at the Barking Dogs, a former fighting pit with sand still in the floor and the pit walls standing.</li>
+          <li>Barking Dog: dwarf, keeps the tavern, blunt about his trade.</li>
+          <li>Wakhar hired the party to escort him to the merchant quarter south-west of the Piazza dei Rospi. Five gold per head. They accepted.</li>
+          <li>Wakhar had goods and no iron. Clean boots, soft hands, no knife at his belt.</li>
+        </ul>
+
+        <h3 id="scene-3">3. The crossroads ambush</h3>
+        <ul>
+          <li>The quarter is stepped streets with leaning houses.</li>
+          <li>Terrain: an alley east; a street west with an awning and a stack of rolled carpets; a steep stair behind; an oxcart set square across the way.</li>
+          <li>Dagen stopped and warned the party before the crossbowmen showed themselves. The party acted first.</li>
+          <li>Crossbowmen were at the alley mouth and the street corner.</li>
+          <li>Elowyn reached the nearest one before he could level his weapon and killed him with one stroke, shoulder to hip. The man got no shot off.</li>
+          <li>A bolt rang off Anglad's mail. A bolt stuck in Bozz's shield. A third passed close to Wakhar and hit a shutter.</li>
+          <li>Anglad killed the second crossbowman. The rest fled.</li>
+          <li>The literator ran. Elowyn caught him and struck him with the flat of his sword to put him down. Bozz tackled him, lifted him off his feet, put him on his back and held a point to his jaw.</li>
+          <li>No PC was wounded. The literator was taken alive.</li>
+        </ul>
+
+        <h3 id="scene-4">4. Kollaro, Barber's Alley, and the fee</h3>
+        <ul>
+          <li>The prisoner was a literator, the man who led the ambush party.</li>
+          <li>Ed searched him: 36 sp, 5 ep, 8 cp.</li>
+          <li>Under questioning the literator gave up the name of the man who had hired the party: Kollaro, of the Barbers' guild. The party had known him as Wakhar; Wakhar had been a false name. The crossbows had been meant for Kollaro, not for the goods. The escort was an inconvenience.</li>
+          <li>Kollaro said the literators keep their guild in the library. He said it as though the party already knew. No reason for the feud between the guilds was given or asked for.</li>
+          <li>Kollaro asked the party to kill the prisoner.</li>
+          <li>Elowyn refused: the man was bound and beaten, and killing him would be murder.</li>
+          <li>Kollaro accepted the refusal without argument. He said the literator was no danger now.</li>
+          <li>The party took the literator to Barber's Alley and handed him over to the barbers, who are Kollaro's guild.</li>
+          <li>Kollaro named the prisoner at the handover: Mahir. That was the first the party heard the name.</li>
+          <li>Kollaro paid them 15 gp each: the five promised plus ten more.</li>
+          <li>Kollaro mentioned a Chül in the city who buys unwanted gear.</li>
+        </ul>
+
+        <h3 id="scene-5">5. Back to the Barking Dogs</h3>
+        <ul>
+          <li>The party returned to the Barking Dogs the same day and let the local drinkers talk.</li>
+          <li>They heard three stories about the plaza, all secondhand:
+            <ol>
+              <li>The urchins sometimes toss one of their own down the well.</li>
+              <li>On mist-shrouded nights, a thing in the shape of a man walks the neighbourhood.</li>
+              <li>A frog monster lurks in the water and drags under whoever leans too near. The last soul to draw water there came from the House of Cheap Delights.</li>
+            </ol>
+          </li>
+          <li>They were also told, as directions, that the urchins gather in a ruin north-west of the plaza.</li>
+          <li>Nobody who told the stories claimed to have seen any of it.</li>
+          <li>The party decided to look at the well.</li>
+        </ul>
+
+        <h3 id="scene-6">6. The Well of Frogs</h3>
+        <ul>
+          <li>Late afternoon in the Piazza dei Rospi.</li>
+          <li>Ed lowered a lantern on a rope into the well.</li>
+          <li>The shaft is lined with rows of frog carvings and appears to have no bottom.</li>
+          <li>One carving moved: a head lifted quickly, a face turned toward the light, the mouth opened. It croaked.</li>
+          <li>The sound carried across the square. A door closed somewhere. Nobody else in the square came near.</li>
+          <li>Ed said aloud what he had seen; the others had heard the croak.</li>
+          <li>He pulled the lantern up. Nothing followed. Nobody descended.</li>
+        </ul>
+
+        <h3 id="scene-7">7. The palm reading</h3>
+        <ul>
+          <li>At the same time as Ed was at the well, an old woman came up behind Dagen and the others.</li>
+          <li>She was old but not yet a crone. Two cats followed her.</li>
+          <li>She offered a reading and asked nothing for it.</li>
+          <li>Dagen gave her his hand.</li>
+          <li>Her reading: they will go down into caverns; there is death there and great reward; keep clear of the green water.</li>
+          <li>The croak from the well carried across the square while she was speaking. She did not startle.</li>
+          <li>She finished, let go of his hand and left. Nobody saw her look back. No name or affiliation was given.</li>
+        </ul>
+
+        <h3 id="scene-8">8. Night at the Broken Wheel</h3>
+        <ul>
+          <li>The party paid 1 gp each for lodging, having received 15 gp each from Kollaro.</li>
+          <li>Wafik asked whether they were joining the Khosuran armies. He said there is a war with the Easterners and the Khosurans are winning, and a man could do well by choosing early.</li>
+          <li>Rewen explained how she and Wafik came under Nook's roof.</li>
+          <li>Dagen kept the prophecy to himself.</li>
+        </ul>
+
+        <h3 id="scene-9">9. The pillar and the Chül</h3>
+        <ul>
+          <li>The party went to a broken white pillar, andesite or near it, carved with a kneeling calf wearing a crown of leaves.</li>
+          <li>Offerings lay at its foot: bread, salt, a knot of coloured thread, a knife with the blade snapped off.</li>
+          <li>Worshippers were present and did not invite questions. No doctrine was learned.</li>
+          <li>Elowyn bought sesame cakes with his own gold. The cakes helped them find the Chül.</li>
+          <li>Batros the Chül trades from a blanket spread on the street, not from a shop.</li>
+          <li>He offered a very low price for the party's two swords and two crossbows. The party kept them.</li>
+          <li>Ed bought a <strong>Fire Rock</strong> from a pile of them for 5 gp. Thrown hard against stone, it will be heard across the quarter. It has not been tested.</li>
+          <li>Also on the blanket:
+            <ul>
+              <li>A green rod of metal that gives off its own light, continuously, in daylight. Batros says chips of it will sharpen a spell. Not bought. Price not recorded.</li>
+              <li>A silvery fabric pouch. It looked expensive once his prices on the other goods had been heard, and nobody asked what it held or what it cost.</li>
+              <li>A necklace that has the look of lapis lazuli, with a cat charm on it, priced at 150 gp. Not bought. Nobody touched it.</li>
+            </ul>
+          </li>
+        </ul>
+
+        <h3 id="scene-10">10. The urchin ruin</h3>
+        <ul>
+          <li>The ruin north-west of the plaza held four urchins.</li>
+          <li>Two came out for the cakes. The oldest, Pablo, about thirteen, with a broken front tooth and a rope burn on one wrist, arrived afterward with Dio. Pablo did the talking.</li>
+          <li>The party brought cakes. The urchins took the two swords and two crossbows in exchange for information.</li>
+          <li>What the urchins gave:
+            <ul>
+              <li>The water is not safe.</li>
+              <li>The frog monster is real.</li>
+              <li>They call it <strong>the Splinter</strong>. It takes children and takes them down the well.</li>
+              <li>Lady Danarose's son <strong>Orlando</strong> is missing.</li>
+            </ul>
+          </li>
+          <li>Elowyn argued that they should get an advance from Lady Danarose before going down.</li>
+          <li>The party hired Dio, an urchin boy, for 1 sp to lead them to Lady Danarose's house.</li>
+          <li>Pablo, the oldest boy, brought Dio forward and was given a silver of his own.</li>
+          <li>The session ended on the walk to her house. The party did not arrive, knock, or meet her.</li>
+        </ul>
+      </section>
+
+      <section id="money">
+        <h2>Money</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th scope="col">Item</th><th scope="col">Amount</th><th scope="col">Notes</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Wakhar's promised fee</td><td>5 gp per head</td><td>Agreed at the Barking Dogs</td></tr>
+              <tr><td>Kollaro's payment</td><td>15 gp per head</td><td>Five promised plus ten more, paid at Barber's Alley</td></tr>
+              <tr><td>Coin from the literator</td><td>36 sp, 5 ep, 8 cp</td><td>Found by Ed, kept by the party</td></tr>
+              <tr><td>Lodging at the Broken Wheel</td><td>1 gp each</td><td>Paid after Kollaro's payment</td></tr>
+              <tr><td>Balance after lodging</td><td>14 gp each</td><td>15 gp received less 1 gp lodging; not tracked as individual purses</td></tr>
+              <tr><td>Ed's Fire Rock</td><td>5 gp</td><td>Paid to Batros</td></tr>
+              <tr><td>Lapis-look necklace</td><td>150 gp asking price</td><td>Not bought</td></tr>
+              <tr><td>Dio's guide fee</td><td>1 sp</td><td>Paid</td></tr>
+              <tr><td>Silver to Pablo</td><td>1 sp</td><td>Paid for bringing Dio forward</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>The party holds 36 sp, 5 ep, 8 cp in common, taken from the literator's pouch. Individual purses are not otherwise tracked.</p>
+      </section>
+
+      <section id="items">
+        <h2>Items seen or gained</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th scope="col">Item</th><th scope="col">Status</th><th scope="col">Notes</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Ed's Fire Rock</td><td>Gained</td><td>One of a pile on the blanket; 5 gp; thrown hard to work; untested</td></tr>
+              <tr><td>Green rod of glowing metal</td><td>Seen, not bought</td><td>Glows continuously in daylight; chips said to sharpen a spell</td></tr>
+              <tr><td>Silvery fabric pouch</td><td>Seen, not bought</td><td>Looked costly; contents never asked about; price never asked</td></tr>
+              <tr><td>Lapis-look necklace</td><td>Seen, not bought</td><td>150 gp; looks like lapis lazuli; cat charm; real stones unconfirmed</td></tr>
+              <tr><td>Two swords, two crossbows</td><td>Gained then traded</td><td>Taken from the dead literators; traded to the urchins for information</td></tr>
+              <tr><td>Four frog statues at the well</td><td>Fixed feature</td><td>Dog-sized, horned bull frogs, worn by weather</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="information">
+        <h2>Information gained</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th scope="col">Fact or claim</th><th scope="col">Source</th><th scope="col">Certainty</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Kollaro is a member of the Barbers' guild and used the name Wakhar</td><td>The captured leader</td><td>Confirmed by Kollaro himself</td></tr>
+              <tr><td>The literators and the Barbers' guild are in conflict</td><td>The literator and Kollaro</td><td>Reported; no cause given</td></tr>
+              <tr><td>The literators keep their guild in the library</td><td>Kollaro, in conversation</td><td>Reported by Kollaro; not visited</td></tr>
+              <tr><td>The captured literator is Mahir</td><td>Kollaro, at the handover</td><td>Confirmed</td></tr>
+              <tr><td>A Chül in the city buys unwanted gear</td><td>Kollaro</td><td>Confirmed by visiting him</td></tr>
+              <tr><td>The well shaft is lined with frog carvings and has no visible bottom</td><td>Ed's lantern</td><td>Observed</td></tr>
+              <tr><td>A frog carving moved and croaked</td><td>Ed</td><td>Observed by Ed; others heard the croak</td></tr>
+              <tr><td>Dagen's prophecy: caverns, death, great reward, avoid green water</td><td>Old woman's palm reading</td><td>Reported; no interpretation given</td></tr>
+              <tr><td>Wafik says the Khosurans are at war with the Easterners and winning</td><td>Wafik</td><td>Reported</td></tr>
+              <tr><td>The urchins call the well monster the Splinter and say it takes children</td><td>Urchins</td><td>Reported</td></tr>
+              <tr><td>Orlando, Lady Danarose's son, is missing</td><td>Urchins</td><td>Reported</td></tr>
+              <tr><td>The urchins say the Splinter took Orlando</td><td>Urchins</td><td>Reported by the urchins; not confirmed</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="rumours">
+        <h2>Rumours heard</h2>
+        <p>All three were heard at the Barking Dogs, after the Kollaro business, and nowhere else.</p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th scope="col">Rumour</th><th scope="col">Told by</th><th scope="col">Status</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>The urchins sometimes toss one of their own down the well</td><td>Barking Dogs drinkers</td><td>Unconfirmed</td></tr>
+              <tr><td>On mist-shrouded nights, a thing in the shape of a man walks the neighbourhood</td><td>Barking Dogs drinkers</td><td>Unconfirmed</td></tr>
+              <tr><td>A frog monster lurks in the water and drags under anyone who leans too near; the last to draw water came from the House of Cheap Delights</td><td>Barking Dogs drinkers</td><td>Unconfirmed at the time; the urchins later confirm the monster is real and name it the Splinter</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>The urchins' confirmation is not a retelling of the three stories. It is a separate claim about the water and the monster.</p>
+      </section>
+
+      <section id="people">
+        <h2>People</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th scope="col">Person</th><th scope="col">Role</th><th scope="col">Status after Session 1</th><th scope="col">Notes</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Nook the Older</td><td>Owner and manager of the Broken Wheel</td><td>Alive</td><td>Wants payment up front</td></tr>
+              <tr><td>Wafik</td><td>Porter</td><td>Alive</td><td>Works under Nook; asks about the Khosuran war</td></tr>
+              <tr><td>Rewen</td><td>Laundress</td><td>Alive</td><td>Works under Nook</td></tr>
+              <tr><td>Barking Dog</td><td>Dwarven tavern master</td><td>Alive</td><td>Former fighting pit</td></tr>
+              <tr><td>Wakhar / Kollaro</td><td>Barber guild member; merchant</td><td>Alive</td><td>Lied about his name; asked for a murder; paid 15 gp each</td></tr>
+              <tr><td>Mahir</td><td>Literator guild member</td><td>Unknown</td><td>Captured, handed to the barbers, named by Kollaro</td></tr>
+              <tr><td>Old woman</td><td>Palm reader</td><td>Unknown</td><td>Two cats; no name; came and went</td></tr>
+              <tr><td>Batros</td><td>Chül trader</td><td>Alive</td><td>Buys and sells unusual goods</td></tr>
+              <tr><td>Pillar worshippers</td><td>Congregation at the broken white pillar</td><td>Unknown</td><td>No name, doctrine, or affiliation learned; they did not invite questions</td></tr>
+              <tr><td>Pablo</td><td>Oldest urchin; leader of the ruin children</td><td>Alive</td><td>About thirteen; broken front tooth; rope burn; spoke for the urchins with the party</td></tr>
+              <tr><td>Dio</td><td>Urchin guide</td><td>Alive</td><td>Hired for 1 sp</td></tr>
+              <tr><td>Lady Danarose</td><td>Orlando's mother</td><td>Not met</td><td>Approached at the session's end</td></tr>
+              <tr><td>Orlando</td><td>Lady Danarose's son</td><td>Missing</td><td>The urchins say the Splinter took him</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="places">
+        <h2>Places</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th scope="col">Place</th><th scope="col">Notes</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Arakay</td><td>Walled city between the Black Desert and the Jashra Mountains; the Asser is dry; trade reduced</td></tr>
+              <tr><td>Piazza dei Rospi</td><td>Plaza of Frogs; the well at its centre; locals avoid the well</td></tr>
+              <tr><td>Well of Frogs</td><td>Old stone; four horned bull-frog statues; frog carvings in the shaft; no visible bottom</td></tr>
+              <tr><td>Broken Wheel</td><td>Lodging house, north-east corner of the old quarter</td></tr>
+              <tr><td>Barking Dogs</td><td>Tavern in a former fighting pit</td></tr>
+              <tr><td>The crossroads</td><td>Site of the ambush; alley east, street west, stair behind, oxcart across the way</td></tr>
+              <tr><td>Barber's Alley</td><td>Barbers' guild territory; Mahir handed over here</td></tr>
+              <tr><td>Broken white pillar</td><td>Street shrine; kneeling calf with a crown of leaves; offerings at the foot</td></tr>
+              <tr><td>Batros's blanket</td><td>Street market stall, not a shop</td></tr>
+              <tr><td>Urchin ruin</td><td>North-west of the plaza; home to the four urchins</td></tr>
+              <tr><td>Lady Danarose's house</td><td>Destination at the session's end; not reached</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="experience">
+        <h2>Experience awarded</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th scope="col">Component</th><th scope="col" class="num">XP</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Session 1 award, party total</td><td class="num">780</td></tr>
+              <tr><td>Per PC, divided five ways</td><td class="num">156</td></tr>
+              <tr><td>Elowyn, with +10% prime requisite</td><td class="num">172</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Supplied by the DM on 2026-10-31, before the prime requisite bonus. No component breakdown was given. The 172 is 156 plus Elowyn's 10%, rounded, and it matches the XP on his 2026-10-20 sheet.</p>
+      </section>
+
+      <section id="decisions">
+        <h2>Decisions made by the party</h2>
+        <ul>
+          <li>Took Wakhar's escort job at 5 gp per head.</li>
+          <li>Fought the ambush rather than fled.</li>
+          <li>Refused Kollaro's request to kill the prisoner.</li>
+          <li>Handed Mahir to the barbers alive.</li>
+          <li>Went back to the Barking Dogs to gather talk.</li>
+          <li>Looked into the well rather than descending.</li>
+          <li>Kept the swords and crossbows when the Chül's offer was low, then traded them to the urchins for information.</li>
+          <li>Bought only one Fire Rock from the Chül, out of a pile of them.</li>
+          <li>Never asked about the silvery fabric pouch on the blanket.</li>
+          <li>Decided to seek an advance from Lady Danarose before entering the well.</li>
+          <li>Hired Dio to guide them to her house.</li>
+        </ul>
+      </section>
+
+      <section id="unresolved">
+        <h2>Unresolved at the end of the session</h2>
+        <ul>
+          <li>Why the literators and the Barbers' guild are at war.</li>
+          <li>What the library holds and who leads the literators.</li>
+          <li>What happened to Mahir after the barbers took him.</li>
+          <li>What the Splinter is.</li>
+          <li>Whether Orlando is alive, and where he was taken.</li>
+          <li>What is at the bottom of the well.</li>
+          <li>What the green rod and the lapis-look necklace are worth or do, and what the silvery fabric pouch holds.</li>
+          <li>Who the pillar worshippers are, what the kneeling calf represents, and whether they have any connection to the well.</li>
+          <li>Whether Lady Danarose will pay, and how much.</li>
+          <li>What the Khosuran war means for Arakay.</li>
+        </ul>
+      </section>
+
+    </main>
+
+    <nav class="toc" aria-label="Contents">
+      <h2>Contents</h2>
+      <ol>
+        <li><a href="#player-characters">Player characters</a></li>
+        <li><a href="#events">Events in order</a></li>
+        <li><a href="#money">Money</a></li>
+        <li><a href="#items">Items seen or gained</a></li>
+        <li><a href="#information">Information gained</a></li>
+        <li><a href="#rumours">Rumours heard</a></li>
+        <li><a href="#people">People</a></li>
+        <li><a href="#places">Places</a></li>
+        <li><a href="#experience">Experience awarded</a></li>
+        <li><a href="#decisions">Decisions made by the party</a></li>
+        <li><a href="#unresolved">Unresolved at the end of the session</a></li>
+      </ol>
+      <a class="top" href="#top">Back to top ↑</a>
+    </nav>
+
+  </div>
+</div>
+</body>
+</html>

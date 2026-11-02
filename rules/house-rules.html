@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>House Rules · The Well of Frogs</title>
+<style>
+
+  :root {
+    --paper: #f4ecda;
+    --paper-2: #fbf7ec;
+    --ink: #241d14;
+    --ink-soft: #5f5342;
+    --rule: #d9c9a9;
+    --accent: #6b3a26;
+    --accent-2: #3f5b43;
+    --gold: #9a7228;
+    --wash: rgba(107, 58, 38, 0.035);
+    --shadow: 0 1px 2px rgba(60, 40, 20, 0.06), 0 24px 48px -36px rgba(60, 40, 20, 0.5);
+    --sans: ui-sans-serif, system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, "Times New Roman", serif;
+  }
+
+  * { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background:
+      radial-gradient(1200px 600px at 12% -10%, rgba(255, 252, 240, 0.85), transparent 60%),
+      radial-gradient(900px 500px at 100% 0%, rgba(154, 114, 40, 0.07), transparent 55%),
+      var(--paper);
+    color: var(--ink);
+    font-family: var(--serif);
+    font-size: 17px;
+    line-height: 1.62;
+    text-rendering: optimizeLegibility;
+  }
+
+  .page {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 44px 28px 72px;
+  }
+
+  /* Masthead */
+
+  .masthead {
+    max-width: 780px;
+    padding-bottom: 26px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .eyebrow {
+    margin: 0 0 10px;
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  h1 {
+    margin: 0;
+    font-size: clamp(2.1rem, 5vw, 3.25rem);
+    line-height: 1.05;
+    font-weight: 600;
+    letter-spacing: -0.015em;
+  }
+
+  .lede {
+    margin: 18px 0 0;
+    max-width: 66ch;
+    font-size: 1.04rem;
+    color: var(--ink-soft);
+  }
+
+  .meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 14px;
+    margin: 18px 0 0;
+    font-family: var(--sans);
+    font-size: 12.5px;
+    color: var(--ink-soft);
+  }
+
+  .meta .sep {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--rule);
+  }
+
+  .pill {
+    padding: 2px 9px;
+    border: 1px solid var(--rule);
+    border-radius: 999px;
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--accent-2);
+    background: rgba(63, 91, 67, 0.06);
+  }
+
+  .notice {
+    margin: 26px 0 0;
+    padding: 14px 18px;
+    border-left: 3px solid var(--gold);
+    border-radius: 0 6px 6px 0;
+    background: var(--paper-2);
+    box-shadow: var(--shadow);
+    font-family: var(--sans);
+    font-size: 13px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+  }
+
+  /* Layout */
+
+  .layout {
+    display: grid;
+    grid-template-columns: minmax(0, 780px) 240px;
+    gap: 64px;
+    justify-content: space-between;
+    padding-top: 40px;
+  }
+
+  main { min-width: 0; }
+
+  /* Contents */
+
+  .toc {
+    align-self: start;
+    position: sticky;
+    top: 28px;
+    font-family: var(--sans);
+  }
+
+  .toc h2 {
+    margin: 0 0 12px;
+    padding: 0 0 8px;
+    border: 0;
+    border-bottom: 1px solid var(--rule);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  .toc ol {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    counter-reset: toc;
+    font-size: 13px;
+    line-height: 1.4;
+  }
+
+  .toc li {
+    counter-increment: toc;
+    margin: 0;
+    padding: 6px 0 6px 26px;
+    position: relative;
+    border-bottom: 1px solid rgba(217, 201, 169, 0.45);
+  }
+
+  .toc li::before {
+    content: counter(toc, decimal-leading-zero);
+    position: absolute;
+    left: 0;
+    top: 7px;
+    font-size: 10.5px;
+    color: var(--gold);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .toc a { color: var(--ink-soft); text-decoration: none; }
+  .toc a:hover { color: var(--accent); }
+
+  .toc .top {
+    display: inline-block;
+    margin-top: 14px;
+    font-size: 11.5px;
+    letter-spacing: 0.04em;
+    color: var(--gold);
+    text-decoration: none;
+    border-bottom: 1px dotted currentColor;
+  }
+
+  /* Sections */
+
+  section { scroll-margin-top: 24px; }
+
+  h2 {
+    margin: 56px 0 0;
+    padding: 0 0 8px 14px;
+    border-left: 3px solid var(--accent);
+    border-bottom: 1px solid var(--rule);
+    font-size: 1.52rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+
+  h2:first-child { margin-top: 0; }
+
+  h3 {
+    margin: 34px 0 8px;
+    font-size: 1.02rem;
+    font-weight: 600;
+    color: var(--accent);
+    letter-spacing: 0.005em;
+  }
+
+  p { margin: 14px 0; max-width: 68ch; }
+
+  a {
+    color: var(--accent);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+  }
+
+  a:hover { color: var(--gold); }
+
+  ul, ol { margin: 14px 0; padding-left: 1.15rem; }
+  li { margin: 6px 0; max-width: 66ch; }
+  li::marker { color: var(--gold); }
+
+  ul ul, ul ol { margin: 8px 0 2px; }
+
+  /* Scene chips */
+
+  .scene-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    margin: 18px 0 6px;
+    font-family: var(--sans);
+    font-size: 11.5px;
+  }
+
+  .scene-nav a {
+    padding: 3px 10px;
+    border: 1px solid var(--rule);
+    border-radius: 999px;
+    background: var(--paper-2);
+    color: var(--ink-soft);
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .scene-nav a:hover { color: var(--accent); border-color: var(--gold); }
+
+  /* Tables */
+
+  .table-wrap {
+    margin: 18px 0 26px;
+    overflow-x: auto;
+    border: 1px solid var(--rule);
+    border-radius: 7px;
+    background: var(--paper-2);
+    box-shadow: var(--shadow);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: var(--sans);
+    font-size: 13.5px;
+    line-height: 1.5;
+  }
+
+  th, td {
+    padding: 9px 13px;
+    text-align: left;
+    vertical-align: top;
+    border-bottom: 1px solid rgba(217, 201, 169, 0.55);
+  }
+
+  thead th {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    border-bottom: 2px solid var(--rule);
+    white-space: nowrap;
+  }
+
+  tbody tr:nth-child(even) { background: var(--wash); }
+  tbody tr:last-child td { border-bottom: 0; }
+
+  td:first-child { font-weight: 600; color: var(--ink); }
+
+  .num {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+
+  tr.total td {
+    font-weight: 700;
+    border-top: 2px solid var(--rule);
+    background: rgba(154, 114, 40, 0.06);
+  }
+
+  /* Footer */
+
+  footer {
+    margin-top: 64px;
+    padding-top: 18px;
+    border-top: 1px solid var(--rule);
+    font-family: var(--sans);
+    font-size: 12px;
+    color: var(--ink-soft);
+  }
+
+  footer p { margin: 0; max-width: 70ch; }
+
+  /* Responsive */
+
+  @media (max-width: 980px) {
+    .page { padding: 32px 20px 56px; }
+    .layout { grid-template-columns: minmax(0, 1fr); gap: 0; padding-top: 28px; }
+    .toc { position: static; order: -1; padding: 0 0 28px; }
+    .toc ol { columns: 2; column-gap: 28px; }
+    .masthead { max-width: none; }
+  }
+
+  @media (max-width: 560px) {
+    .toc ol { columns: 1; }
+    h2 { margin-top: 42px; }
+  }
+
+  /* Print */
+
+  @media print {
+    body { background: #fff; color: #000; font-size: 11pt; }
+    .page { max-width: none; padding: 0; }
+    .toc, .notice { display: none; }
+    .table-wrap { box-shadow: none; }
+    th, td, tr { break-inside: avoid; }
+    a { color: inherit; text-decoration: none; }
+    h2 { break-after: avoid; }
+  }
+
+  /* Dark */
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #14110c;
+      --paper-2: #1c1811;
+      --ink: #e9e0ca;
+      --ink-soft: #b6a88d;
+      --rule: #3b3224;
+      --accent: #d9a05b;
+      --accent-2: #9dbfa1;
+      --gold: #d9b26a;
+      --wash: rgba(255, 246, 220, 0.03);
+      --shadow: none;
+    }
+    body {
+      background:
+        radial-gradient(1100px 500px at 10% -10%, rgba(120, 90, 45, 0.12), transparent 60%),
+        var(--paper);
+    }
+    .notice { background: var(--paper-2); }
+  }
+  /* Rules page */
+  .notice { margin-bottom: 34px; }
+
+
+  .back { margin: 0 0 16px; font-family: var(--sans); font-size: 12px; }
+  .back a { color: var(--accent-2); text-decoration: none; border-bottom: 1px dotted currentColor; }
+  .back a:hover { color: var(--gold); }
+
+  code {
+    padding: 1px 4px;
+    border-radius: 3px;
+    background: rgba(154, 114, 40, 0.09);
+    font-family: ui-monospace, "Cascadia Mono", Consolas, monospace;
+    font-size: 0.86em;
+  }
+
+  .rule-id {
+    display: inline-block;
+    margin-right: 8px;
+    padding: 2px 7px;
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    background: rgba(154, 114, 40, 0.07);
+    font-family: var(--sans);
+    font-size: 10.5px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    color: var(--gold);
+    vertical-align: 2px;
+  }
+
+  h3 { scroll-margin-top: 24px; }
+
+  .related { margin-top: 12px; font-family: var(--sans); font-size: 13.5px; }
+  .related li { margin: 8px 0; }
+
+  td .pill { white-space: nowrap; }
+</style>
+</head>
+<body>
+<div class="page" id="top">
+
+  <header class="masthead">
+    <p class="eyebrow">The Well of Frogs · Old-School Essentials</p>
+    <p class="back"><a href="../sessions/index.html">← Campaign home</a></p>
+    <h1>House Rules</h1>
+    <p class="lede">The table's deviations from core OSE, its additions, and the interpretations it plays by. Core procedures are assumed unless a rule appears here.</p>
+    <p class="meta">
+      <span class="pill">active</span>
+      <span>updated 2026-11-01</span>
+      <span class="sep"></span>
+      <span>15 rules</span>
+      <span class="sep"></span>
+      <span>6 open questions</span>
+    </p>
+  </header>
+
+  <div class="layout">
+
+    <main>
+
+      <p class="notice">The Well of Frogs House Rules v1.0 PDF is authoritative. This page is the working reference and the register below is its index. Each rule here is in play at the table.</p>
+
+      <section id="register">
+        <h2>The register</h2>
+        <p>Fifteen numbered rules, all currently active. The scope column says where each one bites.</p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th scope="col">ID</th><th scope="col">Rule</th><th scope="col">Scope</th><th scope="col">Status</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>HR-01</td><td>Shields Shall Be Splintered</td><td>Combat and defense</td><td><span class="pill">active</span></td></tr>
+              <tr><td>HR-02</td><td>Always Wear Your Helmet</td><td>Equipment and combat</td><td><span class="pill">active</span></td></tr>
+              <tr><td>HR-03</td><td>Moving and Encumbrance</td><td>Exploration and equipment</td><td><span class="pill">active</span></td></tr>
+              <tr><td>HR-04</td><td>Expanded Equipment</td><td>Equipment</td><td><span class="pill">active</span></td></tr>
+              <tr><td>HR-05</td><td>Crossbows and Longbows</td><td>Weapons</td><td><span class="pill">active</span></td></tr>
+              <tr><td>HR-06</td><td>Fighter favored weapon</td><td>Class</td><td><span class="pill">active</span></td></tr>
+              <tr><td>HR-07</td><td>Cleric sanctified weapons</td><td>Class</td><td><span class="pill">active</span></td></tr>
+              <tr><td>HR-08</td><td>Magic-User starting spells</td><td>Class</td><td><span class="pill">active</span></td></tr>
+              <tr><td>HR-09</td><td>Thief D6 skills</td><td>Class</td><td><span class="pill">active</span></td></tr>
+              <tr><td>HR-10</td><td>Ranger Monster Slayer</td><td>Class</td><td><span class="pill">active</span></td></tr>
+              <tr><td>HR-11</td><td>Detect Magic and Read Magic</td><td>Spellcasting</td><td><span class="pill">active</span></td></tr>
+              <tr><td>HR-12</td><td>Trollkin increased healing</td><td>Ancestry</td><td><span class="pill">active</span></td></tr>
+              <tr><td>HR-13</td><td>Thief hit die and starting HP</td><td>Class and advancement</td><td><span class="pill">active</span></td></tr>
+              <tr><td>HR-14</td><td>Weapon Proficiencies</td><td>Combat and weapons</td><td><span class="pill">active</span></td></tr>
+              <tr><td>HR-15</td><td>Splash and Area Attack Deviation</td><td>Combat</td><td><span class="pill">active</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Also in use, and not numbered: <strong>Feats of Exploration</strong> supplies the campaign's exploration XP stream, and <strong>magic item XP</strong> is the table's own variation on the optional rule, paying nothing for finding an item and flat XP on its sale.</p>
+      </section>
+
+      <section id="combat">
+        <h2>Combat</h2>
+
+        <h3 id="hr-01"><span class="rule-id">HR-01</span>Shields Shall Be Splintered</h3>
+        <p>A character currently using a shield may destroy it to block all damage from an attack.</p>
+        <ul>
+          <li><strong>Martial classes</strong> (fighter, barbarian, ranger and the like) may declare the block <strong>after</strong> the attacker rolls damage.</li>
+          <li><strong>Semi-martial classes</strong> with access to shields may declare the block <strong>before</strong> damage is rolled.</li>
+          <li>In either case the shield is completely destroyed and unusable afterward.</li>
+          <li>Normal shields can block only damage from a physical attack.</li>
+          <li>Damage from traps, the environment, or poison cannot be blocked by a normal shield.</li>
+          <li>Certain magical shields can block magical attacks.</li>
+        </ul>
+
+        <h3 id="hr-02"><span class="rule-id">HR-02</span>Always Wear Your Helmet</h3>
+        <ul>
+          <li>Classes that can equip shields can also equip helmets.</li>
+          <li>A helmet does <strong>not</strong> provide an AC bonus.</li>
+          <li>A helmet can absorb the damage from a single critical hit, then is rendered useless.</li>
+          <li>Wearing a helmet imposes a <code>-1</code> penalty to Surprise.</li>
+        </ul>
+
+        <h3 id="hr-15"><span class="rule-id">HR-15</span>Splash and Area Attack Deviation</h3>
+        <p>Added at the table on 2026-11-01. When a splash or area attack misses, it deviates from the target.</p>
+        <ul>
+          <li><strong>Distance:</strong> it deviates 1 ft for every point by which the attack roll missed.</li>
+          <li><strong>Direction:</strong> roll a <code>d12</code>.</li>
+        </ul>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th scope="col">d12</th><th scope="col">Where it lands</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>1</td><td>Bounces back, towards the thrower</td></tr>
+              <tr><td>2</td><td>Falls short, somewhere in between</td></tr>
+              <tr><td>3-6</td><td>Goes wide; roll a second <code>d6</code>, 1-3 left, 4-6 right</td></tr>
+              <tr><td>7-12</td><td>Too far, past the target</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>A wide throw takes a second roll: <code>d6</code>, where 1-3 puts it to the left and 4-6 to the right.</p>
+      </section>
+
+      <section id="weapons">
+        <h2>Weapons</h2>
+
+        <h3 id="hr-05"><span class="rule-id">HR-05</span>Crossbows and Longbows</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th scope="col">Weapon</th><th scope="col" class="num">Damage</th><th scope="col">Range</th><th scope="col">Rules</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Crossbow</td><td class="num"><code>2d4</code></td><td>5' to 70' / 71' to 140' / 141' to 210'</td><td>Two-handed, Slow, Reload</td></tr>
+              <tr><td>Long bow</td><td class="num"><code>1d6</code></td><td>5' to 80' / 81' to 160' / 161' to 240'</td><td>Two-handed</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>If loaded ahead of combat, a crossbow is <strong>not</strong> Slow in the first round.</p>
+
+        <h3 id="hr-06"><span class="rule-id">HR-06</span>Fighter: Favored Weapon Type</h3>
+        <p>At 1st level a fighter may choose a weapon type preferred over all others. The fighter receives <code>+1</code> to hit and <code>+1</code> to damage with that weapon type in combat.</p>
+
+        <h3 id="hr-07"><span class="rule-id">HR-07</span>Cleric: Sanctified Weapons</h3>
+        <p>At character creation a cleric chooses three weapon types as the weapons of their god. These weapons may be used without penalty. Other weapons may not be used. The choices should make sense for the deity.</p>
+
+        <h3 id="hr-10"><span class="rule-id">HR-10</span>Ranger: Monster Slayer</h3>
+        <p>A ranger receives <code>+1</code> to attack and damage rolls against giants and monstrous creatures larger than a man.</p>
+
+        <h3 id="hr-14"><span class="rule-id">HR-14</span>Weapon Proficiencies</h3>
+        <p>An optional OSE rule, adopted on the DM's instruction on 2026-10-27. Proficiencies are declared at 1st level.</p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th scope="col">Aptitude</th><th scope="col">At 1st level</th><th scope="col">Thereafter</th><th scope="col">Non-proficient penalty</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Martial</td><td>4</td><td>One every 3 levels</td><td class="num"><code>-2</code></td></tr>
+              <tr><td>Semi-martial</td><td>3</td><td>One every 4 levels</td><td class="num"><code>-3</code></td></tr>
+              <tr><td>Non-martial</td><td>1</td><td>One every 5 levels</td><td class="num"><code>-5</code></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Weapon specialisation (<code>+1</code> attack and damage with one weapon) is open to martial characters only.</p>
+        <p>Elowyn, a semi-martial thief, is proficient with <strong>normal sword</strong>, <strong>short bow</strong>, and <strong>dagger</strong>. Four of the party have not declared theirs.</p>
+      </section>
+
+      <section id="exploration">
+        <h2>Exploration and equipment</h2>
+
+        <h3 id="hr-03"><span class="rule-id">HR-03</span>Moving and Encumbrance, Item-Based</h3>
+        <p>Use the <strong>item-based encumbrance</strong> system from <em>Carcass Crawler #2</em> (Gavin Norman, pp. 28-29).</p>
+        <ul>
+          <li>Track significant items rather than coin weight.</li>
+          <li>Classify each item as equipped or packed.</li>
+          <li>Look up both totals and use the slower movement rate.</li>
+        </ul>
+        <p>The full procedure, movement table, and gear weights are on the encumbrance reference page.</p>
+
+        <h3 id="hr-04"><span class="rule-id">HR-04</span>Expanded Equipment</h3>
+        <p>The source points to <em>Carcass Crawler #3</em> for expanded equipment and item-based encumbrance. Exact scope should be confirmed against the supplement.</p>
+      </section>
+
+      <section id="classes">
+        <h2>Classes and advancement</h2>
+
+        <h3 id="hr-08"><span class="rule-id">HR-08</span>Magic-User: Starting Spells</h3>
+        <p>A newly created magic-user begins with <strong>four random Level 1 spells</strong> in their spellbook, in addition to <strong>Read Magic</strong>.</p>
+
+        <h3 id="hr-09"><span class="rule-id">HR-09</span>Thief: D6 Skills</h3>
+        <p>Use the <strong>D6 thief skills</strong> from <em>Carcass Crawler #1</em>.</p>
+        <ul>
+          <li>All skills start at <strong>1-in-6</strong>.</li>
+          <li>A 1st-level thief allocates <strong>4 expertise points</strong>; each point raises one skill by 1-in-6.</li>
+          <li><strong>+2 points per level</strong> thereafter, to a maximum of <strong>5-in-6</strong> per skill.</li>
+          <li><strong>Read languages</strong> is available from 1st level and can be improved, per the article. The same article's later section still repeats the standard "from 4th level" wording; this campaign follows the 1st-level version.</li>
+        </ul>
+
+        <h3 id="hr-13"><span class="rule-id">HR-13</span>Thief Hit Die and Starting HP</h3>
+        <p>A table clarification rather than part of the v1.0 PDF.</p>
+        <ul>
+          <li><strong>Thief hit die:</strong> <code>d6</code> (the 2026 OSE DM option).</li>
+          <li><strong>Starting HP:</strong> maximum hit die result plus the CON modifier.</li>
+          <li><strong>Example:</strong> Elowyn, Thief 1, CON 8 (<code>-1</code>): <code>6 - 1 = 5</code> HP.</li>
+        </ul>
+        <p>The maximum-HP-at-1st-level rule applies to the initial character total. Whether it also applies to newly recruited retainers or replacement characters is unsettled.</p>
+      </section>
+
+      <section id="magic-ancestry">
+        <h2>Magic and ancestry</h2>
+
+        <h3 id="hr-11"><span class="rule-id">HR-11</span>Detect Magic and Read Magic</h3>
+        <p><strong>Detect Magic.</strong> All magic-users can detect magical resonance at will if they can concentrate without distraction and physically touch the subject.</p>
+        <ul>
+          <li>Only the <strong>existence</strong> of magic is detected.</li>
+          <li>The nature and strength of the magic are not revealed.</li>
+          <li>Each attempt requires one turn.</li>
+        </ul>
+        <p><strong>Read Magic.</strong> Read Magic is <strong>not</strong> necessary to decipher scrolls. It <strong>is</strong> necessary to decipher spellbooks.</p>
+
+        <h3 id="hr-12"><span class="rule-id">HR-12</span>Trollkin: Increased Healing</h3>
+        <p>A Draga'Kyr, or Trollkin, heals faster than other ancestries:</p>
+        <ul>
+          <li>An 8-hour rest heals <code>d3</code> HP.</li>
+          <li>A 24-hour rest heals <code>3d3</code> HP.</li>
+        </ul>
+      </section>
+
+      <section id="open-questions">
+        <h2>Open rules questions</h2>
+        <p>Six questions the table has not settled. They are marked <code>[?]</code> rather than resolved in the archive.</p>
+        <ul>
+          <li><code>[?]</code> Which classes count as "semi-martial" for Shields Shall Be Splintered? The aptitude table implies a list but does not settle it.</li>
+          <li><code>[?]</code> What counts as a "critical hit" for the helmet rule?</li>
+          <li><code>[?]</code> Are <em>Carcass Crawler</em> #1 and #3 available? The #2 encumbrance pages are transcribed.</li>
+          <li><code>[?]</code> Does the expanded equipment rule change equipment lists, encumbrance, or both?</li>
+          <li><code>[?]</code> Can a destroyed shield or helmet be repaired, or only replaced?</li>
+          <li><code>[?]</code> Does HR-13's maximum starting HP apply to retainers and replacement characters?</li>
+        </ul>
+
+        <h3>Related pages</h3>
+        <ul class="related">
+          <li><a href="../state/experience.html">Experience</a>, which uses the Feats of Exploration stream these rules point at.</li>
+          <li><a href="../people/characters.html">Our Heroes</a>, showing the house rules applied to the party.</li>
+          <li><a href="../state/party-funds.html">Party Funds</a>, for what the gear on those sheets cost.</li>
+          <li><a href="../sessions/index.html">Campaign home</a>, the record of the rules in play.</li>
+        </ul>
+      </section>
+
+    </main>
+
+    <nav class="toc" aria-label="Contents">
+      <h2>Contents</h2>
+      <ol>
+        <li><a href="#register">The register</a></li>
+        <li><a href="#combat">Combat</a></li>
+        <li><a href="#weapons">Weapons</a></li>
+        <li><a href="#exploration">Exploration and equipment</a></li>
+        <li><a href="#classes">Classes and advancement</a></li>
+        <li><a href="#magic-ancestry">Magic and ancestry</a></li>
+        <li><a href="#open-questions">Open rules questions</a></li>
+      </ol>
+      <a class="top" href="#top">Back to top ↑</a>
+    </nav>
+
+  </div>
+</div>
+</body>
+</html>

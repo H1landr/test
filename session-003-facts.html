@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Session 3: Factual Outline · The Well of Frogs</title>
+<style>
+  :root {
+    --paper: #f4ecda;
+    --paper-2: #fbf7ec;
+    --ink: #241d14;
+    --ink-soft: #5f5342;
+    --rule: #d9c9a9;
+    --accent: #6b3a26;
+    --accent-2: #3f5b43;
+    --gold: #9a7228;
+    --wash: rgba(107, 58, 38, 0.035);
+    --shadow: 0 1px 2px rgba(60, 40, 20, 0.06), 0 24px 48px -36px rgba(60, 40, 20, 0.5);
+    --sans: ui-sans-serif, system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, "Times New Roman", serif;
+  }
+
+  * { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background:
+      radial-gradient(1200px 600px at 12% -10%, rgba(255, 252, 240, 0.85), transparent 60%),
+      radial-gradient(900px 500px at 100% 0%, rgba(154, 114, 40, 0.07), transparent 55%),
+      var(--paper);
+    color: var(--ink);
+    font-family: var(--serif);
+    font-size: 17px;
+    line-height: 1.62;
+    text-rendering: optimizeLegibility;
+  }
+
+  .page {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 44px 28px 72px;
+  }
+
+  /* Masthead */
+
+  .masthead {
+    max-width: 780px;
+    padding-bottom: 26px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .eyebrow {
+    margin: 0 0 10px;
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  h1 {
+    margin: 0;
+    font-size: clamp(2.1rem, 5vw, 3.25rem);
+    line-height: 1.05;
+    font-weight: 600;
+    letter-spacing: -0.015em;
+  }
+
+  .lede {
+    margin: 18px 0 0;
+    max-width: 66ch;
+    font-size: 1.04rem;
+    color: var(--ink-soft);
+  }
+
+  .meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 14px;
+    margin: 18px 0 0;
+    font-family: var(--sans);
+    font-size: 12.5px;
+    color: var(--ink-soft);
+  }
+
+  .meta .sep {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--rule);
+  }
+
+  .pill {
+    padding: 2px 9px;
+    border: 1px solid var(--rule);
+    border-radius: 999px;
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--accent-2);
+    background: rgba(63, 91, 67, 0.06);
+  }
+
+  .notice {
+    margin: 26px 0 0;
+    padding: 14px 18px;
+    border-left: 3px solid var(--gold);
+    border-radius: 0 6px 6px 0;
+    background: var(--paper-2);
+    box-shadow: var(--shadow);
+    font-family: var(--sans);
+    font-size: 13px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+  }
+
+  /* Layout */
+
+  .layout {
+    display: grid;
+    grid-template-columns: minmax(0, 780px) 240px;
+    gap: 64px;
+    justify-content: space-between;
+    padding-top: 40px;
+  }
+
+  main { min-width: 0; }
+
+  /* Contents */
+
+  .toc {
+    align-self: start;
+    position: sticky;
+    top: 28px;
+    font-family: var(--sans);
+  }
+
+  .toc h2 {
+    margin: 0 0 12px;
+    padding: 0 0 8px;
+    border: 0;
+    border-bottom: 1px solid var(--rule);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  .toc ol {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    counter-reset: toc;
+    font-size: 13px;
+    line-height: 1.4;
+  }
+
+  .toc li {
+    counter-increment: toc;
+    margin: 0;
+    padding: 6px 0 6px 26px;
+    position: relative;
+    border-bottom: 1px solid rgba(217, 201, 169, 0.45);
+  }
+
+  .toc li::before {
+    content: counter(toc, decimal-leading-zero);
+    position: absolute;
+    left: 0;
+    top: 7px;
+    font-size: 10.5px;
+    color: var(--gold);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .toc a { color: var(--ink-soft); text-decoration: none; }
+  .toc a:hover { color: var(--accent); }
+
+  .toc .top {
+    display: inline-block;
+    margin-top: 14px;
+    font-size: 11.5px;
+    letter-spacing: 0.04em;
+    color: var(--gold);
+    text-decoration: none;
+    border-bottom: 1px dotted currentColor;
+  }
+
+  /* Sections */
+
+  section { scroll-margin-top: 24px; }
+
+  h2 {
+    margin: 56px 0 0;
+    padding: 0 0 8px 14px;
+    border-left: 3px solid var(--accent);
+    border-bottom: 1px solid var(--rule);
+    font-size: 1.52rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+
+  h2:first-child { margin-top: 0; }
+
+  h3 {
+    margin: 34px 0 8px;
+    font-size: 1.02rem;
+    font-weight: 600;
+    color: var(--accent);
+    letter-spacing: 0.005em;
+  }
+
+  p { margin: 14px 0; max-width: 68ch; }
+
+  a {
+    color: var(--accent);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+  }
+
+  a:hover { color: var(--gold); }
+
+  ul { margin: 14px 0; padding-left: 1.15rem; }
+  li { margin: 6px 0; max-width: 66ch; }
+  li::marker { color: var(--gold); }
+
+  /* Scene chips */
+
+  .scene-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    margin: 18px 0 6px;
+    font-family: var(--sans);
+    font-size: 11.5px;
+  }
+
+  .scene-nav a {
+    padding: 3px 10px;
+    border: 1px solid var(--rule);
+    border-radius: 999px;
+    background: var(--paper-2);
+    color: var(--ink-soft);
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .scene-nav a:hover { color: var(--accent); border-color: var(--gold); }
+
+  /* Tables */
+
+  .table-wrap {
+    margin: 18px 0 26px;
+    overflow-x: auto;
+    border: 1px solid var(--rule);
+    border-radius: 7px;
+    background: var(--paper-2);
+    box-shadow: var(--shadow);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: var(--sans);
+    font-size: 13.5px;
+    line-height: 1.5;
+  }
+
+  th, td {
+    padding: 9px 13px;
+    text-align: left;
+    vertical-align: top;
+    border-bottom: 1px solid rgba(217, 201, 169, 0.55);
+  }
+
+  thead th {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    border-bottom: 2px solid var(--rule);
+    white-space: nowrap;
+  }
+
+  tbody tr:nth-child(even) { background: var(--wash); }
+  tbody tr:last-child td { border-bottom: 0; }
+
+  td:first-child { font-weight: 600; color: var(--ink); }
+
+  .num {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+
+  tr.total td {
+    font-weight: 700;
+    border-top: 2px solid var(--rule);
+    background: rgba(154, 114, 40, 0.06);
+  }
+
+  /* Footer */
+
+  footer {
+    margin-top: 64px;
+    padding-top: 18px;
+    border-top: 1px solid var(--rule);
+    font-family: var(--sans);
+    font-size: 12px;
+    color: var(--ink-soft);
+  }
+
+  footer p { margin: 0; max-width: 70ch; }
+
+  /* Responsive */
+
+  @media (max-width: 980px) {
+    .page { padding: 32px 20px 56px; }
+    .layout { grid-template-columns: minmax(0, 1fr); gap: 0; padding-top: 28px; }
+    .toc { position: static; order: -1; padding: 0 0 28px; }
+    .toc ol { columns: 2; column-gap: 28px; }
+    .masthead { max-width: none; }
+  }
+
+  @media (max-width: 560px) {
+    .toc ol { columns: 1; }
+    h2 { margin-top: 42px; }
+  }
+
+  /* Print */
+
+  @media print {
+    body { background: #fff; color: #000; font-size: 11pt; }
+    .page { max-width: none; padding: 0; }
+    .toc, .notice { display: none; }
+    .table-wrap { box-shadow: none; }
+    th, td, tr { break-inside: avoid; }
+    a { color: inherit; text-decoration: none; }
+    h2 { break-after: avoid; }
+  }
+
+  /* Dark */
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #14110c;
+      --paper-2: #1c1811;
+      --ink: #e9e0ca;
+      --ink-soft: #b6a88d;
+      --rule: #3b3224;
+      --accent: #d9a05b;
+      --accent-2: #9dbfa1;
+      --gold: #d9b26a;
+      --wash: rgba(255, 246, 220, 0.03);
+      --shadow: none;
+    }
+    body {
+      background:
+        radial-gradient(1100px 500px at 10% -10%, rgba(120, 90, 45, 0.12), transparent 60%),
+        var(--paper);
+    }
+    .notice { background: var(--paper-2); }
+  }
+</style>
+</head>
+<body>
+<div class="page" id="top">
+
+  <header class="masthead">
+    <p class="eyebrow">The Well of Frogs · Old-School Essentials</p>
+    <h1>Session 3: Factual Outline</h1>
+    <p class="lede">A plain record of what happened, who was there, and what was learned, taken from the raw notes and Ian's answers of 2026-11-01. What is still open is marked <code>[?]</code> and gathered in <strong>Unresolved</strong> at the end. Room numbers follow the annotated undercroft map. Session 2 is in its own fact outline.</p>
+    <p class="meta">
+      <span class="pill">draft</span>
+      <span>updated 2026-11-01</span>
+      <span class="sep"></span>
+      <span>11 scenes</span>
+      <span class="sep"></span>
+      <span>11 sections</span>
+      <span class="sep"></span>
+      <span>8 tables</span>
+    </p>
+  </header>
+
+  <div class="layout">
+
+    <main>
+
+      <section id="player-characters">
+        <h2>Player characters</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th scope="col">PC</th><th scope="col">Player</th><th scope="col">Ancestry</th><th scope="col">Class and level</th><th scope="col">Notes from play</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Elowyn</td><td>Ian</td><td>Essanin elf, male</td><td>Thief 1</td><td>Throws an oil flask that misses the moths and hits a pillar; stays behind with the bow and puts an arrow through a thin wing; charges and finishes a moth; finds no traps in the hallway by the stairs</td></tr>
+              <tr><td>Anglad the Faceless</td><td>Sebastian</td><td>Sabbatean</td><td>Fighter 1</td><td>Sees the wild man peering round the corridor; blocks the west door; skewers a moth; explains to the Archivist how the party got past the moths; inspects the northern tunnel</td></tr>
+              <tr><td>Bozz the Well Endowed</td><td>Max</td><td>Sabbatean</td><td>Fighter 1</td><td>Blocks the west door; enters the pillar room; searches it; squashes a larva; misses several times in the moth fight</td></tr>
+              <tr><td>Dagen</td><td>Jordan</td><td>Human</td><td>Ranger 1</td><td>Enters the pillar room; puts out the remaining fire; slashes the Amnesiac's throat; picks and identifies the Candlecap mushrooms</td></tr>
+              <tr><td>Illiterate Ed</td><td>Alex</td><td>Half-elf</td><td>Magic User 1</td><td>Throws an oil flask and hits four moths; searches the pillar room; wears the yellow cap; inspects the bedroom books; tries ventriloquism on the Amnesiac and is shot by his wand</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="events">
+        <h2>Events in order</h2>
+
+        <nav class="scene-nav" aria-label="Scenes">
+          <a href="#scene-1">1 The altar room and the visitor</a>
+          <a href="#scene-2">2 The plan for the moths</a>
+          <a href="#scene-3">3 The moth fight</a>
+          <a href="#scene-4">4 The pillar room</a>
+          <a href="#scene-5">5 The hallway and the stair</a>
+          <a href="#scene-6">6 The Archivist</a>
+          <a href="#scene-7">7 The rest in the bedroom</a>
+          <a href="#scene-8">8 Questions for the Archivist</a>
+          <a href="#scene-9">9 Down the spiral stair</a>
+          <a href="#scene-10">10 The Amnesiac</a>
+          <a href="#scene-11">11 After the Amnesiac</a>
+        </nav>
+
+        <h3 id="scene-1">1. The altar room and the visitor</h3>
+        <ul>
+          <li>The session opens where Session 2 ends: the party resting in the altar room, room 3 on the map, with Dio.</li>
+          <li>Fluttering against the west door, scuttling near the bottom of the door, then the fluttering stops.</li>
+          <li>Someone tries the south door. That is the room's entry door, the one the party came in by, on the corridor north of the dead room. Ed listens and hears what sounds like barefoot footfalls.</li>
+          <li>The party is captivated by the curious sound of someone trying the door and walking around barefoot.</li>
+          <li>Plan: bait the stranger back inside and jump him if it turns dangerous. Dio is chosen to call out.</li>
+          <li>Looking down the corridor, Anglad sees a dirty, bearded man peering round the corner. A wild-man type.</li>
+          <li>The party offers safety. He does not believe it and leaves.</li>
+        </ul>
+
+        <h3 id="scene-2">2. The plan for the moths</h3>
+        <ul>
+          <li>The party opens the west door, into room 5, and leaves Dio in the corner of the altar room with the lantern, to bait the moths in.</li>
+          <li>Beyond the door is the eight-column hall. The moths are disturbed; there seem to be more than five inside.</li>
+          <li>New plan: light and throw a torch in, then an oil flask once the moths flock to the torch.</li>
+        </ul>
+
+        <h3 id="scene-3">3. The moth fight</h3>
+        <ul>
+          <li>Surprise round (round 0): Elowyn and Ed throw oil flasks. Elowyn's misses the moths and hits a pillar. Ed's hits four moths for 2 damage each; two are incinerated at once.</li>
+          <li>Round 1, the party wins initiative: three missile attacks miss. Two moths burst into flame. Bozz and Anglad block the door.</li>
+          <li>Round 2, the party loses initiative, the moths are still busy: Ed, Bozz, Dagen and Anglad enter the room. Elowyn stays behind and puts an arrow through a very thin wing. Anglad skewers a moth cleanly. Ed, Dagen and Bozz miss.</li>
+          <li>Round 3: Elowyn charges, smacks a moth and finishes it. Bozz misses. Ed hits for 2. Dagen hits and kills it.</li>
+          <li>Victory. There were seven moths and all seven died.</li>
+        </ul>
+
+        <h3 id="scene-4">4. The pillar room</h3>
+        <ul>
+          <li>The room is still on fire. Furniture is smouldering. Eight marble pillars hold up the ceiling of a room that was once finer than it is now.</li>
+          <li>20 ft wide, 25 ft long.</li>
+          <li>Dio had hidden behind the altar when he baited the moths. He rejoined the party after the fight and carried the lantern.</li>
+          <li>Bozz and Ed search. They find clothing, equipment and a pack.</li>
+          <li>Bozz finds a larva about a foot long and squashes it.</li>
+          <li>Found: 76 cp, 38 sp, a suit of leather armour, a sling with 20 silver bullets, a studded wood club, a pointy yellow cap (Ed puts it on at once), a flask of clear water, and a small leather bag of colourful ribbons and pearl-encrusted buttons.</li>
+          <li>The party leaves by the only other door in the room, into a hallway that turns south after 15 ft.</li>
+          <li>Dagen puts out what is left of the fire.</li>
+        </ul>
+
+        <h3 id="scene-5">5. The hallway and the stair</h3>
+        <ul>
+          <li>Elowyn finds no traps in the hallway.</li>
+          <li>No wandering monsters.</li>
+          <li>Round the corner the hallway turns west and ends in a steep staircase up.</li>
+          <li>A sign at the top reads "knock first" in the trade tongue.</li>
+          <li>Shuffling on the other side. A voice asks how they got past the moths. Anglad answers.</li>
+        </ul>
+
+        <h3 id="scene-6">6. The Archivist</h3>
+        <ul>
+          <li>The party comes in by the eastern door, under the "knock first" sign. The chamber is room 6 on the map.</li>
+          <li>The door opens on a man in well-kept robes, dark skin, neat beard.</li>
+          <li>His room is well lit and full of books, parchments and shelves, with reading stands and texts of every kind.</li>
+          <li>Long and narrow: 15 ft wide, 25 ft long, with doors at the far sides and one large door at the far end.</li>
+          <li>The door opposite the entrance, the western one, leads to the tunnels to the well.</li>
+          <li>He gives the party a crudely drawn map of the area. It is missing details: no dead room (called the murder room in the notes), and the pillar room is drawn small.</li>
+          <li>He knows of the Collector: the entrance to her hall is below the Barking Dogs tavern.</li>
+          <li>He is a Kessian bookkeeper, and is known as the Archivist. His name is Mnarka.</li>
+          <li>Ed asks about spellbooks. Mnarka scuttles about and trades the tablets for a spellbook. The book holds six arcane spells: Floating Disc, Light, Protection from Evil, Read Languages, Invisibility, and Web. Ed is the only member of the party who can use it.</li>
+          <li>The tablets are the two clay tablets from Session 2, the divine scrolls of Bless and Speak with Animals. A trade counts as a sale, so their 250 XP each still applies.</li>
+          <li>A small paper figure of a horse jumps out of the spellbook.</li>
+          <li>The origami creatures are called the paperkin, and stay to one shelf.</li>
+          <li><code>[?]</code> Whether the paperkin lives in the spellbook, on the shelf, or both.</li>
+          <li>Mnarka will reward the party with knowledge if they find out who was trying to dig into the room. The party agreed to come back once they were done finding the kids.</li>
+        </ul>
+
+        <h3 id="scene-7">7. The rest in the bedroom</h3>
+        <ul>
+          <li>The party finishes its rest in the bedroom. Six of them sleep there, the Archivist included.</li>
+          <li>Ed inspects the room and finds more books.</li>
+        </ul>
+
+        <h3 id="scene-8">8. Questions for the Archivist</h3>
+        <ul>
+          <li>He does not know where the animals in the domed hall came from.</li>
+          <li>He does not know who the wild man is.</li>
+          <li>The skulls are said to be from "those hooked on the coal willing to do dark deeds".</li>
+          <li>He leads the party to the western door, the one toward the well of frogs.</li>
+          <li>He explains that the well of frogs houses evil, previously worshipped by Acheron.</li>
+        </ul>
+
+        <h3 id="scene-9">9. Down the spiral stair</h3>
+        <ul>
+          <li>The western door leads to a passage with another spiral staircase, 20 ft down, ending in an unlocked door.</li>
+          <li>Beyond it: a door leading south, a hallway leading southwest, a collapsed tunnel to the north, and to the west a man sitting against the wall with a candleholder beside him.</li>
+          <li>The room is room 7 on the map.</li>
+          <li>The Amnesiac remembers nothing and loves counting.</li>
+          <li>Ed tries ventriloquism to get him to give up the stick. It does not work. The man uses the stick on Ed.</li>
+        </ul>
+
+        <h3 id="scene-10">10. The Amnesiac</h3>
+        <ul>
+          <li>The Amnesiac wins initiative.</li>
+          <li>He uses the stick on Ed. It shoots a bolt for 2 damage.</li>
+          <li>Bozz and Anglad miss. Dagen slashes his throat open.</li>
+          <li>Victory.</li>
+        </ul>
+
+        <h3 id="scene-11">11. After the Amnesiac</h3>
+        <ul>
+          <li>On him and beside him: 8 candles, a candleholder, a leather medallion bearing a candle, and a wand of magic missile. The stick he used is that wand; it was first seen as a stick before it was used, its charges are unknown, and its command word is "Shras!".</li>
+          <li>Dagen picks the mushrooms and identifies them as Candlecap mushrooms. Enough of them make a paste for fire resistance.</li>
+          <li>The remaining door is blocked. It is unlocked, but something is pressed against it, and it does not look as though anyone has tried to force it shut. It is the south door of room 7.</li>
+          <li>Anglad inspects the northern tunnel. It seems normal, just collapsed.</li>
+          <li>The session ends here.</li>
+        </ul>
+      </section>
+
+      <section id="money">
+        <h2>Money</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th scope="col">Item</th><th scope="col">Amount</th><th scope="col">Notes</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Copper found in the pillar room</td><td>76 cp</td><td>Taken with the rest of the gear</td></tr>
+              <tr><td>Silver found in the pillar room</td><td>38 sp</td><td>Taken with the rest of the gear</td></tr>
+              <tr><td>Lady Danarose's advance</td><td>25 gp</td><td>Carried since Session 2; no spending recorded this session</td></tr>
+              <tr><td>Two clay tablets</td><td>Traded</td><td>Given to Mnarka for a spellbook; the trade counts as a sale for XP</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>The chest of treasure promised by Lady Danarose is still with her. No purse is counted and no running total is written down.</p>
+      </section>
+
+      <section id="items">
+        <h2>Items seen or gained</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th scope="col">Item</th><th scope="col">Status</th><th scope="col">Notes</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Leather armour</td><td>Gained</td><td>From the pillar room; holder not stated</td></tr>
+              <tr><td>Sling with 20 silver bullets</td><td>Gained</td><td>From the pillar room; holder not stated</td></tr>
+              <tr><td>Studded wood club</td><td>Gained</td><td>From the pillar room; acts as a mace. It may be magical or cursed, and it has not been used in combat; Bozz swung it to test it</td></tr>
+              <tr><td>Pointy yellow cap</td><td>Gained</td><td>From the pillar room; Ed wears it</td></tr>
+              <tr><td>Flask of clear water</td><td>Gained</td><td>From the pillar room</td></tr>
+              <tr><td>Small leather bag of ribbons and pearl-encrusted buttons</td><td>Gained</td><td>From the pillar room</td></tr>
+              <tr><td>Eight candles</td><td>Gained</td><td>From the Amnesiac's pockets</td></tr>
+              <tr><td>Leather medallion bearing a candle</td><td>Gained</td><td>From the Amnesiac's pockets</td></tr>
+              <tr><td>Candleholder</td><td>Gained</td><td>Beside the Amnesiac</td></tr>
+              <tr><td>Wand of magic missile</td><td>Gained</td><td>The Amnesiac's stick; it shoots bolts for 2 damage; the number of charges is unknown and the command word is "Shras!"; from his pockets</td></tr>
+              <tr><td>Spellbook</td><td>Gained</td><td>Traded by Mnarka for the tablets; holds six arcane spells: Floating Disc, Light, Protection from Evil, Read Languages, Invisibility and Web; Ed is the only member who can use it; a paper horse jumped out of it</td></tr>
+              <tr><td>Paperkin figure</td><td>Seen</td><td>A small paper horse; the origami creatures stay to one shelf. See the paperkin</td></tr>
+              <tr><td>Candlecap mushrooms</td><td>Gained</td><td>Picked by Dagen; enough make a fire-resistance paste</td></tr>
+              <tr><td>Crudely drawn map</td><td>Gained</td><td>Given by Mnarka; omits the dead room and draws the pillar room small</td></tr>
+              <tr><td>Clothing, equipment and a pack</td><td>Seen</td><td>In the pillar room; not itemised beyond the list above</td></tr>
+              <tr><td>Larva</td><td>Destroyed</td><td>About a foot long; squashed by Bozz</td></tr>
+              <tr><td>Smouldering furniture</td><td>Seen</td><td>Pillar room</td></tr>
+              <tr><td>Eight marble pillars</td><td>Seen</td><td>Pillar room</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="information">
+        <h2>Information gained</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th scope="col">Fact or claim</th><th scope="col">Source</th><th scope="col">Certainty</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>The entrance to the Collector's hall is below the Barking Dogs tavern</td><td>Mnarka</td><td>Reported</td></tr>
+              <tr><td>The Collector is a woman, "her hall"</td><td>Mnarka</td><td>Reported</td></tr>
+              <tr><td>Mnarka is a Kessian bookkeeper</td><td>Mnarka</td><td>Confirmed 2026-11-01</td></tr>
+              <tr><td>Mnarka is known as the Archivist</td><td>Mnarka</td><td>Confirmed 2026-11-01</td></tr>
+              <tr><td>The origami creatures are collectively the paperkin and stay to one shelf</td><td>Mnarka</td><td>Reported</td></tr>
+              <tr><td>The well of frogs houses evil</td><td>Mnarka</td><td>Reported</td></tr>
+              <tr><td>The evil in the well was previously worshipped by Acheron</td><td>Mnarka</td><td>Reported; confirmed at the table</td></tr>
+              <tr><td>The skulls are from those hooked on the coal willing to do dark deeds</td><td>Mnarka</td><td>Reported</td></tr>
+              <tr><td>Mnarka does not know where the animals in the domed hall came from</td><td>Mnarka</td><td>Reported</td></tr>
+              <tr><td>Mnarka does not know who the wild man is</td><td>Mnarka</td><td>Reported</td></tr>
+              <tr><td>Mnarka wants to know who was trying to dig into his room</td><td>Mnarka</td><td>Reported</td></tr>
+              <tr><td>Ed is the only party member who can use the spellbook</td><td>The table</td><td>Confirmed</td></tr>
+              <tr><td>The wand's charges are unknown and its command word is "Shras!"</td><td>The table</td><td>Confirmed</td></tr>
+              <tr><td>The party agreed to return once the kids were found</td><td>Play</td><td>Confirmed at the table</td></tr>
+              <tr><td>Candlecap mushrooms can produce a paste for fire resistance</td><td>Dagen</td><td>Identified at the table</td></tr>
+              <tr><td>The Archivist's map omits the dead room and draws the pillar room small</td><td>Play</td><td>Observed</td></tr>
+              <tr><td>The tunnels to the well lie beyond the western door of room 6</td><td>Mnarka</td><td>Reported; confirmed at the table</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="rumours">
+        <h2>Rumours heard</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th scope="col">Rumour</th><th scope="col">Told by</th><th scope="col">Status</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>The Collector's hall entrance is below the Barking Dogs</td><td>Mnarka</td><td>Reported; the party has not looked</td></tr>
+              <tr><td>An evil in the well of frogs was worshipped by Acheron</td><td>Mnarka</td><td>Reported; Acheron is the empire Lady Danarose named</td></tr>
+              <tr><td>The skulls in the undercroft came from coal addicts who did dark deeds</td><td>Mnarka</td><td>Reported; matches the charcoal trade from Session 2</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="people">
+        <h2>People</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th scope="col">Person</th><th scope="col">Role</th><th scope="col">Status after Session 3</th><th scope="col">Notes</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Mnarka</td><td>The Archivist; a Kessian bookkeeper</td><td>Alive</td><td>Well-kept robes, dark skin, neat beard; trades a spellbook for the tablets; will pay in knowledge for the name of whoever was digging into his room; the party promised to come back</td></tr>
+              <tr><td>The wild man</td><td>Unknown</td><td>Gone</td><td>Dirty and bearded; seen peering round the corridor; refused the party's offer of safety</td></tr>
+              <tr><td>The Amnesiac</td><td>Unknown</td><td>Dead</td><td>No memory, loved counting; a candleholder beside him; his stick is the wand of magic missile; killed by Dagen</td></tr>
+              <tr><td>Dio</td><td>Urchin torchbearer (hireling)</td><td>Alive</td><td>Dark hair and purple (gennet) eyes, a Sarossian trait said to mark good luck; baits the moths from the altar room and hides behind the altar; rejoins after the fight carrying the lantern; with the party but not very participatory</td></tr>
+              <tr><td>The Collector</td><td>Sorcerer in the tunnels</td><td>Not met</td><td>A woman; her hall is entered below the Barking Dogs</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="places">
+        <h2>Places</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th scope="col">Place</th><th scope="col">Notes</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>The altar room, room 3</td><td>15 × 15 ft, where Session 2 ended; south door onto the corridor, west door into room 5; stone table and stone font</td></tr>
+              <tr><td>The pillar room, room 5</td><td>20 ft wide, 25 ft long; eight marble pillars; smouldering furniture; two doors</td></tr>
+              <tr><td>The hallway</td><td>Turns south after 15 ft, then west; no traps; leads to a steep stair up</td></tr>
+              <tr><td>The knock-first door</td><td>At the top of the stair, on the eastern side of room 6; the sign is in the trade tongue</td></tr>
+              <tr><td>The Archivist's chamber, room 6</td><td>15 ft wide, 25 ft long; well lit; books, parchments, shelves, reading stands; eastern entrance, western door to the well</td></tr>
+              <tr><td>The bedroom</td><td>Where the party rested; six of them including the Archivist</td></tr>
+              <tr><td>The spiral stair</td><td>Beyond the western door, 20 ft down; ends in an unlocked door</td></tr>
+              <tr><td>Room 7</td><td>The Amnesiac's room; south door (blocked), southwest hallway, collapsed north tunnel, the Amnesiac to the west</td></tr>
+              <tr><td>The tunnels to the well</td><td>Beyond the western door of room 6</td></tr>
+              <tr><td>The dead room</td><td>South of the corridor by room 3; not shown on Mnarka's map</td></tr>
+              <tr><td>The Barking Dogs</td><td>Named by Mnarka as the way into the Collector's hall</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="experience">
+        <h2>Experience awarded</h2>
+        <p>The referee's sheet for the session gives a party total of 1,779, and 356 per PC before the prime requisite bonus.</p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th scope="col">Component</th><th scope="col" class="num">XP</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Feats of Exploration: Exploration, Hazard, Rumor, Secret, Skills ×2, six minor feats at 199</td><td class="num">1,194</td></tr>
+              <tr><td>Combat: seven giant lantern moths at 10</td><td class="num">70</td></tr>
+              <tr><td>Combat: the Amnesiac</td><td class="num">10</td></tr>
+              <tr><td>Treasure: the two scrolls, traded for the spellbook</td><td class="num">500</td></tr>
+              <tr><td>Treasure: loose coin</td><td class="num">5</td></tr>
+              <tr class="total"><td>Party total</td><td class="num">1,779</td></tr>
+              <tr><td>Per PC</td><td class="num">356</td></tr>
+              <tr><td>Elowyn, with +10% prime requisite</td><td class="num">392</td></tr>
+              <tr><td>Elowyn's running total</td><td class="num">828</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>The scrolls pay 250 each even though they were traded rather than sold, because a trade counts as a sale. The 1,194 is six minor feats at 199, where 199 is 2% of the party TXP of 9,950. Elowyn's 392 brings him to 828, which matches his updated character sheet. See Magic item XP and the XP ledger.</p>
+      </section>
+
+      <section id="decisions">
+        <h2>Decisions made by the party</h2>
+        <ul>
+          <li>Baited the visitor rather than meeting him in the open.</li>
+          <li>Left the wild man alone after he refused them.</li>
+          <li>Opened the west door and used Dio and the lantern as bait.</li>
+          <li>Threw oil flasks in a surprise round rather than waiting for the moths.</li>
+          <li>Blocked the doorway with Bozz and Anglad, then entered the pillar room to finish the fight.</li>
+          <li>Searched the pillar room and took what was there.</li>
+          <li>Followed the hallway and climbed the stair.</li>
+          <li>Went through the door under the "knock first" sign rather than turning back.</li>
+          <li>Told the Archivist how they got past the moths.</li>
+          <li>Traded the tablets for a spellbook.</li>
+          <li>Agreed to return to Mnarka once the kids were found.</li>
+          <li>Rested in his bedroom.</li>
+          <li>Followed him west, through the door toward the well of frogs.</li>
+          <li>Tried ventriloquism on the Amnesiac.</li>
+          <li>Killed him, took his things, and picked the mushrooms.</li>
+          <li>Left the blocked door alone.</li>
+        </ul>
+      </section>
+
+      <section id="unresolved">
+        <h2>Unresolved at the end of the session</h2>
+        <ul>
+          <li>Who the wild man is.</li>
+          <li>Who was trying to dig into the Archivist's room.</li>
+          <li>What the evil in the well is, and how it was worshipped.</li>
+          <li>What is behind the blocked door, and what is in the collapsed tunnel.</li>
+          <li>Where the taxidermied animals in the domed hall came from.</li>
+          <li>What the skulls are, and who the coal addicts were.</li>
+          <li>Whether Orlando is in the Collector's hall.</li>
+          <li>Who the Amnesiac was, and why he could not remember.</li>
+          <li>What the paperkin is.</li>
+          <li>Whether the party owes Mnarka anything beyond the promise to return.</li>
+        </ul>
+      </section>
+
+    </main>
+
+    <nav class="toc" aria-label="Contents">
+      <h2>Contents</h2>
+      <ol>
+        <li><a href="#player-characters">Player characters</a></li>
+        <li><a href="#events">Events in order</a></li>
+        <li><a href="#money">Money</a></li>
+        <li><a href="#items">Items seen or gained</a></li>
+        <li><a href="#information">Information gained</a></li>
+        <li><a href="#rumours">Rumours heard</a></li>
+        <li><a href="#people">People</a></li>
+        <li><a href="#places">Places</a></li>
+        <li><a href="#experience">Experience awarded</a></li>
+        <li><a href="#decisions">Decisions made by the party</a></li>
+        <li><a href="#unresolved">Unresolved at the end of the session</a></li>
+      </ol>
+      <a class="top" href="#top">Back to top ↑</a>
+    </nav>
+
+  </div>
+</div>
+</body>
+</html>

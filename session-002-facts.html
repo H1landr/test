@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Session 2: Factual Outline · The Well of Frogs</title>
+<style>
+  :root {
+    --paper: #f4ecda;
+    --paper-2: #fbf7ec;
+    --ink: #241d14;
+    --ink-soft: #5f5342;
+    --rule: #d9c9a9;
+    --accent: #6b3a26;
+    --accent-2: #3f5b43;
+    --gold: #9a7228;
+    --wash: rgba(107, 58, 38, 0.035);
+    --shadow: 0 1px 2px rgba(60, 40, 20, 0.06), 0 24px 48px -36px rgba(60, 40, 20, 0.5);
+    --sans: ui-sans-serif, system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, "Times New Roman", serif;
+  }
+
+  * { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background:
+      radial-gradient(1200px 600px at 12% -10%, rgba(255, 252, 240, 0.85), transparent 60%),
+      radial-gradient(900px 500px at 100% 0%, rgba(154, 114, 40, 0.07), transparent 55%),
+      var(--paper);
+    color: var(--ink);
+    font-family: var(--serif);
+    font-size: 17px;
+    line-height: 1.62;
+    text-rendering: optimizeLegibility;
+  }
+
+  .page {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 44px 28px 72px;
+  }
+
+  /* Masthead */
+
+  .masthead {
+    max-width: 780px;
+    padding-bottom: 26px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .eyebrow {
+    margin: 0 0 10px;
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  h1 {
+    margin: 0;
+    font-size: clamp(2.1rem, 5vw, 3.25rem);
+    line-height: 1.05;
+    font-weight: 600;
+    letter-spacing: -0.015em;
+  }
+
+  .lede {
+    margin: 18px 0 0;
+    max-width: 66ch;
+    font-size: 1.04rem;
+    color: var(--ink-soft);
+  }
+
+  .meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 14px;
+    margin: 18px 0 0;
+    font-family: var(--sans);
+    font-size: 12.5px;
+    color: var(--ink-soft);
+  }
+
+  .meta .sep {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--rule);
+  }
+
+  .pill {
+    padding: 2px 9px;
+    border: 1px solid var(--rule);
+    border-radius: 999px;
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--accent-2);
+    background: rgba(63, 91, 67, 0.06);
+  }
+
+  .notice {
+    margin: 26px 0 0;
+    padding: 14px 18px;
+    border-left: 3px solid var(--gold);
+    border-radius: 0 6px 6px 0;
+    background: var(--paper-2);
+    box-shadow: var(--shadow);
+    font-family: var(--sans);
+    font-size: 13px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+  }
+
+  /* Layout */
+
+  .layout {
+    display: grid;
+    grid-template-columns: minmax(0, 780px) 240px;
+    gap: 64px;
+    justify-content: space-between;
+    padding-top: 40px;
+  }
+
+  main { min-width: 0; }
+
+  /* Contents */
+
+  .toc {
+    align-self: start;
+    position: sticky;
+    top: 28px;
+    font-family: var(--sans);
+  }
+
+  .toc h2 {
+    margin: 0 0 12px;
+    padding: 0 0 8px;
+    border: 0;
+    border-bottom: 1px solid var(--rule);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  .toc ol {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    counter-reset: toc;
+    font-size: 13px;
+    line-height: 1.4;
+  }
+
+  .toc li {
+    counter-increment: toc;
+    margin: 0;
+    padding: 6px 0 6px 26px;
+    position: relative;
+    border-bottom: 1px solid rgba(217, 201, 169, 0.45);
+  }
+
+  .toc li::before {
+    content: counter(toc, decimal-leading-zero);
+    position: absolute;
+    left: 0;
+    top: 7px;
+    font-size: 10.5px;
+    color: var(--gold);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .toc a { color: var(--ink-soft); text-decoration: none; }
+  .toc a:hover { color: var(--accent); }
+
+  .toc .top {
+    display: inline-block;
+    margin-top: 14px;
+    font-size: 11.5px;
+    letter-spacing: 0.04em;
+    color: var(--gold);
+    text-decoration: none;
+    border-bottom: 1px dotted currentColor;
+  }
+
+  /* Sections */
+
+  section { scroll-margin-top: 24px; }
+
+  h2 {
+    margin: 56px 0 0;
+    padding: 0 0 8px 14px;
+    border-left: 3px solid var(--accent);
+    border-bottom: 1px solid var(--rule);
+    font-size: 1.52rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+
+  h2:first-child { margin-top: 0; }
+
+  h3 {
+    margin: 34px 0 8px;
+    font-size: 1.02rem;
+    font-weight: 600;
+    color: var(--accent);
+    letter-spacing: 0.005em;
+  }
+
+  p { margin: 14px 0; max-width: 68ch; }
+
+  a {
+    color: var(--accent);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+  }
+
+  a:hover { color: var(--gold); }
+
+  ul { margin: 14px 0; padding-left: 1.15rem; }
+  li { margin: 6px 0; max-width: 66ch; }
+  li::marker { color: var(--gold); }
+
+  /* Scene chips */
+
+  .scene-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    margin: 18px 0 6px;
+    font-family: var(--sans);
+    font-size: 11.5px;
+  }
+
+  .scene-nav a {
+    padding: 3px 10px;
+    border: 1px solid var(--rule);
+    border-radius: 999px;
+    background: var(--paper-2);
+    color: var(--ink-soft);
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .scene-nav a:hover { color: var(--accent); border-color: var(--gold); }
+
+  /* Tables */
+
+  .table-wrap {
+    margin: 18px 0 26px;
+    overflow-x: auto;
+    border: 1px solid var(--rule);
+    border-radius: 7px;
+    background: var(--paper-2);
+    box-shadow: var(--shadow);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: var(--sans);
+    font-size: 13.5px;
+    line-height: 1.5;
+  }
+
+  th, td {
+    padding: 9px 13px;
+    text-align: left;
+    vertical-align: top;
+    border-bottom: 1px solid rgba(217, 201, 169, 0.55);
+  }
+
+  thead th {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    border-bottom: 2px solid var(--rule);
+    white-space: nowrap;
+  }
+
+  tbody tr:nth-child(even) { background: var(--wash); }
+  tbody tr:last-child td { border-bottom: 0; }
+
+  td:first-child { font-weight: 600; color: var(--ink); }
+
+  .num {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+
+  tr.total td {
+    font-weight: 700;
+    border-top: 2px solid var(--rule);
+    background: rgba(154, 114, 40, 0.06);
+  }
+
+  /* Footer */
+
+  footer {
+    margin-top: 64px;
+    padding-top: 18px;
+    border-top: 1px solid var(--rule);
+    font-family: var(--sans);
+    font-size: 12px;
+    color: var(--ink-soft);
+  }
+
+  footer p { margin: 0; max-width: 70ch; }
+
+  /* Responsive */
+
+  @media (max-width: 980px) {
+    .page { padding: 32px 20px 56px; }
+    .layout { grid-template-columns: minmax(0, 1fr); gap: 0; padding-top: 28px; }
+    .toc { position: static; order: -1; padding: 0 0 28px; }
+    .toc ol { columns: 2; column-gap: 28px; }
+    .masthead { max-width: none; }
+  }
+
+  @media (max-width: 560px) {
+    .toc ol { columns: 1; }
+    h2 { margin-top: 42px; }
+  }
+
+  /* Print */
+
+  @media print {
+    body { background: #fff; color: #000; font-size: 11pt; }
+    .page { max-width: none; padding: 0; }
+    .toc, .notice { display: none; }
+    .table-wrap { box-shadow: none; }
+    th, td, tr { break-inside: avoid; }
+    a { color: inherit; text-decoration: none; }
+    h2 { break-after: avoid; }
+  }
+
+  /* Dark */
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #14110c;
+      --paper-2: #1c1811;
+      --ink: #e9e0ca;
+      --ink-soft: #b6a88d;
+      --rule: #3b3224;
+      --accent: #d9a05b;
+      --accent-2: #9dbfa1;
+      --gold: #d9b26a;
+      --wash: rgba(255, 246, 220, 0.03);
+      --shadow: none;
+    }
+    body {
+      background:
+        radial-gradient(1100px 500px at 10% -10%, rgba(120, 90, 45, 0.12), transparent 60%),
+        var(--paper);
+    }
+    .notice { background: var(--paper-2); }
+  }
+</style>
+</head>
+<body>
+<div class="page" id="top">
+
+  <header class="masthead">
+    <p class="eyebrow">The Well of Frogs · Old-School Essentials</p>
+    <h1>Session 2: Factual Outline</h1>
+    <p class="lede">A plain record of what happened, who was there, and what was learned. Corrected 2026-10-25 from the table's notes, and brought current on 2026-10-27 with the DM's naming and class corrections. The session is processed and reviewed; this outline matches the record.</p>
+    <p class="meta">
+      <span class="pill">reviewed</span>
+      <span>updated 2026-10-27</span>
+      <span class="sep"></span>
+      <span>13 scenes</span>
+      <span class="sep"></span>
+      <span>11 sections</span>
+      <span class="sep"></span>
+      <span>8 tables</span>
+    </p>
+  </header>
+
+  <div class="layout">
+
+    <main>
+
+      <section id="player-characters">
+        <h2>Player characters</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th scope="col">PC</th><th scope="col">Player</th><th scope="col">Ancestry</th><th scope="col">Class and level</th><th scope="col">Notes from play</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Elowyn</td><td>Ian</td><td>Essanin elf, male</td><td>Thief 1</td><td>Talks at the side door; offers condolences and makes the pitch; takes the 25 gp advance; nocks an arrow before the door is kicked; misses with the bow; cuts a moth in half; picks two locks; listens at doors</td></tr>
+              <tr><td>Anglad the Faceless</td><td>Sebastian</td><td>Sabbatean</td><td>Fighter 1</td><td>Kicks the door with Bozz; guards the rear; searches the shrine walls for false walls and lights a candle there; takes a piece of flatbread into his pouch to eat in private, saying he is ugly</td></tr>
+              <tr><td>Bozz the Well Endowed</td><td>Max</td><td>Sabbatean</td><td>Fighter 1</td><td>Kicks the door; fights the moths with a mace and splatters one; asks about the star-metal sword; relights the torch and assists Dio</td></tr>
+              <tr><td>Dagen</td><td>Jordan</td><td>Human</td><td>Ranger 1</td><td>Reads the sign: passage through the yard, the trapdoor used recently, tracks in the eastern corridor, barefoot-human footprints; carries Orlando's drawing; has no infravision and is left without light</td></tr>
+              <tr><td>Illiterate Ed</td><td>Alex</td><td>Half-elf</td><td>Magic User 1</td><td>Questions Dio at the door; buys lotus coal; finds the altar hollow and sets off its needle, saving; takes the cache; lights a lantern</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p><strong>Weapon proficiencies (HR-14):</strong> Elowyn is proficient with normal sword, short bow and dagger. He used only the first two in Session 2, so no non-proficiency penalty applied. Anglad, Bozz, Dagen and Ed have not declared theirs.</p>
+      </section>
+
+      <section id="events">
+        <h2>Events in order</h2>
+
+        <nav class="scene-nav" aria-label="Scenes">
+          <a href="#scene-1">1 The door</a>
+          <a href="#scene-2">2 The terms</a>
+          <a href="#scene-3">3 What they say</a>
+          <a href="#scene-4">4 The urchin ruin</a>
+          <a href="#scene-5">5 House of Cheap Delights</a>
+          <a href="#scene-6">6 Shrine of Cloacina</a>
+          <a href="#scene-7">7 The charcoalers</a>
+          <a href="#scene-8">8 The shanty</a>
+          <a href="#scene-9">9 Below the trapdoor</a>
+          <a href="#scene-10">10 The moths</a>
+          <a href="#scene-11">11 The dead room</a>
+          <a href="#scene-12">12 The domed hall</a>
+          <a href="#scene-13">13 The altar</a>
+        </nav>
+
+        <h3 id="scene-1">1. The Danarose estate, at the door</h3>
+        <ul>
+          <li>The house is in disrepair. The gate is wooden and closed. A smaller door stands to one side.</li>
+          <li>Dio does not beg. Pardoht-Ram, Lady Danarose's steward, is angered by his presence alone, which the party reads as urchins being blamed for Orlando's disappearance.</li>
+          <li>A servant answers the side door and goes to fetch Pardoht-Ram. It is the servant who leaves the door, not Elowyn. Lady Danarose does not come to the door.</li>
+          <li>While they wait, Ed asks Dio whether urchins really throw one another into the well. Dio says bad men do it, meaning guild men. He is genuinely confused by the question.</li>
+          <li>Dio adds that a woman threw herself into the well recently. She was from the House of Cheap Delights; her child went missing and grief overcame her.</li>
+          <li>The servant returns with Pardoht-Ram: a long white beard. Everyone in the household speaks H'Zhari; he translates regardless.</li>
+          <li>Pardoht-Ram asks their business. Elowyn offers condolences and makes his pitch.</li>
+        </ul>
+
+        <h3 id="scene-2">2. The courtyard and the terms</h3>
+        <ul>
+          <li>Pardoht-Ram accepts the party's help and invites them into the courtyard at the centre of the building.</li>
+          <li>The courtyard shows traditional Arakayan architecture: false windows, none facing the street. The estate is otherwise fallen into disrepair.</li>
+          <li>Two guards and several servants are present. Water is brought; a chair is brought for Pardoht-Ram.</li>
+          <li>His office is steward to Lady Danarose.</li>
+          <li>Lady Danarose enters flanked by two servants, in a black veiled dress and an elaborate headdress with pearls and muted gold medallions. She does not speak to the party directly; Pardoht-Ram translates.</li>
+          <li>Pardoht-Ram states the party would be paid handsomely, and that Orlando disappeared 48 hours ago, enamoured with the urchins and wanting to join them.</li>
+          <li>The party asks for something of Orlando's to track him with. Servants bring a small chest holding a large but uncounted amount of treasure; the Lady defines it as the reward.</li>
+          <li>The party asks for something up front. The Lady grants Elowyn 25 gp.</li>
+          <li>Bozz asks about the sword. It is a blade of star metal, from the late husband's service in the Khosurian military. Orlando carried it into the well with him.</li>
+          <li>Lady Danarose does not want the sword back. She believes its being down there was part of Orlando's problem.</li>
+          <li>Pardoht-Ram gives Dagen a parchment bearing a drawing by Orlando: a figure holding a curved sword forward, opposite it a dark shape with red eyes, and four smaller dark shapes behind it.</li>
+          <li>The party is shown a painting of Orlando: a ginger child.</li>
+        </ul>
+
+        <h3 id="scene-3">3. What the Lady and Pardoht-Ram say</h3>
+        <ul>
+          <li>She knows nothing of guilds, but knows of the tunnels. The deeper layers were built by Acheron, the demon empire that previously terrorised the land.</li>
+          <li>She knows of rumours of a person called the Collector: a powerful sorcerer living in the tunnels who collects wonders and information.</li>
+          <li>Orlando wanted to befriend the urchins, but Pablo did not like him.</li>
+          <li>Orlando took the sword to impress Pablo, then went to fight the Splinter to show off and gain standing in the street.</li>
+          <li>Anglad asks about competition. Pardoht-Ram says no group like the party has come, but some people came looking for a handout.</li>
+          <li>Flatbread is served. All the party eat at the table; Anglad takes a piece and puts it in his pouch to eat in private, stating plainly that he is ugly. The household seems less offended than expected.</li>
+        </ul>
+
+        <h3 id="scene-4">4. Back at the urchin ruin</h3>
+        <ul>
+          <li>Pablo is the oldest of the urchins, and the same boy the archive recorded as the unnamed oldest in Session 1.</li>
+          <li>Dio does not know how to find the Collector and suggests Pablo is the right person to ask.</li>
+          <li>Dio says few of the urchins liked the Collector, and that they did not care about the sword.</li>
+          <li>Five cats are present at the ruin. Dio is tipped an electrum piece to keep quiet.</li>
+          <li>Pablo says the Literators know of hideouts in the sewers, and that the Barbers are looking for them.</li>
+          <li>Pablo says a gang war will come soon: Barbers against Literators. The Barbers would pay for knowledge of a Literator hideout.</li>
+          <li>The party pays Pablo 5 sp. Pablo permits Dio to go with the party.</li>
+        </ul>
+
+        <h3 id="scene-5">5. The House of Cheap Delights</h3>
+        <ul>
+          <li>The party travels there without incident.</li>
+          <li>The missing woman is Busty Rita. Her daughter is Nian; Nian's father is Hiram.</li>
+          <li>Hiram went looking for Nian. He did not go down the well. The charcoalers may know something; they are by the stairs to the east.</li>
+          <li>Rita threw herself into the well a week ago.</li>
+          <li>Nian went out on a misty night and was taken. She knew she was supposed to stay inside and did not like doing as she was told.</li>
+        </ul>
+
+        <h3 id="scene-6">6. The shrine of Cloacina</h3>
+        <ul>
+          <li>The shrine is a domed mud-brick building. A stairway leads down to an empty oval chamber.</li>
+          <li>Dio names it the shrine of Cloacina, the goddess of sewers.</li>
+          <li>The chamber is dimly lit by candles and incense. Two channels run down the sides into a 3 ft drain heading down.</li>
+          <li>A statue of Cloacina stands at the centre. A central drain is covered by an iron grate and appears to go deep.</li>
+          <li>No shrine attendants are present. Anglad inspects the walls, finds no false walls, and lights a candle before leaving.</li>
+        </ul>
+
+        <h3 id="scene-7">7. The charcoalers</h3>
+        <ul>
+          <li>People in black robes stand around the stairs: desert folk, apparently from the southern part of Arakay. They are southern-quarter residents, not attached to the Ziggurat complex.</li>
+          <li>A charcoaler is paid for charcoal by a sick-looking man, who then runs off.</li>
+          <li>Party members who pass an intelligence roll know charcoal is a drug, breathed in for a transcendent experience.</li>
+          <li>Ed asks to buy some. The price quoted is 5 gp, described as half price. Ed haggles and buys Lotus coal for 3 gp.</li>
+          <li>Ed asks after Hiram. A charcoaler says Hiram was an occasional customer, and was at the top of the stairs a couple of nights ago, not last week. The charcoalers are ambivalent to detail rather than misleading.</li>
+        </ul>
+
+        <h3 id="scene-8">8. The shanty and the trapdoor</h3>
+        <ul>
+          <li>The top of the stairs leads to a far more rundown district of dilapidated buildings and shanties.</li>
+          <li>A ruined building stands among the shanty. Its courtyard is choked with desert weeds and fallen rubble; the collapse looks old.</li>
+          <li>Dagen determines that people have passed through.</li>
+          <li>Five cats are present here, not the five from the ruin.</li>
+          <li>The party finds a trapdoor. Dagen determines it has been used somewhat recently.</li>
+        </ul>
+
+        <h3 id="scene-9">9. Below the trapdoor</h3>
+        <ul>
+          <li>The trapdoor opens onto a stone-carved former storeroom, 10 × 10 ft. Dio carries a torch.</li>
+          <li>A circular stone stairwell leads down. Dagen estimates the descent at 40 ft.</li>
+          <li>The stairwell ends in a square room, 20 × 20 ft. The stonework deeper down is better than above.</li>
+          <li>A doorway leads west. A corridor leads east and has no visible end at 30 ft.</li>
+          <li>Objects are piled against the south wall: skulls, and small ones.</li>
+          <li>Ed inspects the stonework. Elowyn hears faint rustling behind the door for a few seconds, which stops. Anglad and Bozz keep watch.</li>
+          <li>Dagen looks down the eastern corridor: 5 ft wide, arched ceiling, some debris, and tracks of many creatures going back and forth into darkness.</li>
+        </ul>
+
+        <h3 id="scene-10">10. The door and the moths</h3>
+        <ul>
+          <li>Bozz and Anglad kick the door in. It takes two kicks, which eliminates any chance of surprise. Elowyn nocks an arrow before the kicks.</li>
+          <li>Beyond, the corridor leads to a larger chamber at the edge of torchlight. A door stands to the south; a junction leads north.</li>
+          <li>The south door is the one the bloody footprints come from, and it opens into the dead room. The north junction leads to the altar room.</li>
+          <li>Three grey fuzzy creatures are on the ceiling and stir at the commotion. They are giant lantern moths, and they are angered by the light.</li>
+          <li>Round 1: Ed throws a dagger and lands the first hit, 2 damage. Two moths miss; one knocks the torch from Dio's hand and the area goes dark.</li>
+          <li>All the party except Dagen have infravision.</li>
+          <li>Round 2: Elowyn's arrow misses. The rest of the fight is fought with swords; Bozz uses a mace. Bozz splatters a moth, and Dagen hits so that a moth impales itself on his sword.</li>
+          <li>Round 3: Elowyn cuts a moth in half. All three are killed.</li>
+          <li>Bozz relights the torch and assists Dio. Ed lights a lantern. Anglad keeps watch. Elowyn moves down the corridor. Dagen is left without light.</li>
+        </ul>
+
+        <h3 id="scene-11">11. The dead room</h3>
+        <ul>
+          <li>Elowyn listens at the door on the southern wall: no sound, but bloody footprints lead from the door into the hallway. Dagen reads them as a barefoot human's.</li>
+          <li>The room is 15 × 20 ft and ransacked, with a 6 ft ceiling, a pool of dried blood at the centre, campsite remains along the walls, and the smell of death.</li>
+          <li>The party does not search the room. It gives them all an uneasy feeling.</li>
+        </ul>
+
+        <h3 id="scene-12">12. The domed hall</h3>
+        <ul>
+          <li>Following the prints leads to a room with a 20 ft dome, cross-shaped, 15 ft wide and 30 ft deep.</li>
+          <li>A hallway leads south, a doorway north, and another door stands on the west side.</li>
+          <li>The room holds taxidermied animals, some of them humanoid. Most are unfamiliar even to Dagen.</li>
+        </ul>
+
+        <h3 id="scene-13">13. The locked room and the altar</h3>
+        <ul>
+          <li>The party backtracks to the corridor by the death chamber. The door stands at the end of a short corridor to the north, 10 ft down. It is a standard door, and it is locked. Elowyn picks it.</li>
+          <li>The room is 15 × 15 ft: a stone table to the north, a door west, a stone font against a wall.</li>
+          <li>Elowyn and Bozz go to the door. Ed inspects the table and finds it is an altar. Anglad guards the rear.</li>
+          <li>Ed probes the altar with his dagger and finds a hollow compartment. He opens it and reaches in; a poison needle strikes him and he makes his saving throw. The needle is harmless once the save is made.</li>
+          <li>Ed draws out a small bundle with his dagger: two clay tablets and five rough-cut amber gems worth 30 gp each.</li>
+          <li>The two clay tablets are the scrolls: divine magic of Bless and Speak with Animals, not usable by sorcerers. Ed carries both, with the gems.</li>
+          <li>The party rests in the room for ten minutes. No wandering monsters appear.</li>
+          <li>The session ends here.</li>
+        </ul>
+      </section>
+
+      <section id="money">
+        <h2>Money</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th scope="col">Item</th><th scope="col">Amount</th><th scope="col">Notes</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Lady Danarose's advance</td><td>25 gp</td><td>Paid to Elowyn at the estate; held in party funds</td></tr>
+              <tr><td>Chest of treasure</td><td>Uncounted</td><td>Full of treasure, worth unknown; promised on delivery of Orlando and still with the Lady</td></tr>
+              <tr><td>Amber gems</td><td>5 × 30 gp = 150 gp</td><td>Recovered from the altar; carried by Ed</td></tr>
+              <tr><td>Lotus coal</td><td>3 gp</td><td>Bought by Ed from the charcoalers, haggled down from 5 gp</td></tr>
+              <tr><td>Pablo's fee</td><td>5 sp</td><td>Paid so Dio could accompany the party</td></tr>
+              <tr><td>Dio's silence</td><td>1 electrum</td><td>Tipped to Dio at the ruin</td></tr>
+              <tr><td>Two clay tablets (the scrolls)</td><td>No price known</td><td>Divine scrolls; carried by Ed. 250 XP each if sold or traded</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>The 25 gp sits in party funds, not in any one purse. Nothing else has left the dungeon or been sold. There is treasure in the chest, but nobody knows what it is worth.</p>
+      </section>
+
+      <section id="items">
+        <h2>Items seen or gained</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th scope="col">Item</th><th scope="col">Status</th><th scope="col">Notes</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Five rough-cut amber gems</td><td>Gained</td><td>30 gp each; carried by Ed</td></tr>
+              <tr><td>Two clay tablets (the scrolls)</td><td>Gained</td><td>Divine magic scrolls: Bless, Speak with Animals; not usable by sorcerers. Worth 250 XP each if sold or traded, no XP while kept</td></tr>
+              <tr><td>Lotus coal</td><td>Gained</td><td>Charcoal drug, breathed in; bought for 3 gp</td></tr>
+              <tr><td>Orlando's drawing</td><td>Gained</td><td>Dagen carries it; figure with a curved sword, a red-eyed shape, four smaller shapes behind</td></tr>
+              <tr><td>Chest of treasure</td><td>Seen, not taken</td><td>Full of treasure; worth unknown. Payment on delivery of Orlando</td></tr>
+              <tr><td>Star-metal sword</td><td>Not present, not wanted</td><td>Orlando took it into the well; Lady Danarose does not want it back</td></tr>
+              <tr><td>Taxidermied animals</td><td>Seen</td><td>Some humanoid; unfamiliar to Dagen</td></tr>
+              <tr><td>Stone font</td><td>Seen</td><td>In the altar room</td></tr>
+              <tr><td>Small skulls</td><td>Seen</td><td>Piled against the south wall of the 20 × 20 room</td></tr>
+              <tr><td>Iron grate over the drain</td><td>Fixed feature</td><td>Shrine of Cloacina; the drain goes deep</td></tr>
+              <tr><td>Two side channels</td><td>Fixed feature</td><td>Run down the sides of the shrine chamber to the 3 ft drain</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="information">
+        <h2>Information gained</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th scope="col">Fact or claim</th><th scope="col">Source</th><th scope="col">Certainty</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Orlando disappeared 48 hours ago</td><td>Pardoht-Ram</td><td>Reported</td></tr>
+              <tr><td>Orlando was enamoured with the urchins and wanted to join them</td><td>Pardoht-Ram</td><td>Reported</td></tr>
+              <tr><td>The sword is star metal, from the husband's Khosurian service</td><td>Pardoht-Ram, after Bozz's question</td><td>Reported</td></tr>
+              <tr><td>Orlando carried the sword into the well</td><td>Lady Danarose</td><td>Confirmed by his mother</td></tr>
+              <tr><td>Lady Danarose does not want the sword back; she thinks it being there was part of Orlando's problem</td><td>Lady Danarose</td><td>Confirmed by his mother</td></tr>
+              <tr><td>Orlando wanted to befriend the urchins, but Pablo did not like him</td><td>Lady Danarose</td><td>Reported</td></tr>
+              <tr><td>Orlando took the sword to impress Pablo</td><td>Lady Danarose</td><td>Reported</td></tr>
+              <tr><td>Orlando went to fight the Splinter to show off and gain standing in the street</td><td>Lady Danarose</td><td>Reported</td></tr>
+              <tr><td>The deep tunnels were built by Acheron</td><td>Lady Danarose, via Pardoht-Ram</td><td>Reported</td></tr>
+              <tr><td>A sorcerer called the Collector lives in the tunnels and collects wonders and information</td><td>Lady Danarose, via Pardoht-Ram</td><td>Rumour she has heard; not met</td></tr>
+              <tr><td>No rival group has come, only people looking for a handout</td><td>Pardoht-Ram</td><td>Reported</td></tr>
+              <tr><td>Few of the urchins liked the Collector</td><td>Dio</td><td>Reported</td></tr>
+              <tr><td>The Literators know of hideouts in the sewers</td><td>Pablo</td><td>Reported</td></tr>
+              <tr><td>The Barbers are hunting those hideouts</td><td>Pablo</td><td>Reported</td></tr>
+              <tr><td>A guild war is coming, Barbers against Literators</td><td>Pablo</td><td>Prediction</td></tr>
+              <tr><td>The Barbers would pay for a Literator hideout</td><td>Pablo</td><td>Offer, not tested</td></tr>
+              <tr><td>Rita threw herself into the well a week ago</td><td>House of Cheap Delights</td><td>Reported</td></tr>
+              <tr><td>Nian was taken on a misty night</td><td>House of Cheap Delights</td><td>Reported</td></tr>
+              <tr><td>Hiram went looking for Nian and did not go down the well</td><td>House of Cheap Delights</td><td>Reported</td></tr>
+              <tr><td>Hiram was at the top of the stairs a couple of nights ago</td><td>A charcoaler</td><td>Reported; differs from the house's account, and the charcoalers are ambivalent to detail</td></tr>
+              <tr><td>Charcoal is a drug, breathed in for a transcendent experience</td><td>Party knowledge, by intelligence roll</td><td>Confirmed at the table</td></tr>
+              <tr><td>Bad men, meaning guild men, throw people into the well</td><td>Dio</td><td>Reported by a child</td></tr>
+              <tr><td>A woman from the House of Cheap Delights drowned herself after her child went missing</td><td>Dio</td><td>Reported; matches what the house says of Rita</td></tr>
+              <tr><td>The household speaks H'Zhari and Pardoht-Ram translates regardless</td><td>Play at the door</td><td>Observed</td></tr>
+              <tr><td>The shrine of Cloacina has no attendants</td><td>Play at the shrine</td><td>Observed</td></tr>
+              <tr><td>The trapdoor has been used recently</td><td>Dagen</td><td>Observed</td></tr>
+              <tr><td>The tracks in the eastern corridor belong to many creatures passing back and forth</td><td>Dagen</td><td>Observed</td></tr>
+              <tr><td>The footprints by the dead room are a barefoot human's</td><td>Dagen</td><td>Observed</td></tr>
+              <tr><td>The altar was trapped with a poison needle</td><td>Play</td><td>Observed; Ed saved, and the needle was harmless afterward</td></tr>
+              <tr><td>The two tablets are divine scrolls, worth 250 XP each if sold or traded</td><td>DM ruling, clarified 2026-10-26</td><td>Confirmed; XP is separate from the sale price</td></tr>
+              <tr><td>The lower stonework is better than the upper</td><td>Ed's inspection</td><td>Observed</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="rumours">
+        <h2>Rumours heard</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th scope="col">Rumour</th><th scope="col">Told by</th><th scope="col">Status</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>On mist-shrouded nights, a humanoid monster stalks the neighbourhood; the urchins call it the Splinter</td><td>Urchins, carried into this session</td><td>Unconfirmed</td></tr>
+              <tr><td>A frog monster lurks in the well and drags down anyone who ventures too close</td><td>Urchins, carried into this session</td><td>Unconfirmed</td></tr>
+              <tr><td>The last victim was a woman from the House of Cheap Delights, who had lost her child</td><td>Tavern talk and Dio</td><td>Resolved: Rita, who drowned herself a week ago</td></tr>
+              <tr><td>Bad men throw people into the well as a guild disposal method</td><td>Dio</td><td>Reported by a child; the guilds were not asked</td></tr>
+              <tr><td>A powerful sorcerer called the Collector lives in the tunnels</td><td>Lady Danarose's rumour, via Pardoht-Ram</td><td>Unconfirmed; nobody has met him</td></tr>
+              <tr><td>A gang war is coming: Barbers against Literators</td><td>Pablo</td><td>Prediction, not a report</td></tr>
+              <tr><td>The Barbers would pay for a Literator hideout</td><td>Pablo</td><td>Offer, untested</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>The urchins' account and the tavern talk agree on the monster but disagree on who is throwing whom into the well. Dio's version is that the guilds do it, not the children.</p>
+      </section>
+
+      <section id="people">
+        <h2>People</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th scope="col">Person</th><th scope="col">Role</th><th scope="col">Status after Session 2</th><th scope="col">Notes</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Lady Danarose</td><td>Orlando's mother</td><td>Alive</td><td>Black veil and pearl headdress; speaks through Pardoht-Ram; paid 25 gp up front</td></tr>
+              <tr><td>Pardoht-Ram</td><td>Steward of House Danarosa</td><td>Alive</td><td>Long white beard; translates for the household; spelling per the DM's list, 2026-10-27; formerly Poddat'Ram</td></tr>
+              <tr><td>Estate household</td><td>Two guards and several servants</td><td>Alive</td><td>Speak H'Zhari; bring water, a chair, and flatbread</td></tr>
+              <tr><td>Orlando</td><td>Lady Danarose's son</td><td>Missing</td><td>Gone 48 hours; wanted to befriend the urchins; Pablo did not like him; took the star-metal sword to impress Pablo; went to fight the Splinter to show off</td></tr>
+              <tr><td>Pablo</td><td>Oldest of the urchins</td><td>Alive</td><td>Took 5 sp to let Dio go; sells knowledge of the guilds; did not like Orlando</td></tr>
+              <tr><td>Dio</td><td>Urchin torchbearer (hireling)</td><td>Alive</td><td>Carried the torch; tipped an electrum to keep quiet</td></tr>
+              <tr><td>Busty Rita</td><td>Mother of Nian</td><td>Dead</td><td>Threw herself into the well a week ago</td></tr>
+              <tr><td>Nian</td><td>Rita's daughter</td><td>Missing</td><td>Taken on a misty night</td></tr>
+              <tr><td>Hiram</td><td>Nian's father</td><td>Missing</td><td>Went looking for her; seen at the top of the stairs</td></tr>
+              <tr><td>The Collector</td><td>Sorcerer in the tunnels</td><td>Not met</td><td>Said to collect wonders and information</td></tr>
+              <tr><td>Cloacina</td><td>Goddess of sewers</td><td>Not encountered</td><td>Her shrine stands unattended</td></tr>
+              <tr><td>Charcoalers</td><td>Dealers by the eastern stairs</td><td>Alive</td><td>Black robes; southern-quarter people; sell lotus coal</td></tr>
+              <tr><td>The urchins</td><td>Four children at the ruin</td><td>Alive</td><td>Five cats at the ruin, five different ones at the shanty</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="places">
+        <h2>Places</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th scope="col">Place</th><th scope="col">Notes</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Lady Danarose's estate</td><td>West of the piazza; closed wooden gate, smaller side door; courtyard at the centre</td></tr>
+              <tr><td>The courtyard</td><td>Traditional Arakayan architecture; false windows facing no street; two guards, servants</td></tr>
+              <tr><td>House of Cheap Delights</td><td>North-east of the piazza; where Rita worked</td></tr>
+              <tr><td>Shrine of Cloacina</td><td>Domed mud-brick building; stair down to an oval chamber; statue, two side channels, 3 ft drain, grated central drain; no attendants</td></tr>
+              <tr><td>The charcoalers' stairs</td><td>Broad steps by the shrine; black-robed dealers; the stairs lead up to the shanty</td></tr>
+              <tr><td>Shanty district</td><td>Above the stairs; dilapidated buildings and shanties</td></tr>
+              <tr><td>Ruined building and courtyard</td><td>Weeds, rubble, an old collapse; five cats; a trapdoor used recently. North-east on the dotted route of the players' map, not the Urchin Ruin</td></tr>
+              <tr><td>Store room</td><td>10 × 10 ft, stone-carved, directly below the trapdoor; circular stair down 40 ft</td></tr>
+              <tr><td>The 20 × 20 room</td><td>Better stonework; west doorway, east corridor; small skulls piled against the south wall</td></tr>
+              <tr><td>The dead room</td><td>15 × 20 ft, 6 ft ceiling; ransacked; pool of dried blood; campsite remains. Room <strong>2</strong> on the players' schematic, south of the corridor</td></tr>
+              <tr><td>The domed hall</td><td>Cross-shaped, 15 ft wide, 30 ft deep, 20 ft dome; taxidermy; hallway south, doorway north, door west. Room <strong>1</strong>, east of the junction</td></tr>
+              <tr><td>The altar room</td><td>15 × 15 ft; stone table-altar with a hollow compartment; west door; stone font; locked. Labelled "altar", north of the corridor</td></tr>
+              <tr><td>Piazza dei Rospi</td><td>The well at its centre, ringed by four frog statues; locals route around it</td></tr>
+              <tr><td>The well</td><td>Old stone; frog carvings down the shaft; no bottom found</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="experience">
+        <h2>Experience awarded</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th scope="col">Component</th><th scope="col" class="num">XP</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Feats of Exploration: five minor feats at 2% (Exploration, Rumor ×2, Skills, Trap)</td><td class="num">995</td></tr>
+              <tr><td>Combat: 3 giant lantern moths × 10</td><td class="num">30</td></tr>
+              <tr><td>Treasure: 25 gp advance plus 150 gp of amber</td><td class="num">175</td></tr>
+              <tr class="total"><td>Party total</td><td class="num">1,200</td></tr>
+              <tr><td>Per PC, divided five ways</td><td class="num">240</td></tr>
+              <tr><td>Elowyn, with +10% prime requisite</td><td class="num">264</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Minor feat value is 2% of the party TXP of 9,950, so 199 each. Retainers are excluded, so Dio has no share.</p>
+        <p><strong>Contingent XP:</strong> if the two divine scrolls are sold or traded, they are worth 250 XP each, 500 XP for the pair, divided among the party. The XP is independent of what they sell for, and nothing is paid for finding them. Not included in the 1,200 above.</p>
+      </section>
+
+      <section id="decisions">
+        <h2>Decisions made by the party</h2>
+        <ul>
+          <li>Accepted Lady Danarose's job and her terms.</li>
+          <li>Asked for something of Orlando's to track him, and for payment up front.</li>
+          <li>Returned to the urchins to ask after the Collector.</li>
+          <li>Paid Pablo 5 sp so Dio could go with them.</li>
+          <li>Went to the House of Cheap Delights to follow the missing woman.</li>
+          <li>Followed the trail to the charcoalers rather than going down the well.</li>
+          <li>Bought lotus coal from the charcoalers.</li>
+          <li>Climbed the stairs into the shanty rather than turning back.</li>
+          <li>Opened the trapdoor and went down.</li>
+          <li>Kicked the door in rather than trying to pass quietly.</li>
+          <li>Fought on in darkness on infravision.</li>
+          <li>Explored the west corridor before the east.</li>
+          <li>Picked the lock on the altar room instead of leaving it.</li>
+          <li>Opened the altar and took the cache.</li>
+          <li>Rested ten minutes in the altar room, and ended the session there.</li>
+        </ul>
+      </section>
+
+      <section id="unresolved">
+        <h2>Unresolved at the end of the session</h2>
+        <ul>
+          <li>Where Orlando is, and whether he is alive.</li>
+          <li>What the Splinter is, and whether it took Nian.</li>
+          <li>Whether the Collector is the resident of the domed taxidermy hall.</li>
+          <li>What the four smaller shapes behind the red-eyed shape in Orlando's drawing are.</li>
+          <li>Where Hiram is, and which account of his movements is right.</li>
+          <li>Who the small skulls belonged to.</li>
+          <li>What happened in the dead room, and when. Nobody was camped there when the party arrived; there was only evidence that someone had been. The room was not searched, because it gave them all an uneasy feeling, so whatever it holds is still there.</li>
+          <li>What lies beyond the west door of the domed hall.</li>
+          <li>What the chest of treasure is worth. It is full, and the Lady pays on delivery of Orlando.</li>
+          <li>Who can use the two divine scrolls.</li>
+          <li>Whether the guild war starts before the party comes back up.</li>
+          <li>Whether the shrine of Cloacina is truly abandoned or kept by someone unseen.</li>
+        </ul>
+      </section>
+
+    </main>
+
+    <nav class="toc" aria-label="Contents">
+      <h2>Contents</h2>
+      <ol>
+        <li><a href="#player-characters">Player characters</a></li>
+        <li><a href="#events">Events in order</a></li>
+        <li><a href="#money">Money</a></li>
+        <li><a href="#items">Items seen or gained</a></li>
+        <li><a href="#information">Information gained</a></li>
+        <li><a href="#rumours">Rumours heard</a></li>
+        <li><a href="#people">People</a></li>
+        <li><a href="#places">Places</a></li>
+        <li><a href="#experience">Experience awarded</a></li>
+        <li><a href="#decisions">Decisions made by the party</a></li>
+        <li><a href="#unresolved">Unresolved at the end of the session</a></li>
+      </ol>
+      <a class="top" href="#top">Back to top ↑</a>
+    </nav>
+
+  </div>
+</div>
+</body>
+</html>
