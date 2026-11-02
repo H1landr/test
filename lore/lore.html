@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lore · The Well of Frogs</title>
+<style>
+
+  :root {
+    --paper: #f4ecda;
+    --paper-2: #fbf7ec;
+    --ink: #241d14;
+    --ink-soft: #5f5342;
+    --rule: #d9c9a9;
+    --accent: #6b3a26;
+    --accent-2: #3f5b43;
+    --gold: #9a7228;
+    --wash: rgba(107, 58, 38, 0.035);
+    --shadow: 0 1px 2px rgba(60, 40, 20, 0.06), 0 24px 48px -36px rgba(60, 40, 20, 0.5);
+    --sans: ui-sans-serif, system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, "Times New Roman", serif;
+  }
+
+  * { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background:
+      radial-gradient(1200px 600px at 12% -10%, rgba(255, 252, 240, 0.85), transparent 60%),
+      radial-gradient(900px 500px at 100% 0%, rgba(154, 114, 40, 0.07), transparent 55%),
+      var(--paper);
+    color: var(--ink);
+    font-family: var(--serif);
+    font-size: 17px;
+    line-height: 1.62;
+    text-rendering: optimizeLegibility;
+  }
+
+  .page {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 44px 28px 72px;
+  }
+
+  /* Masthead */
+
+  .masthead {
+    max-width: 780px;
+    padding-bottom: 26px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .eyebrow {
+    margin: 0 0 10px;
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  h1 {
+    margin: 0;
+    font-size: clamp(2.1rem, 5vw, 3.25rem);
+    line-height: 1.05;
+    font-weight: 600;
+    letter-spacing: -0.015em;
+  }
+
+  .lede {
+    margin: 18px 0 0;
+    max-width: 66ch;
+    font-size: 1.04rem;
+    color: var(--ink-soft);
+  }
+
+  .meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 14px;
+    margin: 18px 0 0;
+    font-family: var(--sans);
+    font-size: 12.5px;
+    color: var(--ink-soft);
+  }
+
+  .meta .sep {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--rule);
+  }
+
+  .pill {
+    padding: 2px 9px;
+    border: 1px solid var(--rule);
+    border-radius: 999px;
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--accent-2);
+    background: rgba(63, 91, 67, 0.06);
+  }
+
+  .notice {
+    margin: 26px 0 0;
+    padding: 14px 18px;
+    border-left: 3px solid var(--gold);
+    border-radius: 0 6px 6px 0;
+    background: var(--paper-2);
+    box-shadow: var(--shadow);
+    font-family: var(--sans);
+    font-size: 13px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+  }
+
+  /* Layout */
+
+  .layout {
+    display: grid;
+    grid-template-columns: minmax(0, 780px) 240px;
+    gap: 64px;
+    justify-content: space-between;
+    padding-top: 40px;
+  }
+
+  main { min-width: 0; }
+
+  /* Contents */
+
+  .toc {
+    align-self: start;
+    position: sticky;
+    top: 28px;
+    font-family: var(--sans);
+  }
+
+  .toc h2 {
+    margin: 0 0 12px;
+    padding: 0 0 8px;
+    border: 0;
+    border-bottom: 1px solid var(--rule);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  .toc ol {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    counter-reset: toc;
+    font-size: 13px;
+    line-height: 1.4;
+  }
+
+  .toc li {
+    counter-increment: toc;
+    margin: 0;
+    padding: 6px 0 6px 26px;
+    position: relative;
+    border-bottom: 1px solid rgba(217, 201, 169, 0.45);
+  }
+
+  .toc li::before {
+    content: counter(toc, decimal-leading-zero);
+    position: absolute;
+    left: 0;
+    top: 7px;
+    font-size: 10.5px;
+    color: var(--gold);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .toc a { color: var(--ink-soft); text-decoration: none; }
+  .toc a:hover { color: var(--accent); }
+
+  .toc .top {
+    display: inline-block;
+    margin-top: 14px;
+    font-size: 11.5px;
+    letter-spacing: 0.04em;
+    color: var(--gold);
+    text-decoration: none;
+    border-bottom: 1px dotted currentColor;
+  }
+
+  /* Sections */
+
+  section { scroll-margin-top: 24px; }
+
+  h2 {
+    margin: 56px 0 0;
+    padding: 0 0 8px 14px;
+    border-left: 3px solid var(--accent);
+    border-bottom: 1px solid var(--rule);
+    font-size: 1.52rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+
+  h2:first-child { margin-top: 0; }
+
+  h3 {
+    margin: 34px 0 8px;
+    font-size: 1.02rem;
+    font-weight: 600;
+    color: var(--accent);
+    letter-spacing: 0.005em;
+  }
+
+  p { margin: 14px 0; max-width: 68ch; }
+
+  a {
+    color: var(--accent);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+  }
+
+  a:hover { color: var(--gold); }
+
+  ul, ol { margin: 14px 0; padding-left: 1.15rem; }
+  li { margin: 6px 0; max-width: 66ch; }
+  li::marker { color: var(--gold); }
+
+  ul ul, ul ol { margin: 8px 0 2px; }
+
+  /* Scene chips */
+
+  .scene-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    margin: 18px 0 6px;
+    font-family: var(--sans);
+    font-size: 11.5px;
+  }
+
+  .scene-nav a {
+    padding: 3px 10px;
+    border: 1px solid var(--rule);
+    border-radius: 999px;
+    background: var(--paper-2);
+    color: var(--ink-soft);
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .scene-nav a:hover { color: var(--accent); border-color: var(--gold); }
+
+  /* Tables */
+
+  .table-wrap {
+    margin: 18px 0 26px;
+    overflow-x: auto;
+    border: 1px solid var(--rule);
+    border-radius: 7px;
+    background: var(--paper-2);
+    box-shadow: var(--shadow);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: var(--sans);
+    font-size: 13.5px;
+    line-height: 1.5;
+  }
+
+  th, td {
+    padding: 9px 13px;
+    text-align: left;
+    vertical-align: top;
+    border-bottom: 1px solid rgba(217, 201, 169, 0.55);
+  }
+
+  thead th {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    border-bottom: 2px solid var(--rule);
+    white-space: nowrap;
+  }
+
+  tbody tr:nth-child(even) { background: var(--wash); }
+  tbody tr:last-child td { border-bottom: 0; }
+
+  td:first-child { font-weight: 600; color: var(--ink); }
+
+  .num {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+
+  tr.total td {
+    font-weight: 700;
+    border-top: 2px solid var(--rule);
+    background: rgba(154, 114, 40, 0.06);
+  }
+
+  /* Footer */
+
+  footer {
+    margin-top: 64px;
+    padding-top: 18px;
+    border-top: 1px solid var(--rule);
+    font-family: var(--sans);
+    font-size: 12px;
+    color: var(--ink-soft);
+  }
+
+  footer p { margin: 0; max-width: 70ch; }
+
+  /* Responsive */
+
+  @media (max-width: 980px) {
+    .page { padding: 32px 20px 56px; }
+    .layout { grid-template-columns: minmax(0, 1fr); gap: 0; padding-top: 28px; }
+    .toc { position: static; order: -1; padding: 0 0 28px; }
+    .toc ol { columns: 2; column-gap: 28px; }
+    .masthead { max-width: none; }
+  }
+
+  @media (max-width: 560px) {
+    .toc ol { columns: 1; }
+    h2 { margin-top: 42px; }
+  }
+
+  /* Print */
+
+  @media print {
+    body { background: #fff; color: #000; font-size: 11pt; }
+    .page { max-width: none; padding: 0; }
+    .toc, .notice { display: none; }
+    .table-wrap { box-shadow: none; }
+    th, td, tr { break-inside: avoid; }
+    a { color: inherit; text-decoration: none; }
+    h2 { break-after: avoid; }
+  }
+
+  /* Dark */
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #14110c;
+      --paper-2: #1c1811;
+      --ink: #e9e0ca;
+      --ink-soft: #b6a88d;
+      --rule: #3b3224;
+      --accent: #d9a05b;
+      --accent-2: #9dbfa1;
+      --gold: #d9b26a;
+      --wash: rgba(255, 246, 220, 0.03);
+      --shadow: none;
+    }
+    body {
+      background:
+        radial-gradient(1100px 500px at 10% -10%, rgba(120, 90, 45, 0.12), transparent 60%),
+        var(--paper);
+    }
+    .notice { background: var(--paper-2); }
+  }
+  /* Lore page */
+
+  .back { margin: 0 0 16px; font-family: var(--sans); font-size: 12px; }
+  .back a { color: var(--accent-2); text-decoration: none; border-bottom: 1px dotted currentColor; }
+  .back a:hover { color: var(--gold); }
+
+  h3.person {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 10px;
+    margin: 40px 0 6px;
+    padding-top: 26px;
+    border-top: 1px solid var(--rule);
+    scroll-margin-top: 24px;
+  }
+
+  h3.person .tag {
+    padding: 3px 9px;
+    border: 1px solid var(--rule);
+    border-radius: 999px;
+    font-family: var(--sans);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent-2);
+    background: rgba(63, 91, 67, 0.05);
+  }
+
+  .person-meta {
+    margin: 0 0 12px;
+    font-family: var(--sans);
+    font-size: 12.5px;
+    line-height: 1.6;
+    color: var(--ink-soft);
+  }
+
+  .person-meta strong { color: var(--ink); font-weight: 600; }
+
+  .appearance {
+    font-size: 0.95rem;
+    color: var(--ink-soft);
+    max-width: 68ch;
+  }
+
+  .appearance strong { color: var(--ink); font-weight: 600; }
+
+  .related { margin-top: 12px; font-family: var(--sans); font-size: 13.5px; }
+  .related li { margin: 8px 0; }
+</style>
+</head>
+<body>
+<div class="page" id="top">
+
+  <header class="masthead">
+    <p class="eyebrow">The Well of Frogs · Old-School Essentials</p>
+    <p class="back"><a href="../sessions/index.html">← Campaign home</a></p>
+    <h1>Lore</h1>
+    <p class="lede">The world around Arakay: the regions that frame it, the ten peoples of the setting, the gods each people names, and the history that left them where they are.</p>
+    <p class="meta">
+      <span class="pill">active</span>
+      <span>updated 2026-11-01</span>
+      <span class="sep"></span>
+      <span>10 peoples</span>
+      <span class="sep"></span>
+      <span>6 gods</span>
+      <span class="sep"></span>
+      <span>9 regions</span>
+    </p>
+  </header>
+
+  <div class="layout">
+
+    <main>
+
+      <p class="notice">Everything here comes from <em>Common Peoples and Cultures v1.1</em>, the setting document supplied for the campaign. These are cultural descriptions, not mechanical packages: no ability modifiers, classes, level limits or languages are given, and none should be inferred from a people's appearance.</p>
+
+      <section id="frame">
+        <h2>The known frame</h2>
+        <p>The document names the large regions of the setting and says what each one is. Arakay sits between the Black Desert and the Jashra Mountains, at a river and road junction; which larger region it belongs to is not stated.</p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th scope="col">Region</th><th scope="col">What is known</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Jorvarah</td><td>A major region. Its northern and eastern lands were once ruled by the H'Zhari; it also holds Hyloran influence, Ahzghalid holds, and Sabbatean tribes.</td></tr>
+              <tr><td>Novis</td><td>A region influenced by the Hyloran kingdom of Anduir.</td></tr>
+              <tr><td>Hylor</td><td>A fabled land across the Great Western Ocean, ancestral home of the Hylorans. Legendary rather than mapped.</td></tr>
+              <tr><td>The Sarossian peninsula</td><td>Homeland of the Sarossians, together with the isles of the Middle Sea.</td></tr>
+              <tr><td>Kythar</td><td>An ancient plateau civilization, older than Anduir, the H'Zhari and Acheron.</td></tr>
+              <tr><td>Acheron</td><td>A demon-haunted empire, overthrown by the H'Zhari over a thousand years ago.</td></tr>
+              <tr><td>The Black Desert</td><td>Desert west and northwest of Arakay.</td></tr>
+              <tr><td>The Jashra Mountains</td><td>Mountains south and southeast of Arakay.</td></tr>
+              <tr><td>The Middle Sea</td><td>Sea to the north, reached by the river road from Arakay.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="peoples">
+        <h2>The peoples</h2>
+        <p>Ten peoples are named, eight of them in full and two in passing. Ancestry is the source's own term, not an OSE class or package.</p>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th scope="col">People</th><th scope="col">Ancestry</th><th scope="col">Homeland or range</th><th scope="col">Chief deity</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><a href="#hzhari">H'Zhari</a></td><td>Human</td><td>Northern and Eastern Jorvarah</td><td>Azura the Eternal Flame</td></tr>
+              <tr><td><a href="#hyloran">Hyloran</a></td><td>Human</td><td>Diaspora from Hylor and Anduir</td><td>Mitra</td></tr>
+              <tr><td><a href="#sarossian">Sarossian</a></td><td>Human</td><td>Sarossian peninsula and the Middle Sea isles</td><td>Kleosiros the Red Lion</td></tr>
+              <tr><td><a href="#kythari">Kythari</a></td><td>Human</td><td>The Kythar plateau</td><td>Bahemon</td></tr>
+              <tr><td><a href="#essanin">Essanin</a></td><td>Elf</td><td>Travelling, far from the Ilmyrrian</td><td>Leyllwynll</td></tr>
+              <tr><td><a href="#draga-kyr">Draga'Kyr</a></td><td>Gargantua / Trollkin</td><td>Travelling mercenary bands</td><td>None specified</td></tr>
+              <tr><td><a href="#ahzghalid">Ahzghalid</a></td><td>Dwarf</td><td>Mountains and hills of Northern Jorvarah</td><td>Kharnigh Kharl</td></tr>
+              <tr><td><a href="#sabbatean">Sabbatean</a></td><td>Half-orc</td><td>Western and southern coasts; the Black Desert</td><td>None specified</td></tr>
+              <tr><td><a href="#ilmyrrian">Ilmyrrian</a></td><td>Elf</td><td>Not given</td><td>None given</td></tr>
+              <tr><td><a href="#khazzahlid">Khazzahlid</a></td><td>Dwarf</td><td>Not given</td><td>None given</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 class="person" id="hzhari">H'Zhari <span class="tag">Human</span></h3>
+        <p class="person-meta"><strong>Range:</strong> Northern and Eastern Jorvarah, now divided among smaller kingdoms and city-states.<br><strong>Chief deity:</strong> Azura the Eternal Flame.</p>
+        <ul>
+          <li>The most widespread human culture in the known setting.</li>
+          <li>Over a thousand years ago their cavalry armies overthrew the demon-haunted Empire of Acheron.</li>
+          <li>The unified dominion has since fractured into smaller kingdoms and city-states.</li>
+          <li>They hold truth to be the highest virtue.</li>
+        </ul>
+        <p class="appearance"><strong>Appearance:</strong> olive skin, dark hair and dark eyes; medium height and build. Men wear hair and beards in tight oiled curls, women in elaborate braids.</p>
+
+        <h3 class="person" id="hyloran">Hyloran <span class="tag">Human</span></h3>
+        <p class="person-meta"><strong>Range:</strong> a diaspora from Hylor and the fallen kingdom of Anduir.<br><strong>Chief deity:</strong> Mitra.</p>
+        <ul>
+          <li>They come from Hylor, a fabled land across the Great Western Ocean.</li>
+          <li>They founded the kingdom of Anduir, which spread its influence across Novis and northwestern Jorvarah.</li>
+          <li>Anduir fell over a century ago in a series of bloody internal wars.</li>
+          <li>Hylorans have spread east and south since.</li>
+        </ul>
+        <p class="appearance"><strong>Appearance:</strong> tall, fair-haired and light-eyed; the men are often clean-shaven. Warriors of the old tradition tattoo the radiant blue sun of Hylor on the forehead as a mark of loyalty. They are described as stoic, laconic and fearless in battle.</p>
+
+        <h3 class="person" id="sarossian">Sarossian <span class="tag">Human</span></h3>
+        <p class="person-meta"><strong>Range:</strong> the Sarossian peninsula and the isles of the Middle Sea.<br><strong>Chief deity:</strong> Kleosiros the Red Lion.</p>
+        <ul>
+          <li>A seafaring and wandering people, many of whom travel far for adventure and glory.</li>
+          <li>Their pantheon is made up of great heroes who rose to godhood, with Kleosiros chief among them.</li>
+        </ul>
+        <p class="appearance"><strong>Appearance:</strong> honey-coloured skin, dark hair, and eyes of many colours, including a deep purple called <em>gennet</em>. Those with gennet eyes are said to be blessed by the fates. Sarossians are described as a people of great moods: roaring laughter, gloomy melancholy, furious rage.</p>
+
+        <h3 class="person" id="kythari">Kythari <span class="tag">Human</span></h3>
+        <p class="person-meta"><strong>Range:</strong> the Kythar plateau.<br><strong>Chief deity:</strong> Bahemon.</p>
+        <ul>
+          <li>Kythar existed before Anduir, before the H'Zhari, and before Acheron.</li>
+          <li>The Kythari study the heavens and pursue esoteric secrets; their astrologers are said to rival the elves in knowledge of the stars.</li>
+          <li>Their customs are ritualized and byzantine.</li>
+          <li>They have an insatiable desire for knowledge, especially forbidden knowledge.</li>
+        </ul>
+        <p class="appearance"><strong>Appearance:</strong> unusually tall and thin, said to look nearer the elder races than other humans; tawny skin flecked with gold, orange hair, large almond eyes often striking blue or grey.</p>
+
+        <h3 class="person" id="essanin">Essanin <span class="tag">Elf</span></h3>
+        <p class="person-meta"><strong>Range:</strong> travelling, distant from the Ilmyrrian.<br><strong>Chief deity:</strong> Leyllwynll.</p>
+        <ul>
+          <li>A peaceful, gregarious elven people who travel vast distances in great beetle-shell wagons.</li>
+          <li>The means of that travel are kept secret.</li>
+          <li>Master craftsmen and traders.</li>
+          <li>Distant relatives of the warlike, empire-building Ilmyrrian.</li>
+          <li>They have a noted affinity with the Draga'Kyr, and the two peoples are often found together.</li>
+        </ul>
+        <p class="appearance"><strong>Appearance:</strong> much shorter and slighter than the Ilmyrrian, mostly dark-haired, with large luminous eyes. Arms and shoulders are often covered in swirling tattoos honouring Leyllwynll.</p>
+        <p>Elowyn is Essanin. His father's trade and the wagon waystations of his childhood are on his <a href="../people/characters.html">character entry</a>.</p>
+
+        <h3 class="person" id="draga-kyr">Draga'Kyr <span class="tag">Gargantua / Trollkin</span></h3>
+        <p class="person-meta"><strong>Range:</strong> travelling mercenary bands.<br><strong>Chief deity:</strong> none specified.</p>
+        <ul>
+          <li>Known to most other peoples as <strong>Trollkin</strong>, for their regenerative abilities.</li>
+          <li>Their origin is unknown: a servant race of the Elder Gods, travellers from another plane, or a sorcerer's experiment.</li>
+          <li>Fearsome warriors who travel looking for mercenary work; a charge of Draga'Kyr has won many battles.</li>
+          <li>They share the mysterious affinity with the Essanin noted above.</li>
+        </ul>
+        <p class="appearance"><strong>Appearance:</strong> they tower over most humans by a full head or more and are broader and bulkier; hard, leathery grey skin with a pebble-like texture; ram-like horns; long black hair braided into a tail by both males and females.</p>
+        <p>The house rules give them increased healing: <code>d3</code> HP on an eight-hour rest and <code>3d3</code> on a full day. See <a href="../rules/house-rules.html">House Rules</a>.</p>
+
+        <h3 class="person" id="ahzghalid">Ahzghalid <span class="tag">Dwarf</span></h3>
+        <p class="person-meta"><strong>Range:</strong> the mountains and hills of Northern Jorvarah.<br><strong>Chief deity:</strong> Kharnigh Kharl, the first dwarf and King Under the Mountain.</p>
+        <ul>
+          <li>Also called <strong>Stone dwarves</strong>.</li>
+          <li>One of two main dwarven cultures; the other is the secretive Khazzahlid, or red dwarves.</li>
+          <li>Far more numerous than the Khazzahlid, with many holds and cities among the northern mountains and hills.</li>
+          <li>Reserved with outsiders: only proven friends are invited to their mountain homes.</li>
+        </ul>
+        <p class="appearance"><strong>Appearance:</strong> pale skin bordering on stone grey; eyes slightly larger than human eyes, able to see in even the darkest places; thick, carefully groomed and braided beards.</p>
+        <p>That ability to see in the dark is described in the source but never defined as infravision, so it is not treated as a mechanical trait.</p>
+
+        <h3 class="person" id="sabbatean">Sabbatean <span class="tag">Half-orc</span></h3>
+        <p class="person-meta"><strong>Range:</strong> the western and southern coasts of Jorvarah, and the Black Desert.<br><strong>Chief deity:</strong> none specified.</p>
+        <ul>
+          <li>Once bonded servants of the ancient Acheronean Empire, and the bulk of its armies; Acheronean power spread fire and death through Jorvarah.</li>
+          <li>Today most tribes travel the hills and mountains of the western and southern coasts, eking out a meagre existence.</li>
+          <li>Others live in the wastes of the Black Desert, surviving by mercenary work and banditry.</li>
+        </ul>
+        <p class="appearance"><strong>Appearance:</strong> broad-shouldered, stocky and hunched, appearing somewhat shorter than most humans; deep olive skin with an almost greenish hue; straight, dull, lusterless black hair; ritual scarring on cheeks, chest and arms; warriors file their teeth to points. They are described as dour, humourless and single-minded once committed.</p>
+
+        <h3 class="person" id="ilmyrrian">Ilmyrrian <span class="tag">Elf · mentioned only</span></h3>
+        <p class="person-meta"><strong>Range:</strong> not given.<br><strong>Chief deity:</strong> none given.</p>
+        <ul>
+          <li>Distant relatives of the Essanin.</li>
+          <li>Described as warlike and empire-building.</li>
+          <li>The source gives no physical description, homeland, deity or current political situation.</li>
+        </ul>
+        <p>They are a background pressure in the setting, a reminder that not all elves are peaceful traders. Nothing more is established, and nothing more is added here.</p>
+
+        <h3 class="person" id="khazzahlid">Khazzahlid <span class="tag">Dwarf · mentioned only</span></h3>
+        <p class="person-meta"><strong>Range:</strong> not given.<br><strong>Chief deity:</strong> none given.</p>
+        <ul>
+          <li>Also called <strong>red dwarves</strong>.</li>
+          <li>The other main dwarven culture besides the Ahzghalid.</li>
+          <li>Described only as secretive. No physical description beyond the name, no homeland and no current situation is given.</li>
+        </ul>
+        <p>Like the Ilmyrrian, they are a mystery the source opens and does not close. No city, agenda or appearance is assigned to them here.</p>
+      </section>
+
+      <section id="gods">
+        <h2>The gods</h2>
+        <p>Six deities are named, each as the chief or defining god of a people. Nothing else about them is supplied.</p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th scope="col">Deity</th><th scope="col">People</th><th scope="col">Sphere or title</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Azura the Eternal Flame</td><td>H'Zhari</td><td>Chief deity</td></tr>
+              <tr><td>Mitra</td><td>Hyloran</td><td>Sun god; chief of the pantheon</td></tr>
+              <tr><td>Kleosiros the Red Lion</td><td>Sarossian</td><td>Chief of the hero-gods</td></tr>
+              <tr><td>Bahemon</td><td>Kythari</td><td>Mysterious dragon god; chief deity</td></tr>
+              <tr><td>Leyllwynll</td><td>Essanin</td><td>Ancestor god</td></tr>
+              <tr><td>Kharnigh Kharl</td><td>Ahzghalid</td><td>First dwarf; King Under the Mountain</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>The Draga'Kyr and the Sabbateans have no named deity, and the Ilmyrrian and Khazzahlid have none in the source either. Domains, alignments, holy symbols, clergy and calendars are all unstated, and which gods are worshipped in Arakay has not been established.</p>
+      </section>
+
+      <section id="history">
+        <h2>History in brief</h2>
+        <p>The document gives a chronology in relative terms only. No absolute campaign dates are supplied.</p>
+        <ul>
+          <li><strong>Kythar before the empires.</strong> The Kythari held their plateau before Anduir, before the H'Zhari and before Acheron, and studied the heavens while they did.</li>
+          <li><strong>Acheron.</strong> A demon-haunted empire whose armies were largely Sabbatean, spreading fire and death through Jorvarah.</li>
+          <li><strong>The H'Zhari ascendancy.</strong> Over a thousand years ago the H'Zhari cavalry overthrew Acheron and came to rule all of Northern and Eastern Jorvarah. Over centuries that dominion fractured into smaller kingdoms and city-states.</li>
+          <li><strong>Anduir.</strong> The Hylorans founded a kingdom that spread its influence across Novis and northwestern Jorvarah, and fell over a century ago in a series of bloody internal wars. Its people spread east and south.</li>
+          <li><strong>The present.</strong> H'Zhari power is divided among successor states, and the Hylorans are a diaspora rather than a kingdom. Sarossians wander for glory, Kythari pursue forbidden knowledge, Essanin trade in their wagons, Draga'Kyr sell their swords, Ahzghalid hold their mountain cities, and Sabbatean tribes live along the coasts and in the Black Desert.</li>
+        </ul>
+      </section>
+
+      <section id="related">
+        <h2>Related pages</h2>
+        <ul class="related">
+          <li><a href="../people/characters.html">Our Heroes</a>, the party, including the Essanin thief and two Sabbatean fighters.</li>
+          <li><a href="../assets/maps/maps.html">Maps</a>, the regional map that places Arakay between the desert and the mountains.</li>
+          <li><a href="../rules/house-rules.html">House Rules</a>, including the Draga'Kyr healing rule.</li>
+          <li><a href="../sessions/index.html">Campaign home</a>, what the party has actually met of all this.</li>
+        </ul>
+      </section>
+
+    </main>
+
+    <nav class="toc" aria-label="Contents">
+      <h2>Contents</h2>
+      <ol>
+        <li><a href="#frame">The known frame</a></li>
+        <li><a href="#peoples">The peoples</a></li>
+        <li><a href="#gods">The gods</a></li>
+        <li><a href="#history">History in brief</a></li>
+      </ol>
+      <a class="top" href="#top">Back to top ↑</a>
+    </nav>
+
+  </div>
+</div>
+</body>
+</html>

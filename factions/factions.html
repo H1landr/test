@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Factions · The Well of Frogs</title>
+<style>
+
+  :root {
+    --paper: #f4ecda;
+    --paper-2: #fbf7ec;
+    --ink: #241d14;
+    --ink-soft: #5f5342;
+    --rule: #d9c9a9;
+    --accent: #6b3a26;
+    --accent-2: #3f5b43;
+    --gold: #9a7228;
+    --wash: rgba(107, 58, 38, 0.035);
+    --shadow: 0 1px 2px rgba(60, 40, 20, 0.06), 0 24px 48px -36px rgba(60, 40, 20, 0.5);
+    --sans: ui-sans-serif, system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, "Times New Roman", serif;
+  }
+
+  * { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background:
+      radial-gradient(1200px 600px at 12% -10%, rgba(255, 252, 240, 0.85), transparent 60%),
+      radial-gradient(900px 500px at 100% 0%, rgba(154, 114, 40, 0.07), transparent 55%),
+      var(--paper);
+    color: var(--ink);
+    font-family: var(--serif);
+    font-size: 17px;
+    line-height: 1.62;
+    text-rendering: optimizeLegibility;
+  }
+
+  .page {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 44px 28px 72px;
+  }
+
+  /* Masthead */
+
+  .masthead {
+    max-width: 780px;
+    padding-bottom: 26px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .eyebrow {
+    margin: 0 0 10px;
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  h1 {
+    margin: 0;
+    font-size: clamp(2.1rem, 5vw, 3.25rem);
+    line-height: 1.05;
+    font-weight: 600;
+    letter-spacing: -0.015em;
+  }
+
+  .lede {
+    margin: 18px 0 0;
+    max-width: 66ch;
+    font-size: 1.04rem;
+    color: var(--ink-soft);
+  }
+
+  .meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 14px;
+    margin: 18px 0 0;
+    font-family: var(--sans);
+    font-size: 12.5px;
+    color: var(--ink-soft);
+  }
+
+  .meta .sep {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--rule);
+  }
+
+  .pill {
+    padding: 2px 9px;
+    border: 1px solid var(--rule);
+    border-radius: 999px;
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--accent-2);
+    background: rgba(63, 91, 67, 0.06);
+  }
+
+  .notice {
+    margin: 26px 0 0;
+    padding: 14px 18px;
+    border-left: 3px solid var(--gold);
+    border-radius: 0 6px 6px 0;
+    background: var(--paper-2);
+    box-shadow: var(--shadow);
+    font-family: var(--sans);
+    font-size: 13px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+  }
+
+  /* Layout */
+
+  .layout {
+    display: grid;
+    grid-template-columns: minmax(0, 780px) 240px;
+    gap: 64px;
+    justify-content: space-between;
+    padding-top: 40px;
+  }
+
+  main { min-width: 0; }
+
+  /* Contents */
+
+  .toc {
+    align-self: start;
+    position: sticky;
+    top: 28px;
+    font-family: var(--sans);
+  }
+
+  .toc h2 {
+    margin: 0 0 12px;
+    padding: 0 0 8px;
+    border: 0;
+    border-bottom: 1px solid var(--rule);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  .toc ol {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    counter-reset: toc;
+    font-size: 13px;
+    line-height: 1.4;
+  }
+
+  .toc li {
+    counter-increment: toc;
+    margin: 0;
+    padding: 6px 0 6px 26px;
+    position: relative;
+    border-bottom: 1px solid rgba(217, 201, 169, 0.45);
+  }
+
+  .toc li::before {
+    content: counter(toc, decimal-leading-zero);
+    position: absolute;
+    left: 0;
+    top: 7px;
+    font-size: 10.5px;
+    color: var(--gold);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .toc a { color: var(--ink-soft); text-decoration: none; }
+  .toc a:hover { color: var(--accent); }
+
+  .toc .top {
+    display: inline-block;
+    margin-top: 14px;
+    font-size: 11.5px;
+    letter-spacing: 0.04em;
+    color: var(--gold);
+    text-decoration: none;
+    border-bottom: 1px dotted currentColor;
+  }
+
+  /* Sections */
+
+  section { scroll-margin-top: 24px; }
+
+  h2 {
+    margin: 56px 0 0;
+    padding: 0 0 8px 14px;
+    border-left: 3px solid var(--accent);
+    border-bottom: 1px solid var(--rule);
+    font-size: 1.52rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+
+  h2:first-child { margin-top: 0; }
+
+  h3 {
+    margin: 34px 0 8px;
+    font-size: 1.02rem;
+    font-weight: 600;
+    color: var(--accent);
+    letter-spacing: 0.005em;
+  }
+
+  p { margin: 14px 0; max-width: 68ch; }
+
+  a {
+    color: var(--accent);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+  }
+
+  a:hover { color: var(--gold); }
+
+  ul, ol { margin: 14px 0; padding-left: 1.15rem; }
+  li { margin: 6px 0; max-width: 66ch; }
+  li::marker { color: var(--gold); }
+
+  ul ul, ul ol { margin: 8px 0 2px; }
+
+  /* Scene chips */
+
+  .scene-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    margin: 18px 0 6px;
+    font-family: var(--sans);
+    font-size: 11.5px;
+  }
+
+  .scene-nav a {
+    padding: 3px 10px;
+    border: 1px solid var(--rule);
+    border-radius: 999px;
+    background: var(--paper-2);
+    color: var(--ink-soft);
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .scene-nav a:hover { color: var(--accent); border-color: var(--gold); }
+
+  /* Tables */
+
+  .table-wrap {
+    margin: 18px 0 26px;
+    overflow-x: auto;
+    border: 1px solid var(--rule);
+    border-radius: 7px;
+    background: var(--paper-2);
+    box-shadow: var(--shadow);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: var(--sans);
+    font-size: 13.5px;
+    line-height: 1.5;
+  }
+
+  th, td {
+    padding: 9px 13px;
+    text-align: left;
+    vertical-align: top;
+    border-bottom: 1px solid rgba(217, 201, 169, 0.55);
+  }
+
+  thead th {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    border-bottom: 2px solid var(--rule);
+    white-space: nowrap;
+  }
+
+  tbody tr:nth-child(even) { background: var(--wash); }
+  tbody tr:last-child td { border-bottom: 0; }
+
+  td:first-child { font-weight: 600; color: var(--ink); }
+
+  .num {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+
+  tr.total td {
+    font-weight: 700;
+    border-top: 2px solid var(--rule);
+    background: rgba(154, 114, 40, 0.06);
+  }
+
+  /* Footer */
+
+  footer {
+    margin-top: 64px;
+    padding-top: 18px;
+    border-top: 1px solid var(--rule);
+    font-family: var(--sans);
+    font-size: 12px;
+    color: var(--ink-soft);
+  }
+
+  footer p { margin: 0; max-width: 70ch; }
+
+  /* Responsive */
+
+  @media (max-width: 980px) {
+    .page { padding: 32px 20px 56px; }
+    .layout { grid-template-columns: minmax(0, 1fr); gap: 0; padding-top: 28px; }
+    .toc { position: static; order: -1; padding: 0 0 28px; }
+    .toc ol { columns: 2; column-gap: 28px; }
+    .masthead { max-width: none; }
+  }
+
+  @media (max-width: 560px) {
+    .toc ol { columns: 1; }
+    h2 { margin-top: 42px; }
+  }
+
+  /* Print */
+
+  @media print {
+    body { background: #fff; color: #000; font-size: 11pt; }
+    .page { max-width: none; padding: 0; }
+    .toc, .notice { display: none; }
+    .table-wrap { box-shadow: none; }
+    th, td, tr { break-inside: avoid; }
+    a { color: inherit; text-decoration: none; }
+    h2 { break-after: avoid; }
+  }
+
+  /* Dark */
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #14110c;
+      --paper-2: #1c1811;
+      --ink: #e9e0ca;
+      --ink-soft: #b6a88d;
+      --rule: #3b3224;
+      --accent: #d9a05b;
+      --accent-2: #9dbfa1;
+      --gold: #d9b26a;
+      --wash: rgba(255, 246, 220, 0.03);
+      --shadow: none;
+    }
+    body {
+      background:
+        radial-gradient(1100px 500px at 10% -10%, rgba(120, 90, 45, 0.12), transparent 60%),
+        var(--paper);
+    }
+    .notice { background: var(--paper-2); }
+  }
+  /* Factions page */
+
+  .back { margin: 0 0 16px; font-family: var(--sans); font-size: 12px; }
+  .back a { color: var(--accent-2); text-decoration: none; border-bottom: 1px dotted currentColor; }
+  .back a:hover { color: var(--gold); }
+
+  h3.faction {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 10px;
+    margin: 40px 0 6px;
+    padding-top: 26px;
+    border-top: 1px solid var(--rule);
+    scroll-margin-top: 24px;
+  }
+
+  h3.faction .tag {
+    padding: 3px 9px;
+    border: 1px solid var(--rule);
+    border-radius: 999px;
+    font-family: var(--sans);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent-2);
+    background: rgba(63, 91, 67, 0.05);
+  }
+
+  .faction-meta {
+    margin: 0 0 12px;
+    font-family: var(--sans);
+    font-size: 12.5px;
+    line-height: 1.6;
+    color: var(--ink-soft);
+  }
+
+  .faction-meta strong { color: var(--ink); font-weight: 600; }
+
+  .related { margin-top: 12px; font-family: var(--sans); font-size: 13.5px; }
+  .related li { margin: 8px 0; }
+</style>
+</head>
+<body>
+<div class="page" id="top">
+
+  <header class="masthead">
+    <p class="eyebrow">The Well of Frogs · Old-School Essentials</p>
+    <p class="back"><a href="../sessions/index.html">← Campaign home</a></p>
+    <h1>Factions</h1>
+    <p class="lede">The powers the party has run into in Arakay: two guilds at war, an army somewhere to the east, and a cult around a broken pillar.</p>
+    <p class="meta">
+      <span class="pill">active</span>
+      <span>updated 2026-11-01</span>
+      <span class="sep"></span>
+      <span>4 factions</span>
+      <span class="sep"></span>
+      <span>1 guild war</span>
+    </p>
+  </header>
+
+  <div class="layout">
+
+    <main>
+
+      <p class="notice">Keep apart what a faction wants and what the party believes it wants. The feud between the guilds is a blank wall: no reason for it has been given, and none is guessed at here.</p>
+
+      <section id="four">
+        <h2>The four</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th scope="col">Faction</th><th scope="col">Type</th><th scope="col">Stance toward the party</th><th scope="col">Status</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><a href="#literators">The Literators</a></td><td>Guild or scholarly faction</td><td>Hostile</td><td>Active</td></tr>
+              <tr><td><a href="#barbers">The Barbers' Guild</a></td><td>Guild</td><td>Wary; used the party</td><td>Active</td></tr>
+              <tr><td><a href="#khosurans">The Khosurans</a></td><td>Army or polity</td><td>Unknown</td><td>At war</td></tr>
+              <tr><td><a href="#pillar">The Pillar Worshippers</a></td><td>Street cult or shrine congregation</td><td>Unknown</td><td>Unknown</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="detail">
+        <h2>In detail</h2>
+
+        <h3 class="faction" id="literators">The Literators <span class="tag">Guild or scholarly faction</span></h3>
+        <p class="faction-meta"><strong>Stance:</strong> hostile. <strong>Status:</strong> active. <strong>First seen:</strong> Session 1.</p>
+        <p>A guild of literators whose seat is the library, in the north of the city. Kollaro said so at the handover, which makes it the party's knowledge rather than a guess. They sent crossbowmen to kill Kollaro; the party killed two of them and took Mahir alive.</p>
+        <ul>
+          <li>Opposed to Kollaro and the Barbers' guild.</li>
+          <li>Sent an armed ambush after Kollaro.</li>
+          <li>Mahir, their man in the ambush, was captured and handed to the barbers. Kollaro named him at the handover.</li>
+          <li>Their seat is the library in the north of the city, as Kollaro described it. Their motive is still unknown.</li>
+          <li>Nobody in the party has been to the library. What they know of it comes from Kollaro.</li>
+        </ul>
+
+        <h3 class="faction" id="barbers">The Barbers' Guild <span class="tag">Guild</span></h3>
+        <p class="faction-meta"><strong>Stance:</strong> wary; they used the party. <strong>Status:</strong> active. <strong>First seen:</strong> Session 1.</p>
+        <p>A powerful guild in Arakay. Kollaro is a member, and the party delivered his captured literator enemy to the guild's territory at Barber's Alley.</p>
+        <ul>
+          <li>Kollaro is a member of the guild.</li>
+          <li>The guild controls Barber's Alley.</li>
+          <li>They took custody of the captured literator.</li>
+          <li>They are in conflict with the Literators.</li>
+          <li>Hiring the party through a false name, and then asking for a murder, is how they came to use them.</li>
+        </ul>
+
+        <h3 class="faction" id="khosurans">The Khosurans <span class="tag">Army or polity</span></h3>
+        <p class="faction-meta"><strong>Stance:</strong> unknown. <strong>Status:</strong> at war. <strong>First seen:</strong> Session 1, by rumour.</p>
+        <p>According to Wafik, the Khosuran armies are fighting a war with some Easterners, and winning. The party has had no direct contact with them. Khosura is the purple city to the east, where the caravan was bound when it was destroyed.</p>
+        <ul>
+          <li>The Khosurans are at war with Easterners.</li>
+          <li>Wafik says they are winning.</li>
+          <li>The war is background pressure in Arakay, not yet a direct threat.</li>
+        </ul>
+
+        <h3 class="faction" id="pillar">The Pillar Worshippers <span class="tag">Street cult or shrine congregation</span></h3>
+        <p class="faction-meta"><strong>Stance:</strong> unknown. <strong>Status:</strong> unknown. <strong>First seen:</strong> Session 1.</p>
+        <p>People worshipping at the broken white pillar, which is carved with a kneeling calf wearing a crown of leaves. Offerings surround the pillar. They did not invite questions, and none of the party asked one.</p>
+        <ul>
+          <li>They worship at the broken pillar.</li>
+          <li>The pillar is white stone, possibly andesite or marble.</li>
+          <li>The carving shows a kneeling calf with a leaf crown.</li>
+          <li>Offerings are left there.</li>
+        </ul>
+      </section>
+
+      <section id="unresolved">
+        <h2>What is unresolved</h2>
+        <p>Questions the archive keeps open rather than answering. Each is marked <code>[?]</code> on the faction's own page.</p>
+        <ul>
+          <li><strong>The Literators:</strong> why they targeted Kollaro, who leads them, what happened to Mahir after the barbers took him, and what the library holds that makes the guild worth a war.</li>
+          <li><strong>The Barbers' Guild:</strong> who leads it, what a barber's guild actually controls, and whether they killed Mahir after the party left.</li>
+          <li><strong>The Khosurans:</strong> where the war is being fought, how it touches Arakay, and whether Wafik is repeating common talk or speaking from knowledge.</li>
+          <li><strong>The Pillar Worshippers:</strong> the cult's name, which god or power the calf represents, and whether they are connected to the well or the Splinter.</li>
+        </ul>
+
+        <h3>Related pages</h3>
+        <ul class="related">
+          <li><a href="../people/npcs.html">NPCs</a>, including Kollaro, Mahir and Wafik.</li>
+          <li><a href="../sessions/index.html">Campaign home</a>, the sessions where each faction appeared.</li>
+          <li><a href="../lore/lore.html">Lore</a>, the peoples and gods these powers sit among.</li>
+          <li><a href="../people/characters.html">Our Heroes</a>, and what the factions have done to them.</li>
+        </ul>
+      </section>
+
+    </main>
+
+    <nav class="toc" aria-label="Contents">
+      <h2>Contents</h2>
+      <ol>
+        <li><a href="#four">The four</a></li>
+        <li><a href="#literators">The Literators</a></li>
+        <li><a href="#barbers">The Barbers' Guild</a></li>
+        <li><a href="#khosurans">The Khosurans</a></li>
+        <li><a href="#pillar">The Pillar Worshippers</a></li>
+        <li><a href="#unresolved">What is unresolved</a></li>
+      </ol>
+      <a class="top" href="#top">Back to top ↑</a>
+    </nav>
+
+  </div>
+</div>
+</body>
+</html>
