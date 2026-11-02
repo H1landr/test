@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Maps · The Well of Frogs</title>
+<style>
+
+  :root {
+    --paper: #f4ecda;
+    --paper-2: #fbf7ec;
+    --ink: #241d14;
+    --ink-soft: #5f5342;
+    --rule: #d9c9a9;
+    --accent: #6b3a26;
+    --accent-2: #3f5b43;
+    --gold: #9a7228;
+    --wash: rgba(107, 58, 38, 0.035);
+    --shadow: 0 1px 2px rgba(60, 40, 20, 0.06), 0 24px 48px -36px rgba(60, 40, 20, 0.5);
+    --sans: ui-sans-serif, system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, "Times New Roman", serif;
+  }
+
+  * { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background:
+      radial-gradient(1200px 600px at 12% -10%, rgba(255, 252, 240, 0.85), transparent 60%),
+      radial-gradient(900px 500px at 100% 0%, rgba(154, 114, 40, 0.07), transparent 55%),
+      var(--paper);
+    color: var(--ink);
+    font-family: var(--serif);
+    font-size: 17px;
+    line-height: 1.62;
+    text-rendering: optimizeLegibility;
+  }
+
+  .page {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 44px 28px 72px;
+  }
+
+  /* Masthead */
+
+  .masthead {
+    max-width: 780px;
+    padding-bottom: 26px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .eyebrow {
+    margin: 0 0 10px;
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  h1 {
+    margin: 0;
+    font-size: clamp(2.1rem, 5vw, 3.25rem);
+    line-height: 1.05;
+    font-weight: 600;
+    letter-spacing: -0.015em;
+  }
+
+  .lede {
+    margin: 18px 0 0;
+    max-width: 66ch;
+    font-size: 1.04rem;
+    color: var(--ink-soft);
+  }
+
+  .meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 14px;
+    margin: 18px 0 0;
+    font-family: var(--sans);
+    font-size: 12.5px;
+    color: var(--ink-soft);
+  }
+
+  .meta .sep {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--rule);
+  }
+
+  .pill {
+    padding: 2px 9px;
+    border: 1px solid var(--rule);
+    border-radius: 999px;
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--accent-2);
+    background: rgba(63, 91, 67, 0.06);
+  }
+
+  .notice {
+    margin: 26px 0 0;
+    padding: 14px 18px;
+    border-left: 3px solid var(--gold);
+    border-radius: 0 6px 6px 0;
+    background: var(--paper-2);
+    box-shadow: var(--shadow);
+    font-family: var(--sans);
+    font-size: 13px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+  }
+
+  /* Layout */
+
+  .layout {
+    display: grid;
+    grid-template-columns: minmax(0, 780px) 240px;
+    gap: 64px;
+    justify-content: space-between;
+    padding-top: 40px;
+  }
+
+  main { min-width: 0; }
+
+  /* Contents */
+
+  .toc {
+    align-self: start;
+    position: sticky;
+    top: 28px;
+    font-family: var(--sans);
+  }
+
+  .toc h2 {
+    margin: 0 0 12px;
+    padding: 0 0 8px;
+    border: 0;
+    border-bottom: 1px solid var(--rule);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  .toc ol {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    counter-reset: toc;
+    font-size: 13px;
+    line-height: 1.4;
+  }
+
+  .toc li {
+    counter-increment: toc;
+    margin: 0;
+    padding: 6px 0 6px 26px;
+    position: relative;
+    border-bottom: 1px solid rgba(217, 201, 169, 0.45);
+  }
+
+  .toc li::before {
+    content: counter(toc, decimal-leading-zero);
+    position: absolute;
+    left: 0;
+    top: 7px;
+    font-size: 10.5px;
+    color: var(--gold);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .toc a { color: var(--ink-soft); text-decoration: none; }
+  .toc a:hover { color: var(--accent); }
+
+  .toc .top {
+    display: inline-block;
+    margin-top: 14px;
+    font-size: 11.5px;
+    letter-spacing: 0.04em;
+    color: var(--gold);
+    text-decoration: none;
+    border-bottom: 1px dotted currentColor;
+  }
+
+  /* Sections */
+
+  section { scroll-margin-top: 24px; }
+
+  h2 {
+    margin: 56px 0 0;
+    padding: 0 0 8px 14px;
+    border-left: 3px solid var(--accent);
+    border-bottom: 1px solid var(--rule);
+    font-size: 1.52rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+
+  h2:first-child { margin-top: 0; }
+
+  h3 {
+    margin: 34px 0 8px;
+    font-size: 1.02rem;
+    font-weight: 600;
+    color: var(--accent);
+    letter-spacing: 0.005em;
+  }
+
+  p { margin: 14px 0; max-width: 68ch; }
+
+  a {
+    color: var(--accent);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+  }
+
+  a:hover { color: var(--gold); }
+
+  ul, ol { margin: 14px 0; padding-left: 1.15rem; }
+  li { margin: 6px 0; max-width: 66ch; }
+  li::marker { color: var(--gold); }
+
+  ul ul, ul ol { margin: 8px 0 2px; }
+
+  /* Scene chips */
+
+  .scene-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    margin: 18px 0 6px;
+    font-family: var(--sans);
+    font-size: 11.5px;
+  }
+
+  .scene-nav a {
+    padding: 3px 10px;
+    border: 1px solid var(--rule);
+    border-radius: 999px;
+    background: var(--paper-2);
+    color: var(--ink-soft);
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .scene-nav a:hover { color: var(--accent); border-color: var(--gold); }
+
+  /* Tables */
+
+  .table-wrap {
+    margin: 18px 0 26px;
+    overflow-x: auto;
+    border: 1px solid var(--rule);
+    border-radius: 7px;
+    background: var(--paper-2);
+    box-shadow: var(--shadow);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: var(--sans);
+    font-size: 13.5px;
+    line-height: 1.5;
+  }
+
+  th, td {
+    padding: 9px 13px;
+    text-align: left;
+    vertical-align: top;
+    border-bottom: 1px solid rgba(217, 201, 169, 0.55);
+  }
+
+  thead th {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    border-bottom: 2px solid var(--rule);
+    white-space: nowrap;
+  }
+
+  tbody tr:nth-child(even) { background: var(--wash); }
+  tbody tr:last-child td { border-bottom: 0; }
+
+  td:first-child { font-weight: 600; color: var(--ink); }
+
+  .num {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+
+  tr.total td {
+    font-weight: 700;
+    border-top: 2px solid var(--rule);
+    background: rgba(154, 114, 40, 0.06);
+  }
+
+  /* Footer */
+
+  footer {
+    margin-top: 64px;
+    padding-top: 18px;
+    border-top: 1px solid var(--rule);
+    font-family: var(--sans);
+    font-size: 12px;
+    color: var(--ink-soft);
+  }
+
+  footer p { margin: 0; max-width: 70ch; }
+
+  /* Responsive */
+
+  @media (max-width: 980px) {
+    .page { padding: 32px 20px 56px; }
+    .layout { grid-template-columns: minmax(0, 1fr); gap: 0; padding-top: 28px; }
+    .toc { position: static; order: -1; padding: 0 0 28px; }
+    .toc ol { columns: 2; column-gap: 28px; }
+    .masthead { max-width: none; }
+  }
+
+  @media (max-width: 560px) {
+    .toc ol { columns: 1; }
+    h2 { margin-top: 42px; }
+  }
+
+  /* Print */
+
+  @media print {
+    body { background: #fff; color: #000; font-size: 11pt; }
+    .page { max-width: none; padding: 0; }
+    .toc, .notice { display: none; }
+    .table-wrap { box-shadow: none; }
+    th, td, tr { break-inside: avoid; }
+    a { color: inherit; text-decoration: none; }
+    h2 { break-after: avoid; }
+  }
+
+  /* Dark */
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #14110c;
+      --paper-2: #1c1811;
+      --ink: #e9e0ca;
+      --ink-soft: #b6a88d;
+      --rule: #3b3224;
+      --accent: #d9a05b;
+      --accent-2: #9dbfa1;
+      --gold: #d9b26a;
+      --wash: rgba(255, 246, 220, 0.03);
+      --shadow: none;
+    }
+    body {
+      background:
+        radial-gradient(1100px 500px at 10% -10%, rgba(120, 90, 45, 0.12), transparent 60%),
+        var(--paper);
+    }
+    .notice { background: var(--paper-2); }
+  }
+  /* Maps page */
+
+  .back { margin: 0 0 16px; font-family: var(--sans); font-size: 12px; }
+  .back a { color: var(--accent-2); text-decoration: none; border-bottom: 1px dotted currentColor; }
+  .back a:hover { color: var(--gold); }
+
+  .gallery { margin: 22px 0 0; }
+
+  figure.map {
+    margin: 0 0 26px;
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    overflow: hidden;
+    background: var(--paper-2);
+    box-shadow: var(--shadow);
+    scroll-margin-top: 24px;
+  }
+
+  figure.map a { display: block; line-height: 0; background: #e6dcc4; }
+  figure.map img { display: block; width: 100%; height: auto; }
+
+  figure.map figcaption {
+    padding: 14px 18px 16px;
+    border-top: 1px solid var(--rule);
+    font-family: var(--sans);
+    font-size: 13px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+  }
+
+  figure.map figcaption strong {
+    display: block;
+    margin-bottom: 4px;
+    font-size: 14px;
+    color: var(--ink);
+  }
+
+  .map-meta {
+    display: block;
+    margin-top: 7px;
+    font-size: 10.5px;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  .related { margin-top: 12px; font-family: var(--sans); font-size: 13.5px; }
+  .related li { margin: 8px 0; }
+
+  @media (prefers-color-scheme: dark) {
+    figure.map a { background: #241f16; }
+  }
+</style>
+</head>
+<body>
+<div class="page" id="top">
+
+  <header class="masthead">
+    <p class="eyebrow">The Well of Frogs · Old-School Essentials</p>
+    <p class="back"><a href="../../sessions/index.html">← Campaign home</a></p>
+    <h1>Maps</h1>
+    <p class="lede">The supplied campaign maps, archived at full size. Every image opens on its own for a closer look.</p>
+    <p class="meta">
+      <span class="pill">active</span>
+      <span>updated 2026-11-01</span>
+      <span class="sep"></span>
+      <span>5 maps</span>
+      <span class="sep"></span>
+      <span>4 places</span>
+    </p>
+  </header>
+
+  <div class="layout">
+
+    <main>
+
+      <section id="region-and-city">
+        <h2>The region and the city</h2>
+        <p>Two maps frame the campaign: the trade country around Arakay, and the walled city itself.</p>
+
+        <div class="gallery">
+
+          <figure class="map" id="regional">
+            <a href="arakay-and-the-black-desert.png"><img src="arakay-and-the-black-desert.png" alt="Regional map of Arakay and the Black Desert"></a>
+            <figcaption>
+              <strong>Arakay and the Black Desert</strong>
+              The regional map. Arakay is the walled city between the Black Desert and the Jashra Mountains, and the desert is the first thing on every road out of it.
+              <span class="map-meta">Regional map · archived copy</span>
+            </figcaption>
+          </figure>
+
+          <figure class="map" id="city">
+            <a href="arakay-city-map-highlighted.png"><img src="arakay-city-map-highlighted.png" alt="Highlighted city map of Arakay"></a>
+            <figcaption>
+              <strong>Arakay, highlighted</strong>
+              The city map in its highlighted form. The old quarter, the Piazza dei Rospi, and the streets the party has used sit inside these walls.
+              <span class="map-meta">City map · highlighted</span>
+            </figcaption>
+          </figure>
+
+        </div>
+      </section>
+
+      <section id="piazza">
+        <h2>Piazza dei Rospi</h2>
+        <p>The plaza with the Well of Frogs at its centre, drawn as players' cartography. Two versions of the same sheet, one without labels and one with them.</p>
+
+        <div class="gallery">
+
+          <figure class="map" id="piazza-plain">
+            <a href="piazza-dei-rospi-players-cartography.png"><img src="piazza-dei-rospi-players-cartography.png" alt="Players' cartography of the Piazza dei Rospi"></a>
+            <figcaption>
+              <strong>Piazza dei Rospi, unlabelled</strong>
+              The players' cartography as drawn, with nothing named on it.
+              <span class="map-meta">Players' cartography</span>
+            </figcaption>
+          </figure>
+
+          <figure class="map" id="piazza-labelled">
+            <a href="piazza-dei-rospi-labelled-2026-10-25.png"><img src="piazza-dei-rospi-labelled-2026-10-25.png" alt="Labelled players' cartography of the Piazza dei Rospi"></a>
+            <figcaption>
+              <strong>Piazza dei Rospi, labelled</strong>
+              The same sheet with the locations named. Added 2026-10-25.
+              <span class="map-meta">Players' cartography · labelled</span>
+            </figcaption>
+          </figure>
+
+        </div>
+      </section>
+
+      <section id="undercroft">
+        <h2>The undercroft</h2>
+        <p>The tunnels under the shanty beside the plaza, as the annotated plan used in the third session.</p>
+
+        <div class="gallery">
+
+
+          <figure class="map" id="undercroft-annotated">
+            <a href="undercroft-map-2026-11-01.png"><img src="undercroft-map-2026-11-01.png" alt="Annotated plan of the undercroft"></a>
+            <figcaption>
+              <strong>The undercroft, annotated</strong>
+              The 2026-11-01 plan, the version the party carried down in the third session.
+              <span class="map-meta">Annotated plan · 2026-11-01</span>
+            </figcaption>
+          </figure>
+
+        </div>
+      </section>
+
+      <section id="about-files">
+        <h2>About these files</h2>
+        <ul>
+          <li>Each image is the archived copy held in the campaign folder, shown at full size and linked to the file itself.</li>
+          <li>Nothing here is redrawn from memory. Where the table has no map, the page has no map.</li>
+          <li>Maps are player-facing: they show what the party has been given, not what the referee has behind the screen.</li>
+        </ul>
+
+        <h3>Related pages</h3>
+        <ul class="related">
+          <li><a href="../../sessions/index.html">Campaign home</a>, the factual outlines and the scenes these maps belong to.</li>
+          <li><a href="../../rules/house-rules.html">House Rules</a>, including item-based encumbrance, which decides what a party can carry through the tunnels.</li>
+          <li><a href="../../bestiary/bestiary.html">Bestiary</a>, the creatures met below the plaza.</li>
+        </ul>
+      </section>
+
+    </main>
+
+    <nav class="toc" aria-label="Contents">
+      <h2>Contents</h2>
+      <ol>
+        <li><a href="#regional">Arakay and the Black Desert</a></li>
+        <li><a href="#city">Arakay, highlighted</a></li>
+        <li><a href="#piazza-plain">Piazza dei Rospi, unlabelled</a></li>
+        <li><a href="#piazza-labelled">Piazza dei Rospi, labelled</a></li>
+       <li><a href="#undercroft-annotated">Undercroft, annotated</a></li>
+        <li><a href="#about-files">About these files</a></li>
+      </ol>
+      <a class="top" href="#top">Back to top ↑</a>
+    </nav>
+
+  </div>
+</div>
+</body>
+</html>
