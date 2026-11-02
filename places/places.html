@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Places · The Well of Frogs</title>
+<style>
+
+  :root {
+    --paper: #f4ecda;
+    --paper-2: #fbf7ec;
+    --ink: #241d14;
+    --ink-soft: #5f5342;
+    --rule: #d9c9a9;
+    --accent: #6b3a26;
+    --accent-2: #3f5b43;
+    --gold: #9a7228;
+    --wash: rgba(107, 58, 38, 0.035);
+    --shadow: 0 1px 2px rgba(60, 40, 20, 0.06), 0 24px 48px -36px rgba(60, 40, 20, 0.5);
+    --sans: ui-sans-serif, system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, "Times New Roman", serif;
+  }
+
+  * { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background:
+      radial-gradient(1200px 600px at 12% -10%, rgba(255, 252, 240, 0.85), transparent 60%),
+      radial-gradient(900px 500px at 100% 0%, rgba(154, 114, 40, 0.07), transparent 55%),
+      var(--paper);
+    color: var(--ink);
+    font-family: var(--serif);
+    font-size: 17px;
+    line-height: 1.62;
+    text-rendering: optimizeLegibility;
+  }
+
+  .page {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 44px 28px 72px;
+  }
+
+  /* Masthead */
+
+  .masthead {
+    max-width: 780px;
+    padding-bottom: 26px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .eyebrow {
+    margin: 0 0 10px;
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  h1 {
+    margin: 0;
+    font-size: clamp(2.1rem, 5vw, 3.25rem);
+    line-height: 1.05;
+    font-weight: 600;
+    letter-spacing: -0.015em;
+  }
+
+  .lede {
+    margin: 18px 0 0;
+    max-width: 66ch;
+    font-size: 1.04rem;
+    color: var(--ink-soft);
+  }
+
+  .meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 14px;
+    margin: 18px 0 0;
+    font-family: var(--sans);
+    font-size: 12.5px;
+    color: var(--ink-soft);
+  }
+
+  .meta .sep {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--rule);
+  }
+
+  .pill {
+    padding: 2px 9px;
+    border: 1px solid var(--rule);
+    border-radius: 999px;
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--accent-2);
+    background: rgba(63, 91, 67, 0.06);
+  }
+
+  .notice {
+    margin: 26px 0 0;
+    padding: 14px 18px;
+    border-left: 3px solid var(--gold);
+    border-radius: 0 6px 6px 0;
+    background: var(--paper-2);
+    box-shadow: var(--shadow);
+    font-family: var(--sans);
+    font-size: 13px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+  }
+
+  /* Layout */
+
+  .layout {
+    display: grid;
+    grid-template-columns: minmax(0, 780px) 240px;
+    gap: 64px;
+    justify-content: space-between;
+    padding-top: 40px;
+  }
+
+  main { min-width: 0; }
+
+  /* Contents */
+
+  .toc {
+    align-self: start;
+    position: sticky;
+    top: 28px;
+    font-family: var(--sans);
+  }
+
+  .toc h2 {
+    margin: 0 0 12px;
+    padding: 0 0 8px;
+    border: 0;
+    border-bottom: 1px solid var(--rule);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  .toc ol {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    counter-reset: toc;
+    font-size: 13px;
+    line-height: 1.4;
+  }
+
+  .toc li {
+    counter-increment: toc;
+    margin: 0;
+    padding: 6px 0 6px 26px;
+    position: relative;
+    border-bottom: 1px solid rgba(217, 201, 169, 0.45);
+  }
+
+  .toc li::before {
+    content: counter(toc, decimal-leading-zero);
+    position: absolute;
+    left: 0;
+    top: 7px;
+    font-size: 10.5px;
+    color: var(--gold);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .toc a { color: var(--ink-soft); text-decoration: none; }
+  .toc a:hover { color: var(--accent); }
+
+  .toc .top {
+    display: inline-block;
+    margin-top: 14px;
+    font-size: 11.5px;
+    letter-spacing: 0.04em;
+    color: var(--gold);
+    text-decoration: none;
+    border-bottom: 1px dotted currentColor;
+  }
+
+  /* Sections */
+
+  section { scroll-margin-top: 24px; }
+
+  h2 {
+    margin: 56px 0 0;
+    padding: 0 0 8px 14px;
+    border-left: 3px solid var(--accent);
+    border-bottom: 1px solid var(--rule);
+    font-size: 1.52rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+
+  h2:first-child { margin-top: 0; }
+
+  h3 {
+    margin: 34px 0 8px;
+    font-size: 1.02rem;
+    font-weight: 600;
+    color: var(--accent);
+    letter-spacing: 0.005em;
+  }
+
+  p { margin: 14px 0; max-width: 68ch; }
+
+  a {
+    color: var(--accent);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+  }
+
+  a:hover { color: var(--gold); }
+
+  ul, ol { margin: 14px 0; padding-left: 1.15rem; }
+  li { margin: 6px 0; max-width: 66ch; }
+  li::marker { color: var(--gold); }
+
+  ul ul, ul ol { margin: 8px 0 2px; }
+
+  /* Scene chips */
+
+  .scene-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    margin: 18px 0 6px;
+    font-family: var(--sans);
+    font-size: 11.5px;
+  }
+
+  .scene-nav a {
+    padding: 3px 10px;
+    border: 1px solid var(--rule);
+    border-radius: 999px;
+    background: var(--paper-2);
+    color: var(--ink-soft);
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .scene-nav a:hover { color: var(--accent); border-color: var(--gold); }
+
+  /* Tables */
+
+  .table-wrap {
+    margin: 18px 0 26px;
+    overflow-x: auto;
+    border: 1px solid var(--rule);
+    border-radius: 7px;
+    background: var(--paper-2);
+    box-shadow: var(--shadow);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: var(--sans);
+    font-size: 13.5px;
+    line-height: 1.5;
+  }
+
+  th, td {
+    padding: 9px 13px;
+    text-align: left;
+    vertical-align: top;
+    border-bottom: 1px solid rgba(217, 201, 169, 0.55);
+  }
+
+  thead th {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    border-bottom: 2px solid var(--rule);
+    white-space: nowrap;
+  }
+
+  tbody tr:nth-child(even) { background: var(--wash); }
+  tbody tr:last-child td { border-bottom: 0; }
+
+  td:first-child { font-weight: 600; color: var(--ink); }
+
+  .num {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+
+  tr.total td {
+    font-weight: 700;
+    border-top: 2px solid var(--rule);
+    background: rgba(154, 114, 40, 0.06);
+  }
+
+  /* Footer */
+
+  footer {
+    margin-top: 64px;
+    padding-top: 18px;
+    border-top: 1px solid var(--rule);
+    font-family: var(--sans);
+    font-size: 12px;
+    color: var(--ink-soft);
+  }
+
+  footer p { margin: 0; max-width: 70ch; }
+
+  /* Responsive */
+
+  @media (max-width: 980px) {
+    .page { padding: 32px 20px 56px; }
+    .layout { grid-template-columns: minmax(0, 1fr); gap: 0; padding-top: 28px; }
+    .toc { position: static; order: -1; padding: 0 0 28px; }
+    .toc ol { columns: 2; column-gap: 28px; }
+    .masthead { max-width: none; }
+  }
+
+  @media (max-width: 560px) {
+    .toc ol { columns: 1; }
+    h2 { margin-top: 42px; }
+  }
+
+  /* Print */
+
+  @media print {
+    body { background: #fff; color: #000; font-size: 11pt; }
+    .page { max-width: none; padding: 0; }
+    .toc, .notice { display: none; }
+    .table-wrap { box-shadow: none; }
+    th, td, tr { break-inside: avoid; }
+    a { color: inherit; text-decoration: none; }
+    h2 { break-after: avoid; }
+  }
+
+  /* Dark */
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #14110c;
+      --paper-2: #1c1811;
+      --ink: #e9e0ca;
+      --ink-soft: #b6a88d;
+      --rule: #3b3224;
+      --accent: #d9a05b;
+      --accent-2: #9dbfa1;
+      --gold: #d9b26a;
+      --wash: rgba(255, 246, 220, 0.03);
+      --shadow: none;
+    }
+    body {
+      background:
+        radial-gradient(1100px 500px at 10% -10%, rgba(120, 90, 45, 0.12), transparent 60%),
+        var(--paper);
+    }
+    .notice { background: var(--paper-2); }
+  }
+  /* Places page */
+
+  .back { margin: 0 0 16px; font-family: var(--sans); font-size: 12px; }
+  .back a { color: var(--accent-2); text-decoration: none; border-bottom: 1px dotted currentColor; }
+  .back a:hover { color: var(--gold); }
+
+  h3.place {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 10px;
+    margin: 38px 0 6px;
+    padding-top: 24px;
+    border-top: 1px solid var(--rule);
+    scroll-margin-top: 24px;
+  }
+
+  h3.place .tag {
+    padding: 3px 9px;
+    border: 1px solid var(--rule);
+    border-radius: 999px;
+    font-family: var(--sans);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent-2);
+    background: rgba(63, 91, 67, 0.05);
+  }
+
+  .place-meta {
+    margin: 0 0 10px;
+    font-family: var(--sans);
+    font-size: 12.5px;
+    line-height: 1.6;
+    color: var(--ink-soft);
+  }
+
+  .place-meta strong { color: var(--ink); font-weight: 600; }
+
+  .related { margin-top: 12px; font-family: var(--sans); font-size: 13.5px; }
+  .related li { margin: 8px 0; }
+</style>
+</head>
+<body>
+<div class="page" id="top">
+
+  <header class="masthead">
+    <p class="eyebrow">The Well of Frogs · Old-School Essentials</p>
+    <p class="back"><a href="../sessions/index.html">← Campaign home</a></p>
+    <h1>Places</h1>
+    <p class="lede">Arakay and the country around it, from the desert roads to the tunnels under the plaza. What the maps name, and what the party has actually walked through.</p>
+    <p class="meta">
+      <span class="pill">active</span>
+      <span>updated 2026-11-01</span>
+      <span class="sep"></span>
+      <span>22 places</span>
+      <span class="sep"></span>
+      <span>5 areas</span>
+    </p>
+  </header>
+
+  <div class="layout">
+
+    <main>
+
+      <p class="notice">A named place is not an explored one. The regional map names roads and destinations the party has never travelled, and the city map names districts it has not crossed. Each entry below says which it is.</p>
+
+      <section id="region">
+        <h2>The region</h2>
+        <p>The country outside the walls, as the regional map gives it.</p>
+
+        <h3 class="place" id="arakay-region">Arakay and the Black Desert <span class="tag">Region</span></h3>
+        <p class="place-meta"><strong>Status:</strong> known on the map.</p>
+        <p>Arakay sits at a river crossing and road junction, with the Middle Sea to the north, the Jashra Mountains to the south, the Black Desert to the west, Khosura to the northeast, and Argentum to the southwest.</p>
+
+        <h3 class="place" id="black-desert">The Black Desert <span class="tag">Desert</span></h3>
+        <p class="place-meta"><strong>Where:</strong> west and northwest of Arakay.<br><strong>Status:</strong> known.</p>
+        <p>A desert expanse west and northwest of the city. The cultures document says some Sabbatean tribes live in its wastes, surviving by mercenary work and banditry.</p>
+
+        <h3 class="place" id="jashra">The Jashra Mountains <span class="tag">Mountains</span></h3>
+        <p class="place-meta"><strong>Where:</strong> south and southeast of Arakay.<br><strong>Status:</strong> known.</p>
+        <p>A large range dominating the southern and southeastern part of the regional map. The river that passes through Arakay continues south into the mountains.</p>
+
+        <h3 class="place" id="middle-sea">The Middle Sea <span class="tag">Sea</span></h3>
+        <p class="place-meta"><strong>Where:</strong> north of Arakay, by the river road.<br><strong>Status:</strong> known as a destination.</p>
+        <p>The map labels the northern river route "To the Middle Sea". The Sarossian culture is tied to the Sarossian peninsula and to the isles of this sea.</p>
+
+        <h3 class="place" id="khosura">Khosura <span class="tag">Destination</span></h3>
+        <p class="place-meta"><strong>Where:</strong> northeast of Arakay, along a dotted road.<br><strong>Status:</strong> named only.</p>
+        <p>A dotted road runs northeast toward a label reading "To Khosura"; the map never shows the place itself. It is the purple city to the east, where the caravan was bound when it was destroyed, and where the Khosuran armies are said to be at war.</p>
+
+        <h3 class="place" id="argentum">Argentum <span class="tag">Destination</span></h3>
+        <p class="place-meta"><strong>Where:</strong> west and southwest, off the map's western edge.<br><strong>Status:</strong> named only.</p>
+        <p>A dotted road leaves the western edge of the regional map, labelled "to Argentum". The map does not show the place, and nothing else about it is recorded.</p>
+      </section>
+
+      <section id="city">
+        <h2>The city</h2>
+        <p>Arakay as the city map draws it: a walled oval with four coloured districts and a river down the middle.</p>
+
+        <h3 class="place" id="arakay">Arakay <span class="tag">Walled city</span></h3>
+        <p class="place-meta"><strong>Status:</strong> known and entered.</p>
+        <p>A walled, roughly oval city split north to south by a broad central corridor, with the river running through it. The city map divides it into the Old Quarter, Temple Quarter, Palace Quarter and the Trade Way. Extramural buildings crowd the gates, including the district labelled the Slump outside the northwest wall. The gate stood open when the party arrived and had not been shut in years; the River Asser is dry, and its bed lies under a bridge that crosses nothing.</p>
+
+        <h3 class="place" id="slump">The Slump <span class="tag">District</span></h3>
+        <p class="place-meta"><strong>Where:</strong> outside the northwest wall.<br><strong>Status:</strong> named on the map.</p>
+        <p>The label sits outside the wall, among irregular buildings and roads. Population, government and even legal status are unrecorded, and why it is called the Slump is not explained.</p>
+
+        <h3 class="place" id="trade-way">The Trade Way <span class="tag">District</span></h3>
+        <p class="place-meta"><strong>Where:</strong> southwestern Arakay.<br><strong>Status:</strong> named on the map.</p>
+        <p>A green district in the southwest of the walled city, with the label near the western approach and a road entering from that side. Whether the name means the district, the road outside, or both is not settled.</p>
+
+        <h3 class="place" id="ziggurat">The Ziggurat <span class="tag">Landmark</span></h3>
+        <p class="place-meta"><strong>Where:</strong> southern Arakay, beside the Palace Quarter.<br><strong>Status:</strong> named on the map.</p>
+        <p>A large black rectangular complex at the southern edge, with what looks like its own precinct. The name suggests a stepped temple, though the footprint on the map is rectangular. Its deity, cult and function are unknown.</p>
+
+        <h3 class="place" id="piazza">The Piazza dei Rospi <span class="tag">Piazza</span></h3>
+        <p class="place-meta"><strong>Where:</strong> in the city; the district is not stated.<br><strong>Status:</strong> visited.</p>
+        <p>A dense, irregular piazza enclosed by attached buildings, narrow alleys, stairs and passages, with the Well of Frogs at its centre. The map of it is labelled players' cartography, so it records what the players have mapped rather than an authoritative survey.</p>
+      </section>
+
+      <section id="well">
+        <h2>The well</h2>
+
+        <h3 class="place" id="well-of-frogs">The Well of Frogs <span class="tag">Ancient well</span></h3>
+        <p class="place-meta"><strong>Where:</strong> the Piazza dei Rospi.<br><strong>Status:</strong> visited; not descended.</p>
+        <p>An old stone well ringed by four statues of horned bull frogs, each about the size of a dog. Locals say the well is older than Arakay and cursed, and people cross the square without going near it. The shaft is lined with frog carvings and seems bottomless by lantern light. One carving moved and croaked. The urchins call the thing below the Splinter.</p>
+      </section>
+
+      <section id="streets">
+        <h2>Streets and houses</h2>
+        <p>What the party has actually used: two doors to sleep behind, one tavern, one guild's ground, and the houses of the people they were sent to find.</p>
+
+        <h3 class="place" id="broken-wheel">The Broken Wheel <span class="tag">Flophouse</span></h3>
+        <p class="place-meta"><strong>Where:</strong> the northeast corner of the Old Quarter.<br><strong>Status:</strong> visited.</p>
+        <p>A cheap flophouse owned and managed by Nook the Older, with Wafik the porter and Rewen the laundress under his roof. The party paid 1 gp each for a night's lodging.</p>
+
+        <h3 class="place" id="barking-dogs">The Barking Dogs <span class="tag">Tavern</span></h3>
+        <p class="place-meta"><strong>Status:</strong> visited.</p>
+        <p>A tavern built in a former fighting pit, with the sand and the pit walls still in place. Barking Dog, a dwarf, keeps it. Wakhar hired the party here for the escort job, and the party came back afterwards to let the drinkers talk.</p>
+
+        <h3 class="place" id="barbers-alley">Barber's Alley <span class="tag">Guild territory</span></h3>
+        <p class="place-meta"><strong>Status:</strong> visited.</p>
+        <p>The territory of the Barbers' guild, where the party delivered the captured literator. Kollaro is a member of the guild, and had the barbers take the prisoner.</p>
+
+        <h3 class="place" id="urchin-ruin">The Urchin Ruin <span class="tag">Ruin</span></h3>
+        <p class="place-meta"><strong>Where:</strong> north of the Piazza dei Rospi.<br><strong>Status:</strong> visited.</p>
+        <p>A ruin where four urchins gather, among them Pablo and the boy who became the party's torchbearer. The party brought sesame cakes and traded captured weapons for information. Dio was hired here as a guide.</p>
+
+        <h3 class="place" id="broken-pillar">The Broken Pillar <span class="tag">Street shrine</span></h3>
+        <p class="place-meta"><strong>Status:</strong> visited.</p>
+        <p>A broken pillar of white stone, possibly andesite or marble, carved with a kneeling calf wearing a crown of leaves. Offerings surround it, and people were worshipping there when the party passed. They did not invite questions.</p>
+
+        <h3 class="place" id="cheap-delights">The House of Cheap Delights <span class="tag">Brothel</span></h3>
+        <p class="place-meta"><strong>Where:</strong> northeast of the Piazza dei Rospi.<br><strong>Status:</strong> visited.</p>
+        <p>Where Busty Rita worked, and where the party went to follow the missing woman. The visit was without incident. The house supplied the names that matter: Rita, her daughter Nian, and Nian's father Hiram. Two employees, Loy and Nyeeve, are named on the DM's list, though the record does not say whether either of them spoke with the party.</p>
+
+        <h3 class="place" id="charcoalers-stairs">The Charcoalers' Stairs <span class="tag">Street market</span></h3>
+        <p class="place-meta"><strong>Where:</strong> north of the Piazza dei Rospi.<br><strong>Status:</strong> visited.</p>
+        <p>A landing of black-robed charcoal dealers around a broad flight of steps, desert folk from the southern quarter. Charcoal here is a drug, breathed in for a transcendent experience. The stairs lead up to the shanty district, and the top of the stairs is where Hiram was last placed.</p>
+
+        <h3 class="place" id="danarose-house">Lady Danarose's House <span class="tag">Private house</span></h3>
+        <p class="place-meta"><strong>Status:</strong> visited.</p>
+        <p>An estate fallen into disrepair, entered through a small side door beside a closed wooden gate. Inside is a courtyard of traditional Arakayan architecture, with false windows, none of them facing the street. The household keeps two guards and several servants, serves water and flatbread, and speaks H'Zhari; Lady Danarose does not speak to visitors directly, and Pardoht-Ram translates for her.</p>
+      </section>
+
+      <section id="below">
+        <h2>Below the city</h2>
+
+        <h3 class="place" id="cloacina">The Shrine of Cloacina <span class="tag">Underground shrine</span></h3>
+        <p class="place-meta"><strong>Where:</strong> north of the Piazza dei Rospi.<br><strong>Status:</strong> visited.</p>
+        <p>A domed mud-brick building with a stair down to an oval chamber. Dio names it the shrine of Cloacina, goddess of sewers. It is lit by candles and incense, holds a statue of the goddess at its centre, and has no attendants.</p>
+
+        <h3 class="place" id="undercroft">The Undercroft <span class="tag">Underground complex</span></h3>
+        <p class="place-meta"><strong>Where:</strong> beneath Arakay.<br><strong>Status:</strong> explored in part.</p>
+        <p>The tunnels under the city, entered through a trapdoor in the courtyard of a ruined building. The stonework is better the deeper it goes. Lady Danarose says the deeper layers were built by Acheron, the demon empire that once terrorised the land. The party explored a fraction of it in the second session and withdrew into the altar room to rest; the third session went further, to the pillar room, the Archivist's chamber and the room where the Amnesiac sat.</p>
+
+        <h3>Related pages</h3>
+        <ul class="related">
+          <li><a href="../assets/maps/maps.html">Maps</a>, the regional, city and undercroft maps these entries come from.</li>
+          <li><a href="../factions/factions.html">Factions</a>, who holds which ground.</li>
+          <li><a href="../sessions/index.html">Campaign home</a>, the sessions where each place was visited.</li>
+          <li><a href="../lore/lore.html">Lore</a>, the peoples and gods of the country around the city.</li>
+        </ul>
+      </section>
+
+    </main>
+
+    <nav class="toc" aria-label="Contents">
+      <h2>Contents</h2>
+      <ol>
+        <li><a href="#region">The region</a></li>
+        <li><a href="#city">The city</a></li>
+        <li><a href="#well">The well</a></li>
+        <li><a href="#streets">Streets and houses</a></li>
+        <li><a href="#below">Below the city</a></li>
+      </ol>
+      <a class="top" href="#top">Back to top ↑</a>
+    </nav>
+
+  </div>
+</div>
+</body>
+</html>
